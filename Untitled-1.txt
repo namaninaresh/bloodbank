@@ -1,0 +1,30 @@
+Most people are able to give blood, but only 1 in 25 people actually do. You can donate blood if you:
+
+are fit and healthy
+weigh at least 50kg (7st 12lb)
+are 17-66 years old (or 70 if you've given blood before)
+are over 70 and have given blood in the last 2 years
+
+
+
+
+
+  Total Available Blood In All Blood Banks <%
+              availableBlood.map((t)=> {%>
+
+              <h3><%=t.units %></h3>
+              <% }) %>
+
+
+
+
+
+
+
+
+
+
+              <% for (let bloodGroups in availableBlood ) { %>
+              <br />
+              <%= bloodGroups['bloodtype'] %> <%# will output the numbers 1-10
+              %> <% } %>

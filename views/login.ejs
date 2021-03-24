@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../header'); %>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container">
+        <a href="/" class="logo">Blood Bank</a>
+        <ul class="list">
+          <li class="nav__item">
+            <a href="#" class="btn btn-primary">Register</a>
+          </li>
+          <li class="nav__item">
+            <a href="/auth/login" class="btn btn-primary">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section class="login">
+      <div class="container">
+        <div class="justify-center">
+          <form action="/auth/login" method="POST" class="login-form">
+            <% if(loginError) {%>
+            <p style="color: rgb(204, 7, 7)"><%= loginError %></p>
+            <%} %>
+            <h1>Login</h1>
+            <div class="form-input-material">
+              <input
+                type="text"
+                id="username"
+                class="form-control-material"
+                name="username"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <label for="username">Username</label>
+            </div>
+            <div class="form-input-material">
+              <input
+                type="password"
+                id="password"
+                class="form-control-material"
+                name="password"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <label for="password">Password</label>
+            </div>
+            <button class="btn" type="submit">Login</button>
+            <a href="#">forgot Password ?</a>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
