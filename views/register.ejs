@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../header'); %>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container">
+        <a href="/" class="logo center">
+          <svg class="icon">
+            <use xlink:href="../images/sprite.svg#droplet-fill"></use>
+          </svg>
+          Blood Bank
+        </a>
+        <ul class="list">
+          <li class="nav__item">
+            <a href="/auth/login" class="btn btn-primary">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="register">
+      <div class="container">
+        <div class="justify-center">
+          <form action="/auth/login" method="POST" class="login-form">
+            <h1>Registration</h1>
+            <div style="display: flex; width: 100%; margin-bottom: 2rem">
+              <label style="flex: 0 0 45%">Role </label>
+              <div style="display: flex">
+                <input
+                  type="radio"
+                  id="donar"
+                  name="role"
+                  value="donar"
+                  style="margin-left: 1rem"
+                  class="form-control-material"
+                  onchange="check()"
+                />
+                <label for="male" style="margin-left: 1rem"> Donar </label
+                ><br />
+                <input
+                  type="radio"
+                  id="receptor"
+                  name="role"
+                  value="receptor"
+                  style="margin-left: 1rem"
+                  class="form-control-material"
+                  onchange="check()"
+                />
+                <label for="female" style="margin-left: 1rem">Receptor</label
+                ><br />
+              </div>
+            </div>
+            <div style="display: flex">
+              <div class="form-input-material" style="flex: 0 0 45%">
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username">First Name</label>
+              </div>
+              <div class="form-input-material" style="flex: 0 0 45%">
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username">Last Name</label>
+              </div>
+            </div>
+            <div style="display: flex">
+              <div class="form-input-material" style="flex: 0 0 50%">
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username" id="usernameLabel">User Name </label>
+              </div>
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username">Password</label>
+              </div>
+            </div>
+            <div class="form-input-material">
+              <textarea class="form-control-material" required> </textarea>
+              <label for="username">Address</label>
+            </div>
+            <div style="display: flex">
+              <div class="form-input-material" style="flex: 0 0 50%">
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username">Country Code</label>
+              </div>
+              <div class="form-input-material">
+                <input
+                  type="number"
+                  id="username"
+                  class="form-control-material"
+                  name="username"
+                  placeholder=""
+                  autocomplete="off"
+                  required
+                />
+                <label for="username">Contact No</label>
+              </div>
+            </div>
+            <button class="btn" type="submit">Register</button>
+            <a href="/auth/login"> Already Registered ! Login ?</a>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script>
+      var e = document.getElementById("donar");
+      var element = document.getElementById("usernameLabel");
+      function check() {
+        if (e.checked) element.innerHTML = "Blood Bank Name";
+        else element.innerHTML = "User Name";
+      }
+    </script>
+  </body>
+</html>

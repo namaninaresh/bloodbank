@@ -3,7 +3,7 @@
   <head>
     <%- include('../header'); %>
   </head>
-  <body >
+  <body>
     <%- include('./navbar') %>
 
     <section class="profile">
@@ -16,11 +16,23 @@
               </div>
               <div>
                 <h4>Username</h4>
-                <p>Full Stack Developer</p>
+                <p>Donar</p>
 
-                <button class="btn btn-accent">Edit</button>
+                <div class="center">
+                  <a class="btn btn-accent center" style="margin: 0 0.5rem">
+                    <svg class="icon">
+                      <use xlink:href="images/sprite.svg#pencil"></use>
+                    </svg>
+                    Edit
+                  </a>
 
-                <button class="btn btn-primary">Delete</button>
+                  <a class="btn btn-primary center" style="margin: 0 0.5rem">
+                    <svg class="icon">
+                      <use xlink:href="images/sprite.svg#trash"></use>
+                    </svg>
+                    Delete
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -1,0 +1,31 @@
+
+sprite => search 
+
+search => pencil
+
+pencil => cursor-fill
+
+cursor-fill   => droplet 
+
+droplet => droplet-fill
+
+droplet-fill  => eye-slash-fill
+
+eye-slash-fill  => plus add
+
+
+
+
+
+geo-alt-fill => questiona-mark
+
+
+
+
+plus-circle-fill  => queston-markfill
+
+
+question-circle => deleted
+
+
+question-circle-fill => trash

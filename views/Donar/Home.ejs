@@ -23,7 +23,12 @@
               <% availableBlood.map((_)=> {%>
               <div class="blood-groud">
                 <div class="blood-group--header">
-                  <h3><%=_.BloodType %></h3>
+                  <h3 class="center">
+                    <svg class="icon" style="margin: 0 0.3rem">
+                      <use xlink:href="images/sprite.svg#droplet"></use>
+                    </svg>
+                    <%=_.BloodType %>
+                  </h3>
                 </div>
                 <div class="blood-group--body">
                   <h2 class="units"><%=_.BloodUnits %></h2>

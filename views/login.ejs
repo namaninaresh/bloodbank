@@ -6,24 +6,34 @@
   <body>
     <nav class="nav">
       <div class="container">
-        <a href="/" class="logo">Blood Bank</a>
+        <a href="/index" class="logo center"
+          ><svg class="icon">
+            <use xlink:href="../images/sprite.svg#droplet-fill"></use>
+          </svg>
+          Blood Bank
+        </a>
         <ul class="list">
           <li class="nav__item">
-            <a href="#" class="btn btn-primary">Register</a>
-          </li>
-          <li class="nav__item">
-            <a href="/auth/login" class="btn btn-primary">Login</a>
+            <a href="/auth/register" class="btn btn-primary">Register</a>
           </li>
         </ul>
       </div>
     </nav>
+    <section class="error">
+      <div class="container">
+        <div class="" style="width: 40%; margin: 0 auto; padding: 2rem 0">
+          <% if(loginError) {%>
+          <div class="alert alert-danger" style="padding: 2rem">
+            <%= loginError %>
+          </div>
+          <%} %>
+        </div>
+      </div>
+    </section>
     <section class="login">
       <div class="container">
         <div class="justify-center">
           <form action="/auth/login" method="POST" class="login-form">
-            <% if(loginError) {%>
-            <p style="color: rgb(204, 7, 7)"><%= loginError %></p>
-            <%} %>
             <h1>Login</h1>
             <div class="form-input-material">
               <input

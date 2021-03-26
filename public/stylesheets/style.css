@@ -61,6 +61,12 @@ a {
   }
 }
 
+.center
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Buttons */
 
@@ -98,6 +104,20 @@ a {
 }
 
 
+/* icons */
+
+.logo .icon
+{
+  width: 3.5rem;
+}
+
+.icon
+{
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.4rem;
+}
+
 
 
 /* navigation */
@@ -127,6 +147,7 @@ a {
   font-size: 2rem;
   font-weight: 700;
   color: var(--color--primary);
+  
 }
 
 .list {
@@ -171,7 +192,7 @@ a {
 
 
 
-.login
+.login , .register
 {
   display: flex;
   min-height: 80vh;
@@ -281,6 +302,51 @@ a {
 
   transform: scale(1.05);
 }
+
+
+
+
+
+/* Registration Page */
+
+
+.register
+{
+  
+    margin-top: 4rem;
+  
+}
+
+.register .form-input-material
+{
+  margin:3rem 0.5rem;
+  width: 100%;
+}
+
+.register .form-input-material textarea
+{
+  width: 100%;
+  outline: none;
+}
+.register .form-input-material input
+{
+  padding: 1rem 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -483,6 +549,8 @@ a {
   flex-direction: column;
   margin-top: 2rem;
 }
+
+
 .card-body
 {
   padding: 2rem;
@@ -618,6 +686,10 @@ hr
 }
 
 
+
+
+
+
 /* Search Page */
 
 
@@ -723,13 +795,154 @@ hr
   background-color: rgba(97, 97, 97, 0.1);
 }
 
+
+
 /* Results box */
 
 .search-result .container
 {
-  box-shadow: var(--box--shadow);
-  background: white;
+ 
+  padding: 2rem;
+ 
+}
+.search-flex
+{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 20rem));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+.result-box
+{
+  border: 0.5px solid var(--color--active);
+  border-radius: 10px;
+ 
+  text-align: center;
+  margin: 0 1rem;
+}
+@media screen and (max-width:580px)
+{
+  .search-flex
+{
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+}
+
+.result-box-header
+{
+  font-size: 2rem;
+  border-bottom:0.5px solid var(--color--active); ;
+}
+.result-box-header .box-title
+{
+  margin: 2rem;
+}
+.result-box-body
+{
+  font-size: 1rem;
+}
+.result-box-body p, .result-box-body h2, .result-box-body h4, .result-box-body h5 
+{
+  margin: 1rem;
+}
+.result-box-body .contains 
+{
+  font-size: 1rem;
+}
+
+.result-box-body .units
+{
+  font-size: 2.5rem;
+}
+.result-box-body .group
+{
+  font-size: 2.5rem;
+}
+
+
+/* Add Blood  Page*/
+.select-box
+{
+  display: flex;
+  margin: 2rem 0 ;
+}
+
+.notification
+{
+  width: 40%; margin: 0 auto; padding: 2rem 0;
+}
+.alert
+{
+  position: relative;
+  padding: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-danger
+{
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+.alert-success
+{
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+/* Blood Donated Page */
+
+.blood-donated
+{
+
 }
 
 
 
+@media screen and (min-width:580px)
+{
+  .blood-donated .container
+  {
+    display: flex;
+    flex-direction: row;
+  
+    justify-content: space-between;
+  }
+  
+}
+.total-blood-donated
+{
+  flex: 0 0 30%;
+  font-family: 'Poppins',sans-serif;
+}
+.total-blood-donated .card-body
+{
+  text-align: center;
+}
+.blood-donated-details
+{
+  flex: 0 0 65%;
+}
+
+table
+{
+  color: #212529;
+  vertical-align: top;
+  width: 100%;
+  
+  border:1px solid #dee2e6;
+  border-collapse: collapse;
+}
+
+
+tr,td,th
+{
+  border: 1px solid #dee2e6;
+  padding: 1.5rem 0.5rem;
+}

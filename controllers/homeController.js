@@ -55,8 +55,27 @@ router.post('/',function(req,res,next){
 router.get('/search', function(req, res,next){
     
   const userSessionData = req.session.currentUser;
-    if(userSessionData)  res.render('Donar/search',{title:"Profile Page",user:userSessionData, active:"search"});
+    if(userSessionData)  res.render('Donar/search',{title:"Search Page",user:userSessionData, active:"search",searchError:false,searchData:false});
     else res.redirect('/auth/login');
+});
+
+router.post('/search',function(req,res,next){
+  
+
+
+
+  const dataJson = [{username:"chinna",bloodType:"AB+",units:100},{username:'A',bloodType:"AB+",units:50},{username:'B',bloodType:"AB+",units:500},{username:'blood Bank OP ',bloodType:"AB+",units:250}];
+
+
+  
+
+
+  const userSessionData = req.session.currentUser;
+  if(userSessionData)  res.render('Donar/search',{title:"Search Page",user:userSessionData, active:"search",searchError:false , searchData: dataJson});
+  else res.redirect('/auth/login');
+
+
+
 });
 
 router.get('/addblood', function(req, res,next){
