@@ -1,91 +1,132 @@
-const router = require('express').Router();
-const sql = require('../models/db');
-//const bloodModal = require('../models/bloodData');
-const searchModal = require('../models/search');
-router.get('/', function(req,res,next){
-        const userSessionData = req.session.currentUser;
-       
-        sql.query("SELECT * FROM totalbloods",
-        function(err,rows,fields){
-            
-            if(rows.length>0)
-            {
-              if(userSessionData) res.render('Donar/Home',{title:"Donar Home", active:"home",user: userSessionData,availableBlood: rows,searchData:""});
-              else res.redirect('/auth/login');
-            
-            }
-           
-            if(err) return({errorMessage:"Invalid Username or Password",status:400})
-        });
+const router = require("express").Router();
 
-       
-         
+const searchModal = require("../models/search");
+const DbService = require("../models/DataController");
+
+router.get("/", function (req, res, next) {
+  const userSessionData = req.session.currentUser;
+  if (userSessionData) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.getHomeData();
+
+    result.then((data) => {
+      res.render("Donar/Home", {
+        title: "Donar Home",
+        active: "home",
+        user: userSessionData,
+        availableBlood: data,
+      });
     });
-
-router.get('/requests', function(req, res,next){
-
-    if(req.session.currentUser)  res.render('Donar/requests',{title:"Requests Page",user: req.session.currentUser, active:"requests"});
-    else res.redirect('/auth/login');
-});
-router.get('/profile', function(req, res,next){
-
-    if(req.session.currentUser)  res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
-    else res.redirect('/auth/login');
+  } else res.redirect("/auth/login");
 });
 
-router.get('/blooddonated', function(req, res,next){
+router.get("/requests", function (req, res, next) {
+  if (req.session.currentUser)
+    res.render("Donar/requests", {
+      title: "Requests Page",
+      user: req.session.currentUser,
+      active: "requests",
+    });
+  else res.redirect("/auth/login");
+});
+router.get("/profile", function (req, res, next) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
 
-    if(req.session.currentUser) res.render('Donar/blooddonated',{title:"BloodDonated Page",user: req.session.currentUser, active:"blooddonated"});
-    else res.redirect('/auth/login');
+    const result = Instance.getProfileData(req.session.currentUser);
+    // const result= Instance.getProfileData(req.session.currentUser);
+    result
+      .then((data) =>
+        res.render("Donar/profile", {
+          title: "Profile Page",
+          user: req.session.currentUser,
+          active: "profile",
+          userdata: data[0][0],
+          donated: data[1][0],
+          available: data[2],
+        })
+      )
+      .catch((err) => console.log(err));
+
+    //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
+  } else res.redirect("/auth/login");
 });
 
+router.get("/blooddonated", function (req, res, next) {
+  if (req.session.currentUser)
+    res.render("Donar/blooddonated", {
+      title: "BloodDonated Page",
+      user: req.session.currentUser,
+      active: "blooddonated",
+    });
+  else res.redirect("/auth/login");
+});
 
-router.post('/',function(req,res,next){
-  const dataJson = searchModal(req.body.group, req.body.Location);
-
+router.get("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
-       
-  const bloodData = bloodModal();
-  if(userSessionData) res.render('Donar/Home',{title:"Donar Home", active:"home",user: userSessionData,availableBlood: bloodData,searchData:dataJson});
-  else res.redirect('/auth/login');
-
+  if (userSessionData)
+    res.render("Donar/search", {
+      title: "Search Page",
+      user: userSessionData,
+      active: "search",
+      searchError: false,
+      searchData: false,
+    });
+  else res.redirect("/auth/login");
 });
 
-
-router.get('/search', function(req, res,next){
-    
+router.post("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
-    if(userSessionData)  res.render('Donar/search',{title:"Search Page",user:userSessionData, active:"search",searchError:false,searchData:false});
-    else res.redirect('/auth/login');
+
+  if (userSessionData) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.getSearchData(req.body);
+
+    result
+      .then((data) => {
+        console.log(data);
+        res.render("Donar/search", {
+          title: "Search Page",
+          user: userSessionData,
+          active: "search",
+          searchError: false,
+          searchData: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  } else res.redirect("/auth/login");
+
+  // console.log(req.body);
+  // const dataJson = [
+  //   { username: "chinna", bloodType: "AB+", units: 100 },
+  //   { username: "A", bloodType: "AB+", units: 50 },
+  //   { username: "B", bloodType: "AB+", units: 500 },
+  //   { username: "blood Bank OP ", bloodType: "AB+", units: 250 },
+  // ];
+
+  // const userSessionData = req.session.currentUser;
+  // if (userSessionData)
+  //   res.render("Donar/search", {
+  //     title: "Search Page",
+  //     user: userSessionData,
+  //     active: "search",
+  //     searchError: false,
+  //     searchData: dataJson,
+  //   });
+  // else res.redirect("/auth/login");
 });
 
-router.post('/search',function(req,res,next){
-  
-
-
-
-  const dataJson = [{username:"chinna",bloodType:"AB+",units:100},{username:'A',bloodType:"AB+",units:50},{username:'B',bloodType:"AB+",units:500},{username:'blood Bank OP ',bloodType:"AB+",units:250}];
-
-
-  
-
-
+router.get("/addblood", function (req, res, next) {
   const userSessionData = req.session.currentUser;
-  if(userSessionData)  res.render('Donar/search',{title:"Search Page",user:userSessionData, active:"search",searchError:false , searchData: dataJson});
-  else res.redirect('/auth/login');
-
-
-
+  if (userSessionData)
+    res.render("Donar/addBlood", {
+      title: "Add Blood Page",
+      user: userSessionData,
+      active: "addblood",
+    });
+  else res.redirect("/auth/login");
 });
-
-router.get('/addblood', function(req, res,next){
-    
-    const userSessionData = req.session.currentUser;
-      if(userSessionData)  res.render('Donar/addBlood',{title:"Add Blood Page",user:userSessionData, active:"addblood"});
-      else res.redirect('/auth/login');
-  });
-  
-
-
 
 module.exports = router;

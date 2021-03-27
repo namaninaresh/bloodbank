@@ -10,7 +10,8 @@
 
   --color--other: #f03861;
   --box--shadow: 0 0 20px 3px rgb(124 124 124 / 5%);
-  --color--first: #03051e;
+  --color--first: #a0a4d1;
+  --color--colorhunt: #caf7e3;
 }
 *,
 *::after,
@@ -813,6 +814,11 @@ hr
   grid-row-gap: 1rem;
 }
 
+
+.search-card
+{
+  background-color: #e3fdfd;
+}
 .result-box
 {
   border: 0.5px solid var(--color--active);
@@ -874,6 +880,13 @@ hr
 .notification
 {
   width: 40%; margin: 0 auto; padding: 2rem 0;
+}
+@media screen and (max-width:760px)
+{
+  .notification
+{
+  width: 100%;
+}
 }
 .alert
 {
@@ -946,3 +959,4 @@ tr,td,th
   border: 1px solid #dee2e6;
   padding: 1.5rem 0.5rem;
 }
+

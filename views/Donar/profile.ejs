@@ -15,8 +15,8 @@
                 <img src="/images/avatar.png" />
               </div>
               <div>
-                <h4>Username</h4>
-                <p>Donar</p>
+                <h4><%= userdata.username %></h4>
+                <p><%= userdata.city %></p>
 
                 <div class="center">
                   <a class="btn btn-accent center" style="margin: 0 0.5rem">
@@ -40,7 +40,7 @@
             <div class="card-body">
               <div>Blood Donated Till Now</div>
               <div>
-                <h1>500 units</h1>
+                <h1><%= donated.bloodunits %> units</h1>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
                   <div class="user-title">
                     <h6>First Name</h6>
                   </div>
-                  <div class="user-text">Chinna</div>
+                  <div class="user-text"><%= userdata.firstname %></div>
                 </div>
               </div>
               <hr />
@@ -62,7 +62,7 @@
                   <div class="user-title">
                     <h6>Last Name</h6>
                   </div>
-                  <div class="user-text">Namani</div>
+                  <div class="user-text"><%= userdata.lastname %></div>
                 </div>
               </div>
 
@@ -72,7 +72,7 @@
                   <div class="user-title">
                     <h6>Email</h6>
                   </div>
-                  <div class="user-text">namaninaresh1996@gmail.com</div>
+                  <div class="user-text"><%= userdata.email %></div>
                 </div>
               </div>
 
@@ -82,9 +82,7 @@
                   <div class="user-title">
                     <h6>Address</h6>
                   </div>
-                  <div class="user-text">
-                    11-22-655,tialk road ,kashibuga ,wraangak
-                  </div>
+                  <div class="user-text"><%= userdata.address %></div>
                 </div>
               </div>
 
@@ -94,7 +92,7 @@
                   <div class="user-title">
                     <h6>City</h6>
                   </div>
-                  <div class="user-text">Warangal</div>
+                  <div class="user-text"><%= userdata.city %></div>
                 </div>
               </div>
 
@@ -104,7 +102,7 @@
                   <div class="user-title">
                     <h6>Contact No</h6>
                   </div>
-                  <div class="user-text">+91 8686506505</div>
+                  <div class="user-text">+91 <%= userdata.contactno %></div>
                 </div>
               </div>
 
@@ -119,78 +117,17 @@
               </div>
               <hr />
               <div class="grid--4">
+                <% available.map((_)=> {%>
                 <div class="blood-groud">
                   <div class="blood-group--header">
-                    <h3>AB+</h3>
+                    <h3><%= _.bloodtype %></h3>
                   </div>
                   <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
+                    <h2 class="units"><%= _.bloodunits %></h2>
                     <p class="units-text">Units</p>
                   </div>
                 </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
-                <div class="blood-groud">
-                  <div class="blood-group--header">
-                    <h3>AB+</h3>
-                  </div>
-                  <div class="blood-group--body">
-                    <h2 class="units">AB+</h2>
-                    <p class="units-text">Units</p>
-                  </div>
-                </div>
+                <% }) %>
               </div>
             </div>
           </div>
