@@ -4,23 +4,8 @@
     <%- include('../header'); %>
   </head>
   <body>
-    <nav class="nav">
-      <div class="container">
-        <a href="/index" class="logo"
-          ><svg class="icon">
-            <use xlink:href="images/sprite.svg#droplet-fill"></use>
-          </svg>
-          Blood Bank
-        </a>
-        <ul class="list">
-          <li class="nav__item">
-            <a href="/auth/register" class="btn btn-primary">Register</a>
-          </li>
-          <li class="nav__item">
-            <a href="/auth/login" class="btn btn-primary">Login</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <%- include('../includes/homeNav'); %>
+
+    <script src="../javascripts/mobileNav.js"></script>
   </body>
 </html>
