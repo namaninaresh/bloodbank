@@ -1,11 +1,13 @@
 <nav class="nav">
   <div class="container">
-    <a href="/" class="logo center"><svg class="icon">
+    <a href="/" class="logo"
+      ><svg class="icon">
+        <use xlink:href="images/sprite.svg#droplet-fill"></use>
+      </svg>
+      Blood Bank
+    </a>
 
-      <use xlink:href="images/sprite.svg#droplet-fill"></use>
-    </svg>
-     Blood Bank </a>
-    <ul class="list">
+    <ul class="list collapse" id="nav">
       <li class="nav__item">
         <a href="/" class=<%= active=='home' ? "active" : "" %> >Home </a>
       </li> 
@@ -35,5 +37,11 @@
         <a href="/auth/logout" > Logout </a>
       </li>
     </ul>
+
+    <div class="mobile-nav__menu" onclick="myFunction(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
   </div>
 </nav>

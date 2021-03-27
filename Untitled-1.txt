@@ -225,3 +225,64 @@ router.post("/", function (req, res, next) {
       console.log(error);
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+/******************* WEB NAVIGATION **********************************/
+
+
+
+
+
+
+
+
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo center"
+      ><svg class="icon">
+        <use xlink:href="images/sprite.svg#droplet-fill"></use>
+      </svg>
+      Blood Bank
+    </a>
+    
+    <ul class="list">
+      <li class="nav__item">
+        <a href="/" class=<%= active=='home' ? "active" : "" %> >Home </a>
+      </li> 
+     
+      <% if(user.role !== 'donar') {%>
+      <li class="nav__item">
+        <a href="/search" class=<%= active=='search' ? "active" : "" %> >Search for Blood </a>
+      </li> 
+      <% } %>
+      <% if(user.role === 'donar') {%>
+      <li class="nav__item">
+        <a href="/addblood" class=<%= active=='addblood' ? "active" : "" %> >Add Blood </a>
+      </li> 
+
+      
+      <li class="nav__item">
+        <a href="/blooddonated"  class=<%= active=='blooddonated' ? "active" : "" %>> Blood Donated </a>
+      </li>
+      <% } %>
+      <li class="nav__item">
+        <a href="/requests"  class=<%= active=='requests' ? "active" : "" %>> Requests </a>
+      </li>
+      <li class="nav__item">
+        <a href="/profile"  class=<%= active=='profile' ? "active" : "" %>> My Profile </a>
+      </li>
+      <li class="nav__item">
+        <a href="/auth/logout" > Logout </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -32,6 +32,7 @@ body {
   /* background-color: #f6f6f6; */
   color: var(--color--black);
   font: 14px "Open Sans", Poppins, Arial, sans-serif;
+
   /* background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26); */
 }
 
@@ -68,6 +69,7 @@ a {
   align-items: center;
   justify-content: center;
 }
+
 
 /* Buttons */
 
@@ -128,7 +130,8 @@ a {
 .nav {
   background: var(--color--white);
   width: 100%;
-  height: 7rem;
+  /* height: 7rem; */
+
   display: flex;
   justify-items: center;
   align-items: center;
@@ -142,13 +145,18 @@ a {
   justify-content: space-between;
   /* align-self: center; */
   align-items: center;
+  transition: all 1s ease-out;
 }
 
 .logo {
   font-size: 2rem;
   font-weight: 700;
   color: var(--color--primary);
-  
+  height: 7rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s;
 }
 
 .list {
@@ -163,15 +171,7 @@ a {
   display: inline-flex;
 }
 
-@media screen and (max-width:580px)
-{
-  .logo{
-    font-size: 1rem;
-  }
-  .list {
-    font-size: 0.9rem;
-  }
-}
+
 
 .nav__item {
   margin: 0 1rem;
@@ -189,7 +189,95 @@ a {
   font-weight: 600;
   cursor: text;
 }
+.mobile-nav__menu
+{
+  display: none;
+}
 
+@media screen and (max-width:580px)
+{
+  .logo{
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgb(236, 236, 236);
+  }
+  .nav .container
+  {
+    width: 100%;
+    position: relative;
+    
+  }
+  .nav ul 
+  {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transition: all 0.5s;
+    
+
+  }
+  .show
+  {
+    display: block;
+    transition: all 0.5s;
+  }
+  .mobile-nav__menu
+    {
+      display: block
+    }
+    .collapse
+    {
+      display: none ;
+    }
+  .nav li
+  {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgb(236, 236, 236);
+  }
+  
+
+  .nav .container
+  {
+    flex-direction: column;
+  }
+  .list {
+    font-size: 1.2rem;
+  }
+}
+
+.mobile-nav__menu
+{
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  padding: 0.8rem 1rem;
+  
+}
+
+.bar1, .bar2, .bar3 {
+  width: 3rem;
+  height: 0.3rem;
+  background-color: rgb(192, 192, 192);
+  margin: 6px 0;
+  transition: 0.4s;
+  border-radius: 21rem;
+}
+
+
+
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -8px);
+  transform: rotate(45deg) translate(-6px, -8px);
+}
+
+/*** Login Page ****/
 
 
 
