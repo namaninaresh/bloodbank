@@ -27,7 +27,7 @@ router.post("/", function (req, res, next) {
       } else {
         const instance = DbService.getDbInstance();
 
-        const result = instance.registerUser();
+        const result = instance.registerUser(req.body);
 
         result
           .then(() =>

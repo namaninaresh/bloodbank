@@ -13,13 +13,13 @@
           <div class="card">
             <div class="card-body card-blue">
               <h3>Total Blood Units available:</h3>
-              <h1>14,500</h1>
+              <h1><%= data.bloodunits %></h1>
             </div>
           </div>
           <div class="card">
             <div class="card-body">
               <h3>Total Blood Donated till Now:</h3>
-              <h1>14,500</h1>
+              <h1><%= data.totalblood %></h1>
             </div>
           </div>
         </div>
@@ -34,18 +34,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <% info.forEach(element => { %>
                   <tr>
-                    <td>Donated blood to user: Chinna Namani, Units 100</td>
-                    <td>Jan 12, 2012</td>
+                    <td>
+                      Donated blood to user: <%= element.touser %>, Units <%=
+                      element.units %>
+                    </td>
+                    <td><%= element.ondate %></td>
                   </tr>
-                  <tr>
-                    <td>Donated blood to user: Chinna Namani, Units 100</td>
-                    <td>Jan 12, 2012</td>
-                  </tr>
-                  <tr>
-                    <td>Donated blood to user: Chinna Namani, Units 100</td>
-                    <td>Jan 12, 2012</td>
-                  </tr>
+                  <% }) %>
                 </tbody>
               </table>
             </div>

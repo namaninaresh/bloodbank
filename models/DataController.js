@@ -68,11 +68,18 @@ class DbService {
     ]);
   };
 
-  registerUser = () => {
+  registerUser = (re = []) => {
     // const query =
     //   "INSERT INTO users(firsname,lastname,username,password) values('a','a','a','a') where not exist (select username from users)";
 
     const query = "insert into scores value(10,34)";
+    return this.queryExecuter(query);
+  };
+
+  getBloodDonatedData = () => {
+    const query =
+      "select bloodunits from totalblooddonated where userid=1;select SUM(bloodunits) as totalblood from bloodinfo where userid=1;select * from donationsinfo where userid=1";
+
     return this.queryExecuter(query);
   };
 }

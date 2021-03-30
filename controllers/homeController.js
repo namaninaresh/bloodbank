@@ -53,13 +53,31 @@ router.get("/profile", function (req, res, next) {
 });
 
 router.get("/blooddonated", function (req, res, next) {
-  if (req.session.currentUser)
-    res.render("Donar/blooddonated", {
-      title: "BloodDonated Page",
-      user: req.session.currentUser,
-      active: "blooddonated",
-    });
-  else res.redirect("/auth/login");
+  // if (req.session.currentUser) {
+  const Instance = DbService.getDbInstance();
+  const result = Instance.getBloodDonatedData();
+
+  result
+    .then((data) => {
+      const result = { ...data[0][0], ...data[1][0] };
+      const info = data[2];
+      console.log(info);
+      res.render("Donar/blooddonated", {
+        title: "BloodDonated Page",
+        user: req.session.currentUser,
+        active: "blooddonated",
+        data: result,
+        info: info,
+      });
+    })
+    .catch((err) => console.log(err));
+  // }
+  // // res.render("Donar/blooddonated", {
+  // //   title: "BloodDonated Page",
+  // //   user: req.session.currentUser,
+  // //   active: "blooddonated",
+  // // });
+  // else res.redirect("/auth/login");
 });
 
 router.get("/search", function (req, res, next) {
@@ -146,4 +164,5 @@ router.post("/addblood", function (req, res, next) {
       .catch((err) => console.log(err));
   } else res.redirect("/auth/login");
 });
+
 module.exports = router;

@@ -23,6 +23,7 @@ router.post("/", function (req, res, next) {
         } else {
           res.render("login", {
             title: "Login Page",
+            active: "login",
             loginError: "Invalid Username or Password",
           });
         }
