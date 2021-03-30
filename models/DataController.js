@@ -48,6 +48,33 @@ class DbService {
 
     return this.queryExecuter(query, [group, Units, Location]);
   };
+
+  addBlood = ({ type, group, Units }, { userid }) => {
+    const remove =
+      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)-? WHERE userid=? AND bloodtype=?;UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)-? WHERE BloodType=? AND (SELECT bloodunits from bloodinfo WHERE userid=?)>0";
+    const add =
+      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)+? WHERE userid=? AND bloodtype=?;UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)+? WHERE BloodType=? AND (SELECT bloodunits from bloodinfo WHERE userid=?)>0";
+
+    const query = type == "add" ? add : remove;
+    return this.queryExecuter(query, [
+      userid,
+      Units,
+      userid,
+      group,
+      group,
+      Units,
+      group,
+      userid,
+    ]);
+  };
+
+  registerUser = () => {
+    // const query =
+    //   "INSERT INTO users(firsname,lastname,username,password) values('a','a','a','a') where not exist (select username from users)";
+
+    const query = "insert into scores value(10,34)";
+    return this.queryExecuter(query);
+  };
 }
 
 module.exports = DbService;

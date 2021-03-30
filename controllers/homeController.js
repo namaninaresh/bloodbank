@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-const searchModal = require("../models/search");
 const DbService = require("../models/DataController");
 
 router.get("/", function (req, res, next) {
@@ -125,8 +124,26 @@ router.get("/addblood", function (req, res, next) {
       title: "Add Blood Page",
       user: userSessionData,
       active: "addblood",
+      notify: false,
     });
   else res.redirect("/auth/login");
 });
 
+router.post("/addblood", function (req, res, next) {
+  const userSessionData = req.session.currentUser;
+  if (userSessionData) {
+    const Instance = DbService.getDbInstance();
+    const result = Instance.addBlood(req.body, req.session.currentUser);
+    result
+      .then((data) => {
+        res.render("Donar/addBlood", {
+          title: "Add Blood Page",
+          user: userSessionData,
+          active: "addblood",
+          notify: "Success",
+        });
+      })
+      .catch((err) => console.log(err));
+  } else res.redirect("/auth/login");
+});
 module.exports = router;

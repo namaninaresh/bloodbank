@@ -1,7 +1,6 @@
-
-const router = require('express').Router();
+const router = require("express").Router();
 //var sql = require('../models/db');
-const   homeController = require('../controllers/homeController');
+const homeController = require("../controllers/homeController");
 
 // var data ="";
 // sql.query("SELECT * FROM users", function(err,rows,fields){
@@ -11,7 +10,6 @@ const   homeController = require('../controllers/homeController');
 
 // })
 
-
-router.use('/',homeController);
+router.use("/", homeController);
 
 module.exports = router;

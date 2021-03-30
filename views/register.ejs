@@ -5,11 +5,26 @@
   </head>
   <body>
     <%- include('../includes/homeNav'); %>
+    <section class="error">
+      <div class="container">
+        <div class="" style="width: 40%; margin: 0 auto; padding: 2rem 0">
+          <% if(registerError) {%>
+          <div class="alert alert-danger" style="padding: 2rem">
+            <%= registerError %>
+          </div>
+          <%} if(registerSuccess) { %>
+          <div class="alert alert-success" style="padding: 2rem">
+            <%= registerSuccess %>
+          </div>
 
+          <% } %>
+        </div>
+      </div>
+    </section>
     <section class="register">
       <div class="container">
         <div class="justify-center">
-          <form action="/auth/login" method="POST" class="login-form">
+          <form action="/auth/register" method="POST" class="login-form">
             <h1>Registration</h1>
             <div style="display: flex; width: 100%; margin-bottom: 2rem">
               <label style="flex: 0 0 45%">Role </label>
@@ -42,26 +57,26 @@
               <div class="form-input-material" style="flex: 0 0 45%">
                 <input
                   type="text"
-                  id="username"
+                  id="firstname"
                   class="form-control-material"
-                  name="username"
+                  name="firstname"
                   placeholder=""
                   autocomplete="off"
                   required
                 />
-                <label for="username">First Name</label>
+                <label for="firstname">First Name</label>
               </div>
               <div class="form-input-material" style="flex: 0 0 45%">
                 <input
                   type="text"
-                  id="username"
+                  id="lastname"
                   class="form-control-material"
-                  name="username"
+                  name="lastname"
                   placeholder=""
                   autocomplete="off"
                   required
                 />
-                <label for="username">Last Name</label>
+                <label for="lastname">Last Name</label>
               </div>
             </div>
             <div style="display: flex">
@@ -80,44 +95,50 @@
               <div class="form-input-material">
                 <input
                   type="text"
-                  id="username"
+                  id="password"
                   class="form-control-material"
-                  name="username"
+                  name="password"
                   placeholder=""
                   autocomplete="off"
                   required
                 />
-                <label for="username">Password</label>
+                <label for="password">Password</label>
               </div>
             </div>
             <div class="form-input-material">
-              <textarea class="form-control-material" required> </textarea>
-              <label for="username">Address</label>
+              <textarea
+                class="form-control-material"
+                name="address"
+                id="address"
+                required
+              >
+              </textarea>
+              <label for="address">Address</label>
             </div>
             <div style="display: flex">
               <div class="form-input-material" style="flex: 0 0 50%">
                 <input
                   type="text"
-                  id="username"
+                  id="countrycode"
                   class="form-control-material"
-                  name="username"
+                  name="countrycode"
                   placeholder=""
                   autocomplete="off"
                   required
                 />
-                <label for="username">Country Code</label>
+                <label for="countrycode">Country Code</label>
               </div>
               <div class="form-input-material">
                 <input
                   type="number"
-                  id="username"
+                  id="contactno"
                   class="form-control-material"
-                  name="username"
+                  name="contactno"
                   placeholder=""
                   autocomplete="off"
                   required
                 />
-                <label for="username">Contact No</label>
+                <label for="contactno">Contact No</label>
               </div>
             </div>
             <button class="btn" type="submit">Register</button>

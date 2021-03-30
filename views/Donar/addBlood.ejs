@@ -6,18 +6,22 @@
   <body>
     <%- include('./navbar') %>
 
-    <section class="form-result">
-      <div class="container">
-        <div style="width: 40rem; margin: 2rem auto">
-          <div class="center alert alert-success">
-            <svg class="icon">
-              <use xlink:href="images/sprite.svg#check-circle-fill"></use>
-            </svg>
-            <p class="message" id="message">Success</p>
-          </div>
+  <% if(notify) {%>
+  <section class="form-result">
+    <div class="container">
+      <div style="width: 40rem; margin: 2rem auto">
+        <div class="center alert <%= notify=='Success' ? "alert-success" : 'alert-danger' %>">
+          <svg class="icon">
+            <use xlink:href="images/sprite.svg#check-circle-fill"></use>
+          </svg>
+          <p class="message" id="message"><%= notify %></p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+
+  <% } %>
 
     <section class="add-blood">
       <div class="container">
