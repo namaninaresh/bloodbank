@@ -1,26 +1,18 @@
-const router = require('express').Router();
-const session = require('express-session');
+const router = require("express").Router();
 
-router.use(session({secret:"er"}));
+router.get("/", function (req, res, next) {
+  // req.session.destroy((err) => {
+  //     if(err) {
+  //         return console.log(err);
+  //     }
+  //     res.redirect('/');
+  // });
 
-router.get('/',function(req, res,next){
+  req.session.destroy((err) => {
+    if (err) console.log(err);
 
-    // req.session.destroy((err) => {
-    //     if(err) {
-    //         return console.log(err);
-    //     }
-    //     res.redirect('/');
-    // });
-
-    req.session.destroy((err)=>{
-        if(err) console.log(err);
-
-        res.redirect('/auth/login');
-
-    })
-
+    res.redirect("/auth/login");
+  });
 });
-
-
 
 module.exports = router;

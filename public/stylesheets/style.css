@@ -31,9 +31,17 @@ body {
   background: #e2e8f0;
   /* background-color: #f6f6f6; */
   color: var(--color--black);
-  font: 14px "Open Sans", Poppins, Arial, sans-serif;
+  font: 1.2rem "Open Sans", Poppins, Arial, sans-serif;
 
   /* background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26); */
+}
+
+@media screen and (min-width:760px)
+{
+  body
+  {
+    font: 1.4rem "Open Sans", Poppins, Arial, sans-serif;
+  }
 }
 
 h1
@@ -44,7 +52,7 @@ h1
 a {
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: 500;
+
   color: #a1a1a1;
   cursor: pointer;
 }
@@ -77,7 +85,7 @@ a {
   outline: none;
   border: 0px;
   text-transform: uppercase;
-  padding: 1.5rem 5rem;
+  padding: 1.5rem 2rem;
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
@@ -85,6 +93,7 @@ a {
   font-weight: 600;
   letter-spacing: 1px;
 }
+
 .btn-primary {
   background: var(--color--primary);
   color: white;
@@ -163,7 +172,7 @@ a {
   list-style: none;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
-  font-weight: 800;
+
   color: var(--color--black);
   font-size: 1.2rem;
   margin: 0;
@@ -176,7 +185,7 @@ a {
 .nav__item {
   margin: 0 1rem;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .nav__item a:hover
@@ -186,7 +195,7 @@ a {
 .nav__item .active,.nav__item .active:hover
 {
   color: var(--color--active);
-  font-weight: 600;
+  font-weight: 500;
   cursor: text;
 }
 .mobile-nav__menu
@@ -212,6 +221,7 @@ a {
     margin: 0;
     padding: 0;
     transition: all 0.5s;
+    z-index: 1000;
     
 
   }
@@ -496,11 +506,20 @@ a {
 
 }
 
+.welcome
+{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
  .title
 {
-  font-size: 1.4rem;
-  font-family: 'Poppins',sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+
   text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 
 }
 
@@ -572,6 +591,11 @@ a {
 .blood-banks-info
 {
   margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+.blood-banks-info h6
+{
+  font-size: 1.2rem;
 }
 .blood-banks-info .container
 {
@@ -596,11 +620,13 @@ a {
 
 .blood-banks-info .in-location
 {
-  width: 50%;
+  width: 45%;
+  padding: 1rem 2rem;
 }
 .blood-banks-info .total
 {
-  width: 40%;
+  width: 45%;
+  padding: 1rem 2rem;
 }
 
 
@@ -730,9 +756,25 @@ hr
 {
   display: grid;
   
-  grid-template-columns: repeat(4, 1fr)
+  grid-template-columns: repeat(2, 1fr)
 }
 
+@media screen and (min-width:760px)
+{
+  .grid--4
+{
+  
+  grid-template-columns: repeat(4, 1fr)
+}
+}
+@media (min-width:600px) and (max-width:750px)
+{
+  .grid--4
+{
+  
+  grid-template-columns: repeat(3, 1fr)
+}
+}
 .header h6
 {
   font-size: 1.5rem;
@@ -750,8 +792,34 @@ hr
 }
 .requests .container
 {
+ 
+}
+
+.new-requests
+{
+  width: 100%;
+  margin: auto;
+}
+.acccepted-requests
+{
+  width: 100%;
+}
+@media screen and (min-width:760px)
+{
+  .requests .container
+{
   display: flex;
   flex-direction: row;
+}
+.new-requests
+{
+  width: 40%;
+  margin: auto;
+}
+.acccepted-requests
+{
+  width: 50%;
+}
 }
 
 .requests .card
@@ -760,19 +828,12 @@ hr
 }
 
 
-.new-requests
-{
-  width: 40%;
-  margin: auto;
-}
+
 
 .new-requests h5{
   margin: 0;
 }
-.acccepted-requests
-{
-  width: 50%;
-}
+
 
 
 
@@ -1021,7 +1082,14 @@ hr
 {
   flex: 0 0 30%;
   font-family: 'Poppins',sans-serif;
+  font-weight: 200;
 }
+
+.total-blood-donated h3,h1
+{
+  font-weight: 400;
+}
+
 .total-blood-donated .card-body
 {
   text-align: center;
@@ -1071,6 +1139,7 @@ tr,td,th
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+ 
 }
 
 @media screen and (min-width:760px)
