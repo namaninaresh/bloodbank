@@ -6,6 +6,17 @@
   <body>
     <%- include('./navbar') %>
 
+    <% if(requestMsg) { %>
+      <section class="notify">
+      <div class="container">
+        <div class="notification" style="margin-bottom: -8rem">
+          <div class="alert <%= requestMsg.status ==='success' ? "alert-success" : "alert-danger" %>" style="padding: 2rem">
+              <%= requestMsg.message %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% }%>
     <section class="search">
       <div class="container">
         <div class="card">
@@ -20,6 +31,7 @@
                 <P style="flex: 0 0 40%">Blood Group</P>
                 <div class="custom-select" style="flex: 0 0 60%">
                   <select class="group" name="group">
+                    <option>SELECT BLOOD GROUP</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -99,11 +111,15 @@
                 <hr />
                 <p class="card__text">
                   contains
-                  <strong style="font-size: 2rem"><%= _.bloodtype %></strong>
-                  <%= _.bloodunits %> units
+                  <strong style="font-size: 2rem"><%= _.bloodtype %></strong> with
+                  <%= requestData.Units %> units
                 </p>
 
-                <button class="card__btn">Request <span>&rarr;</span></button>
+                <a
+                  href="/requestBlood/<%=_.userid %>&<%= _.username %>&<%=_.bloodtype%>&<%= requestData.Units %>&<%= user.userid %>&<%= user.username %>"
+                  class="card__btn"
+                  >Request <span>&rarr;</span></a
+                >
               </div>
             </div>
           </div>

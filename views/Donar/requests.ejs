@@ -5,26 +5,138 @@
   </head>
 
   <body>
-    <%- include('./navbar') %>
+    <%- include('./navbar') %> <% if(user.role=='donar') { %>
 
     <section class="requests">
       <div class="container">
         <div class="new-requests">
           <div class="card">
             <div class="card-body">
-              <h5>New Requests :</h5>
-
-              <div></div>
+              <% if(data.length>0) { %>
+              <table style="margin-top: 2rem">
+                <thead>
+                  <tr>
+                    <th scope="col">New Requests</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.filter(element => element.status=='unknown').map(_ =>
+                  { %>
+                  <tr>
+                    <td>
+                      Recieved a request from <%= _.requesteduser %>,for
+                      BloodGroup of <%= _.reqgroup%> with <%= _.bloodunits %>
+                      Units
+                    </td>
+                    <td>
+                      <a
+                        href="/requestEx/status=accepted&id= <%=_.reqid %>&userid=<%= _.userid %>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
+                      >
+                        <svg class="icon accept">
+                          <use
+                            xlink:href="./images/sprite.svg#check-circle-fill"
+                          ></use>
+                        </svg>
+                      </a>
+                    </td>
+                    <td>
+                      <a
+                        href="/requestEx/status=rejected&id= <%=_.reqid %>&userid=<%= _.userid %>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
+                      >
+                        <svg class="icon reject">
+                          <use
+                            xlink:href="./images/sprite.svg#x-circle-fill"
+                          ></use>
+                        </svg>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+                <% }) } else {%>
+                <div class="notification" style="width: 100%; padding: 0">
+                  <div class="alert alert-success" style="padding: 2rem">
+                    No New Requests
+                  </div>
+                </div>
+                <% }%>
+              </table>
             </div>
           </div>
         </div>
         <div class="acccepted-requests">
           <div class="card">
-            <div class="card-body">Accepted Requests</div>
+            <div class="card-body">
+              <table style="margin-top: 2rem">
+                <thead>
+                  <tr>
+                    <th scope="col">Responded Requests</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(data.length>0) { %> <% data.filter(element =>
+                  element.status!=='unknown').map(_ => { %>
+                  <tr>
+                    <td>
+                      Request from <%= _.requesteduser %> with <%= _.bloodunits
+                      %> units has been <%= _.status %> on <%= _.ondate %>
+                    </td>
+                  </tr>
+                  <% }) } else {%>
+                  <tr>
+                    <td>No Request till now..</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <% } else {%>
+
+    <section class="requests">
+      <div class="container">
+        <div class="receptor-req">
+          <div class="card">
+            <div class="card-body">
+              <% if(data.length>0) { %>
+              <table style="margin-top: 2rem; text-align: center">
+                <thead>
+                  <tr>
+                    <th scope="col">Requests</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(data.length>0) { %> <% data.map(_ => { %>
+                  <tr>
+                    <td>
+                      Request To <%= _.username %> with <%= _.bloodunits %>
+                      units
+                    </td>
+                    <td><%= _.status %></td>
+                    <td><%= _.ondate %></td>
+                  </tr>
+                  <% }) } else {%>
+                  <tr>
+                    <td>No Request till now..</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <%} %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%} %>
 
     <script src="./javascripts/mobileNav.js"></script>
   </body>

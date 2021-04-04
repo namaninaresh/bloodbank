@@ -1,6 +1,7 @@
 @charset "UTF-8";
 :root {
-  --color--primary: rgb(245, 64, 64);
+  --color--primary:#ed1b24;
+  /*--color--primary: rgb(245, 64, 64); */
   --color--secondary: rgb(224, 223, 223);
   --color--heading: #262626;
   --color--white: #fff;
@@ -666,10 +667,13 @@ a {
 }
 
 
-.card-body
+@media screen and (min-width:760px)
+{
+  .card-body
 {
   padding: 2rem;
 
+}
 }
 .card-body img
 {
@@ -792,40 +796,71 @@ hr
 }
 .requests .container
 {
- 
+  
 }
 
 .new-requests
 {
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
 }
 .acccepted-requests
 {
   width: 100%;
 }
+.receptor-req
+{
+  width:100%;
+}
+
 @media screen and (min-width:760px)
 {
   .requests .container
 {
   display: flex;
-  flex-direction: row;
 }
 .new-requests
 {
-  width: 40%;
-  margin: auto;
+  width: 65%;
+  margin: 0 auto;
 }
 .acccepted-requests
 {
-  width: 50%;
+  width: 30%;
+}
+.receptor-req
+{
+  width:80%;
 }
 }
 
-.requests .card
+.new-requests td
+{
+  text-align: center;
+}
+
+.new-requests .accept
+{
+  color: rgb(62, 163, 3);
+}
+
+.new-requests .reject
+{
+  color: rgb(179, 44, 2);
+}
+
+@media screen and (min-width:760px)
+{
+  .requests .card
 {
   padding: 0 2rem;
 }
+}
+.requests .card
+{
+  padding:1rem;
+}
+
 
 
 
@@ -834,7 +869,11 @@ hr
   margin: 0;
 }
 
-
+.acccepted-requests td
+{
+  text-align: center;
+  line-height: 1.5;
+}
 
 
 

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const url = require("url");
 const DbService = require("../models/DataController");
 
 router.get("/", function (req, res, next) {
@@ -21,22 +21,32 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/requests", function (req, res, next) {
-  if (req.session.currentUser)
-    res.render("Donar/requests", {
-      title: "Requests Page",
-      user: req.session.currentUser,
-      active: "requests",
-    });
-  else res.redirect("/auth/login");
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.getRequestData(req.session.currentUser);
+
+    result
+      .then((data) => {
+        res.render("Donar/requests", {
+          title: "Requests Page",
+          user: req.session.currentUser,
+          active: "requests",
+          data,
+        });
+      })
+      .catch((err) => console.log(err));
+  } else res.redirect("/auth/login");
 });
 router.get("/profile", function (req, res, next) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
 
     const result = Instance.getProfileData(req.session.currentUser);
+
     // const result= Instance.getProfileData(req.session.currentUser);
     result
-      .then((data) =>
+      .then((data) => {
         res.render("Donar/profile", {
           title: "Profile Page",
           user: req.session.currentUser,
@@ -44,8 +54,8 @@ router.get("/profile", function (req, res, next) {
           userdata: data[0][0],
           donated: data[1][0],
           available: data[2],
-        })
-      )
+        });
+      })
       .catch((err) => console.log(err));
 
     //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
@@ -55,13 +65,13 @@ router.get("/profile", function (req, res, next) {
 router.get("/blooddonated", function (req, res, next) {
   // if (req.session.currentUser) {
   const Instance = DbService.getDbInstance();
-  const result = Instance.getBloodDonatedData();
+  const result = Instance.getBloodDonatedData(req.session.currentUser);
 
   result
     .then((data) => {
       const result = { ...data[0][0], ...data[1][0] };
       const info = data[2];
-      console.log(info);
+
       res.render("Donar/blooddonated", {
         title: "BloodDonated Page",
         user: req.session.currentUser,
@@ -89,6 +99,7 @@ router.get("/search", function (req, res, next) {
       active: "search",
       searchError: false,
       searchData: false,
+      requestMsg: false,
     });
   else res.redirect("/auth/login");
 });
@@ -103,13 +114,14 @@ router.post("/search", function (req, res, next) {
 
     result
       .then((data) => {
-        console.log(data);
         res.render("Donar/search", {
           title: "Search Page",
           user: userSessionData,
+          requestData: req.body,
           active: "search",
           searchError: false,
           searchData: data,
+          requestMsg: false,
         });
       })
       .catch((err) => console.log(err));
@@ -165,4 +177,82 @@ router.post("/addblood", function (req, res, next) {
   } else res.redirect("/auth/login");
 });
 
+router.get(
+  "/requestEx/status=:status&id=:id&userid=:userid&group=:group&units=:units",
+  function (req, res, next) {
+    const userSessionData = req.session.currentUser;
+    const data = {
+      status: req.params.status,
+      reqid: req.params.id,
+      userid: req.params.userid,
+      group: req.params.group,
+
+      units: req.params.units,
+    };
+    if (userSessionData) {
+      const Instance = DbService.getDbInstance();
+
+      const result = Instance.putRequestData(data);
+
+      result.then((data) => {
+        res.redirect("/requests");
+      });
+    } else res.redirect("/auth/login");
+  }
+);
+
+function contSearch(req, res, next) {
+  const userSessionData = req.session.currentUser;
+  if (userSessionData)
+    res.render("Donar/search", {
+      title: "Search Page",
+      user: userSessionData,
+      active: "search",
+      searchError: false,
+      searchData: false,
+      requestMsg: { message: "Requested Successfull", status: "success" },
+    });
+  else res.redirect("/auth/login");
+}
+router.get(
+  "/requestBlood/:userid&:username&:bloodtype&:bloodunits&:requserid&:requser",
+  function (req, res, next) {
+    const userSessionData = req.session.currentUser;
+    if (userSessionData) {
+      const Instance = DbService.getDbInstance();
+
+      const result = Instance.makeRequest(req.params);
+      result
+        .then((data) => {
+          return contSearch(req, res, next);
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+);
+
+router.get("/deleteuser", function (req, res, next) {
+  res.send("user Deleting....");
+});
+
+router.get("/profile/edit", function (req, res, next) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.getProfileData(req.session.currentUser);
+
+    // const result= Instance.getProfileData(req.session.currentUser);
+    result
+      .then((data) => {
+        res.render("Donar/profileEdit", {
+          title: "Profile Page",
+          user: req.session.currentUser,
+          active: "profile",
+        });
+      })
+      .catch((err) => console.log(err));
+
+    //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
+  } else res.redirect("/auth/login");
+});
 module.exports = router;

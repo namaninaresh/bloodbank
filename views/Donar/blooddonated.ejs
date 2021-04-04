@@ -13,19 +13,26 @@
           <div class="card">
             <div class="card-body card-blue">
               <h3>Total Blood Units available:</h3>
-              <h1><%= data.bloodunits %></h1>
+              <h1>
+                <% if( data.totalblood >0 && data.totalblood != null){ %>
+                <%=data.totalblood %> <% } else { %> 0 <% }%> units
+              </h1>
             </div>
           </div>
           <div class="card">
             <div class="card-body">
               <h3>Total Blood Donated till Now:</h3>
-              <h1><%= data.totalblood %></h1>
+              <h1>
+                <% if(data.bloodonated !=null & data.bloodonated >0){ %>
+                <%=data.bloodonated %> <% } else { %> 0 <% }%> units
+              </h1>
             </div>
           </div>
         </div>
         <div class="blood-donated-details">
           <div class="card">
             <div class="card-body">
+              <% if(info.length>0) { %>
               <table>
                 <thead>
                   <tr>
@@ -45,6 +52,13 @@
                   <% }) %>
                 </tbody>
               </table>
+              <% } else {%>
+              <div class="notification" style="width: 100%; padding: 0">
+                <div class="alert alert-success" style="padding: 2rem">
+                  You haven't Donated till now
+                </div>
+              </div>
+              <% }%>
             </div>
           </div>
         </div>

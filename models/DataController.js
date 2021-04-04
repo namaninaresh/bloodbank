@@ -36,9 +36,15 @@ class DbService {
     return this.queryExecuter(query);
   };
 
-  getProfileData = ({ userid }) => {
-    const query1 =
-      "SELECT * FROM users  WHERE userid=?; SELECT * FROM totalblooddonated WHERE userid=?;SELECT * FROM bloodinfo WHERE userid=?";
+  getProfileData = ({ userid, role }) => {
+    var query1 = null;
+    if (role === "donar") {
+      query1 =
+        "SELECT * FROM users  WHERE userid=?;select SUM(units) as totalblood from donationsinfo where userid=?;SELECT * FROM bloodinfo WHERE userid=?";
+    } else {
+      query1 =
+        "SELECT * FROM users  WHERE userid=?;select SUM(units) as totalblood from donationsinfo where touserid=?;SELECT * FROM bloodinfo WHERE userid=?";
+    }
     return this.queryExecuter(query1, [userid, userid, userid]);
   };
 
@@ -51,21 +57,35 @@ class DbService {
 
   addBlood = ({ type, group, Units }, { userid }) => {
     const remove =
-      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)-? WHERE userid=? AND bloodtype=?;UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)-? WHERE BloodType=? AND (SELECT bloodunits from bloodinfo WHERE userid=?)>0";
+      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)-? WHERE userid=? AND (bloodtype=? AND (select bloodunits where userid=? AND bloodtype=?) > 0);UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)-? WHERE BloodType=? AND (SELECT bloodunits from bloodinfo WHERE userid=? AND bloodtype=?)>0";
     const add =
-      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)+? WHERE userid=? AND bloodtype=?;UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)+? WHERE BloodType=? AND (SELECT bloodunits from bloodinfo WHERE userid=?)>0";
+      "UPDATE bloodinfo SET bloodunits = (SELECT bloodunits WHERE userid=?)+? WHERE userid=? AND bloodtype=?;UPDATE totalbloods SET BloodUnits = (SELECT BloodUnits WHERE BloodType=?)+? WHERE BloodType=?;";
 
-    const query = type == "add" ? add : remove;
-    return this.queryExecuter(query, [
-      userid,
-      Units,
-      userid,
-      group,
-      group,
-      Units,
-      group,
-      userid,
-    ]);
+    if (type == "add") {
+      return this.queryExecuter(add, [
+        userid,
+        Units,
+        userid,
+        group,
+        group,
+        Units,
+        group,
+      ]);
+    } else
+      return this.queryExecuter(remove, [
+        userid,
+        Units,
+        userid,
+        group,
+        userid,
+        group,
+
+        group,
+        Units,
+        group,
+        userid,
+        group,
+      ]);
   };
 
   registerUser = (re = []) => {
@@ -76,12 +96,78 @@ class DbService {
     return this.queryExecuter(query);
   };
 
-  getBloodDonatedData = () => {
+  getBloodDonatedData = ({ userid }) => {
     const query =
-      "select bloodunits from totalblooddonated where userid=1;select SUM(bloodunits) as totalblood from bloodinfo where userid=1;select * from donationsinfo where userid=1";
+      "select SUM(units) as bloodonated from donationsinfo where userid=?;select SUM(bloodunits) as totalblood from bloodinfo where userid=?;select * from donationsinfo where userid=?";
 
-    return this.queryExecuter(query);
+    return this.queryExecuter(query, [userid, userid, userid]);
   };
+
+  getRequestData = ({ userid, role }) => {
+    var query = null;
+    if (role == "donar") query = "select * from requestinfo where userid=?";
+    else query = "select * from requestinfo where requesteduserid=?";
+
+    return this.queryExecuter(query, [userid]);
+  };
+
+  putRequestData = ({ status, reqid, userid, group, units }) => {
+    if (status == "accepted") {
+      const query =
+        "update requestinfo set status=? where userid=? AND reqid=?;update bloodinfo set bloodunits=(select bloodunits where userid=? and bloodtype=?)-? where userid=? and bloodtype=?;update totalbloods set BloodUnits=(select BloodUnits where BloodType=?)-? where BloodType=?;insert into donationsinfo values(?,?,?,?,?,?);";
+
+      return this.queryExecuter(query, [
+        status,
+        reqid,
+        userid,
+        userid,
+        group,
+        units,
+        userid,
+        group,
+        group,
+        units,
+        group,
+        userid,
+        "chinna",
+        "unknow",
+        "12/12/12",
+        units,
+        12,
+      ]);
+    } else {
+      const query =
+        "update requestinfo set status=? where userid=? AND reqid=?;";
+
+      return this.queryExecuter(query, [status, userid, reqid]);
+    }
+  };
+
+  makeRequest = ({
+    userid,
+    username,
+    bloodtype,
+    bloodunits,
+    requserid,
+    requser,
+  }) => {
+    const query = "insert ignore into requestinfo values(?,?,?,?,?,?,?,?,?)";
+
+    const id = Math.floor(Math.random() * 14000);
+    return this.queryExecuter(query, [
+      id,
+      userid,
+      requserid,
+      username,
+      requser,
+      bloodunits,
+      "01/01/22",
+      "unknown",
+      bloodtype,
+    ]);
+  };
+
+  deleteUser = () => {};
 }
 
 module.exports = DbService;

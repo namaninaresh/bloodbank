@@ -19,14 +19,22 @@
                 <p><%= userdata.city %></p>
 
                 <div class="center">
-                  <a class="btn btn-accent center" style="margin: 0 0.5rem">
+                  <a
+                    class="btn btn-accent center"
+                    href="/profile/edit"
+                    style="margin: 0 0.5rem"
+                  >
                     <svg class="icon">
                       <use xlink:href="images/sprite.svg#pencil"></use>
                     </svg>
                     Edit
                   </a>
 
-                  <a class="btn btn-primary center" style="margin: 0 0.5rem">
+                  <a
+                    class="btn btn-primary center"
+                    onclick="onDelete()"
+                    style="margin: 0 0.5rem"
+                  >
                     <svg class="icon">
                       <use xlink:href="images/sprite.svg#trash"></use>
                     </svg>
@@ -36,14 +44,33 @@
               </div>
             </div>
           </div>
+          <% if(user.role ==='donar') { %>
           <div class="card">
             <div class="card-body">
               <div>Blood Donated Till Now</div>
               <div>
-                <h1><%= donated.bloodunits %> units</h1>
+                <h1>
+                  <% if( donated.totalblood >0 && donated.totalblood != null){
+                  %> <%=donated.totalblood %> <% } else { %> 0 <% }%> units
+                </h1>
               </div>
             </div>
           </div>
+          <% } else {%>
+
+          <div class="card">
+            <div class="card-body">
+              <div>Blood Recieved Till Now</div>
+              <div>
+                <h1>
+                  <% if( donated.totalblood >0 && donated.totalblood != null){
+                  %> <%=donated.totalblood %> <% } else { %> 0 <% }%> units
+                </h1>
+              </div>
+            </div>
+          </div>
+
+          <% } %>
         </div>
         <div class="user-details">
           <div class="card">
@@ -110,6 +137,7 @@
             </div>
           </div>
 
+          <% if(user.role ==='donar') { %>
           <div class="card">
             <div class="card-body">
               <div class="header">
@@ -131,10 +159,18 @@
               </div>
             </div>
           </div>
+
+          <% } %>
         </div>
       </div>
     </section>
 
+    <script>
+      function onDelete() {
+        const answer = confirm("Delete ?");
+        if (answer) window.location.replace("/deleteUser");
+      }
+    </script>
     <script src="./javascripts/mobileNav.js"></script>
   </body>
 </html>
