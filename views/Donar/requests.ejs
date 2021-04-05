@@ -32,7 +32,7 @@
                     </td>
                     <td>
                       <a
-                        href="/requestEx/status=accepted&id= <%=_.reqid %>&userid=<%= _.userid %>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
+                        href="/requestEx/status=accepted&id= <%=_.reqid %>&<%=_.username%>&userid=<%= _.userid %>&<%=_.requesteduser%>&<%=_.requesteduserid%>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
                       >
                         <svg class="icon accept">
                           <use
@@ -43,7 +43,7 @@
                     </td>
                     <td>
                       <a
-                        href="/requestEx/status=rejected&id= <%=_.reqid %>&userid=<%= _.userid %>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
+                        href="/requestEx/status=rejected&id= <%=_.reqid %>&<%=_.username%>&userid=<%= _.userid %>&<%=_.requesteduser%>&<%=_.requesteduserid%>&group=<%= _.reqgroup %>&units=<%= _.bloodunits %>"
                       >
                         <svg class="icon reject">
                           <use

@@ -164,21 +164,20 @@ router.post("/addblood", function (req, res, next) {
   if (userSessionData) {
     const Instance = DbService.getDbInstance();
     const result = Instance.addBlood(req.body, req.session.currentUser);
-    result
-      .then((data) => {
-        res.render("Donar/addBlood", {
-          title: "Add Blood Page",
-          user: userSessionData,
-          active: "addblood",
-          notify: "Success",
-        });
-      })
-      .catch((err) => console.log(err));
+
+    result.then((data) => {
+      res.render("Donar/addBlood", {
+        title: "Add Blood Page",
+        user: userSessionData,
+        active: "addblood",
+        notify: "Success",
+      });
+    });
   } else res.redirect("/auth/login");
 });
 
 router.get(
-  "/requestEx/status=:status&id=:id&userid=:userid&group=:group&units=:units",
+  "/requestEx/status=:status&id=:id&:username&userid=:userid&:requser&:requserid&group=:group&units=:units",
   function (req, res, next) {
     const userSessionData = req.session.currentUser;
     const data = {
@@ -186,13 +185,16 @@ router.get(
       reqid: req.params.id,
       userid: req.params.userid,
       group: req.params.group,
-
+      username: req.params.username,
+      requser: req.params.requser,
+      ondate: "1/1/1",
       units: req.params.units,
+      requserid: req.params.requserid,
     };
     if (userSessionData) {
       const Instance = DbService.getDbInstance();
 
-      const result = Instance.putRequestData(data);
+      const result = Instance.putRequestData(req.params);
 
       result.then((data) => {
         res.redirect("/requests");
