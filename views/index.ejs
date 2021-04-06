@@ -2,25 +2,80 @@
 <html lang="en">
   <head>
     <%- include('../header'); %>
+
+    <style>
+      header {
+        display: grid;
+        grid-template-areas: "hero";
+        place-items: center;
+        height: 60vh;
+        max-height: 600px;
+        background-color: rgba(45, 56, 63, 0.5);
+        overflow: hidden;
+      }
+      header::before {
+        content: "";
+        grid-area: hero;
+        place-self: start;
+        width: 50vmin;
+        height: 50vmin;
+        border-radius: 50%;
+        transform: translate(-10%, -10%);
+        background-image: url("../public/images/donation.jpg");
+      }
+      header::after {
+        content: "";
+        grid-area: hero;
+        place-self: end;
+        width: 30vmin;
+        height: 60vmin;
+        transform: translate(20%, 40%) rotate(45deg);
+        background-image: url("../public/images/donation.jpg");
+      }
+      header > * {
+        grid-area: hero;
+      }
+      header img {
+        -o-object-fit: cover;
+        object-fit: cover;
+        height: min(60vh, 600px);
+        width: 100%;
+        z-index: -1;
+      }
+      header .hero__content {
+        z-index: 1;
+        text-align: center;
+        color: #fff;
+        min-width: 30ch;
+        padding: 1rem;
+      }
+      header .hero__content h1 {
+        font-weight: 500;
+        margin: 0 0 1rem;
+      }
+      header .hero__content p {
+        font-size: 1.75rem;
+      }
+
+      .hero__content .btn-danger {
+        background: red;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <%- include('../includes/homeNav'); %>
 
-    <section class="index">
-      <div class="container">
-        <div class="hero">
-          <div class="hero__content">
-            <p>Save Life</p>
-            <p>Donate Blood</p>
-          </div>
-
-          <div class="hero__footer">
-            <button class="btn btn-danger">Donate Now</button>
-            <button class="btn btn-accent">Register</button>
-          </div>
-        </div>
+    <header>
+      <div class="hero__content">
+        <h1>Save Life</h1>
+        <h3>Donate Blood</h3>
+        <a href="/auth/register" class="btn btn-danger">Register</a>
+        <a href="/auth/login" class="btn btn-accent">Login</a>
       </div>
-    </section>
+      <img src="./images/donation.jpg" alt="" />
+    </header>
+
     <section class="content">
       <div class="container">
         <div class="row">

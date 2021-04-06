@@ -29,7 +29,8 @@
             <div style="display: flex; width: 100%; margin-bottom: 2rem">
               <label style="flex: 0 0 45%">Role </label>
               <div style="display: flex">
-                <input
+               
+                <label for="donar" style="margin-left: 1rem">  <input
                   type="radio"
                   id="donar"
                   name="role"
@@ -37,10 +38,11 @@
                   style="margin-left: 1rem"
                   class="form-control-material"
                   onchange="check()"
-                />
-                <label for="male" style="margin-left: 1rem"> Donar </label
+                  required
+                /> Donar </label
                 ><br />
-                <input
+                
+                <label for="receptor" style="margin-left: 1rem"> <input
                   type="radio"
                   id="receptor"
                   name="role"
@@ -48,33 +50,39 @@
                   style="margin-left: 1rem"
                   class="form-control-material"
                   onchange="check()"
-                />
-                <label for="female" style="margin-left: 1rem">Receptor</label
+                  required
+                /> Receptor</label
                 ><br />
               </div>
             </div>
             <div style="display: flex">
-              <div class="form-input-material" style="flex: 0 0 45%">
+              <div
+                class="form-input-material"
+                id="firstname-box"
+                style="flex: 0 0 45%"
+              >
                 <input
                   type="text"
                   id="firstname"
                   class="form-control-material"
                   name="firstname"
-                  placeholder=""
+                  placeholder="Name"
                   autocomplete="off"
-                  required
                 />
                 <label for="firstname">First Name</label>
               </div>
-              <div class="form-input-material" style="flex: 0 0 45%">
+              <div
+                class="form-input-material"
+                id="lastname-box"
+                style="flex: 0 0 45%"
+              >
                 <input
                   type="text"
                   id="lastname"
                   class="form-control-material"
                   name="lastname"
-                  placeholder=""
+                  placeholder="Last Name"
                   autocomplete="off"
-                  required
                 />
                 <label for="lastname">Last Name</label>
               </div>
@@ -86,7 +94,7 @@
                   id="username"
                   class="form-control-material"
                   name="username"
-                  placeholder=""
+                  placeholder="username"
                   autocomplete="off"
                   required
                 />
@@ -98,23 +106,89 @@
                   id="password"
                   class="form-control-material"
                   name="password"
-                  placeholder=""
+                  placeholder="Password"
                   autocomplete="off"
                   required
                 />
                 <label for="password">Password</label>
               </div>
             </div>
-            <div class="form-input-material">
-              <textarea
-                class="form-control-material"
-                name="address"
-                id="address"
-                required
-              >
-              </textarea>
-              <label for="address">Address</label>
+            <div style="display: flex; width: 100%; margin: 2rem" id="gender">
+              <label style="flex: 0 0 45%">Gender </label>
+              <div style="display: flex">
+               
+                <label for="male" style="margin-left: 1rem"> <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  style="margin-left: 1rem"
+                  class="form-control-material"
+                  onchange="check()"
+                  required
+                /> Male </label
+                ><br />
+                
+                <label for="female" style="margin-left: 1rem"><input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  style="margin-left: 1rem"
+                  class="form-control-material"
+                  onchange="check()"
+                  required
+                />  Female</label
+                ><br />
+              </div>
             </div>
+             
+       
+            <div style="display: flex">
+              <div class="form-input-material" style="flex: 0 0 50%">
+                <textarea
+                  placeholder="This is an awesome comment box"
+                 
+                  name="address"
+                  id="address"
+                 
+                  class="form-control-material"
+                  autocomplete="off"
+                  role="textbox"
+                  aria-autocomplete="list"
+                  aria-haspopup="true"
+                ></textarea>
+               
+                </textarea>
+                <label for="address">Address</label>
+              </div>
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="city"
+                  class="form-control-material"
+                  name="city"
+                  placeholder="City"
+                  autocomplete="off"
+                  required
+                />
+                <label for="city">City</label>
+              </div>
+            </div>
+
+            <div class="form-input-material">
+              <input
+                type="email"
+                id="email"
+                class="form-control-material"
+                name="email"
+                placeholder="Email"
+                autocomplete="off"
+                required
+              />
+              <label for="Email">Email</label>
+            </div>
+
             <div style="display: flex">
               <div class="form-input-material" style="flex: 0 0 50%">
                 <input
@@ -122,7 +196,7 @@
                   id="countrycode"
                   class="form-control-material"
                   name="countrycode"
-                  placeholder=""
+                  placeholder="Country Code"
                   autocomplete="off"
                   required
                 />
@@ -134,7 +208,7 @@
                   id="contactno"
                   class="form-control-material"
                   name="contactno"
-                  placeholder=""
+                  placeholder="Contact No"
                   autocomplete="off"
                   required
                 />
@@ -151,9 +225,31 @@
     <script>
       var e = document.getElementById("donar");
       var element = document.getElementById("usernameLabel");
+      console.log(document.getElementById("firstname").autofocus);
+      document.getElementById("username").autofocus = false;
       function check() {
-        if (e.checked) element.innerHTML = "Blood Bank Name";
-        else element.innerHTML = "User Name";
+        if (e.checked) {
+          element.innerHTML = "Blood Bank Name";
+          document.getElementById("lastname-box").style = "display:none";
+
+          document.getElementById("firstname-box").style = "display:none";
+          document.getElementById("gender").style= "display:none";
+          document.getElementById('male').required = false;
+          document.getElementById('female').required = false;
+          document.getElementById("firstname").required =false;
+          document.getElementById("lastname").required = false;
+        } else {
+          element.innerHTML = "User Name";
+
+          document.getElementById("lastname-box").style = "display:block";
+          document.getElementById("firstname").required = true;
+          document.getElementById("lastname").required = true;
+          document.getElementById('male').required = true;
+          document.getElementById('female').required = true;
+          document.getElementById("gender").style= "display:flex;width:100%;margin:2rem";
+
+          document.getElementById("firstname-box").style = "display:block";
+        }
       }
     </script>
   </body>

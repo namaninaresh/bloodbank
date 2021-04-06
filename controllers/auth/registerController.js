@@ -14,8 +14,10 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/", function (req, res, next) {
+  console.log(req.body);
   Db.query(
-    "select * from users where username='asdf'",
+    "select * from users where username=? OR email=?",
+    [req.body.username, req.body.email],
     function (err, rows, fields) {
       if (rows.length > 0) {
         res.render("register", {

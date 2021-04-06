@@ -60,12 +60,36 @@ class DbService {
     return this.queryExecuter(query, [group, Units, Location]);
   };
 
-  registerUser = (re = []) => {
-    // const query =
-    //   "INSERT INTO users(firsname,lastname,username,password) values('a','a','a','a') where not exist (select username from users)";
+  registerUser = ({
+    role,
+    firstname,
+    lastname,
+    username,
+    password,
+    address,
+    city,
+    email,
+    countrycode,
+    contactno,
+    gender = "donar",
+  }) => {
+    const id = Math.floor(Math.random() * 100000);
+    const query = "INSERT INTO users values(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    const query = "insert into scores value(10,34)";
-    return this.queryExecuter(query);
+    return this.queryExecuter(query, [
+      id,
+      firstname,
+      lastname,
+      username,
+      password,
+      address,
+      city.toLowerCase(),
+      role,
+      contactno,
+      email,
+      gender,
+      countrycode,
+    ]);
   };
 
   getBloodDonatedData = ({ userid }) => {

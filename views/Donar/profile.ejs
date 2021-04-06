@@ -75,6 +75,7 @@
         <div class="user-details">
           <div class="card">
             <div class="card-body">
+              <% if(userdata.role!='donar') {%>
               <div class="row">
                 <div class="d-flex">
                   <div class="user-title">
@@ -92,6 +93,28 @@
                   <div class="user-text"><%= userdata.lastname %></div>
                 </div>
               </div>
+              <hr />
+              <div class="row">
+                <div class="d-flex">
+                  <div class="user-title">
+                    <h6>Gender</h6>
+                  </div>
+                  <div class="user-text"><%= userdata.gender %></div>
+                </div>
+              </div>
+
+              <% } else {%>
+
+              <div class="row">
+                <div class="d-flex">
+                  <div class="user-title">
+                    <h6>BloodBank Name</h6>
+                  </div>
+                  <div class="user-text"><%= userdata.username %></div>
+                </div>
+              </div>
+
+              <% } %>
 
               <hr />
               <div class="row">
@@ -129,7 +152,9 @@
                   <div class="user-title">
                     <h6>Contact No</h6>
                   </div>
-                  <div class="user-text">+91 <%= userdata.contactno %></div>
+                  <div class="user-text">
+                    <%= userdata.contactprefix %> <%= userdata.contactno %>
+                  </div>
                 </div>
               </div>
 
