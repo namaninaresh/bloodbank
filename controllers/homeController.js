@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const url = require("url");
 const DbService = require("../models/DataController");
+const moment = require("moment");
 
 router.get("/", function (req, res, next) {
   const userSessionData = req.session.currentUser;
@@ -28,6 +29,13 @@ router.get("/requests", function (req, res, next) {
 
     result
       .then((data) => {
+        data.map(
+          (element) =>
+            (element.ondate = moment(
+              element.ondate,
+              "YYYY-MM-DDTHH:mm:ss"
+            ).fromNow())
+        );
         res.render("Donar/requests", {
           title: "Requests Page",
           user: req.session.currentUser,
@@ -70,8 +78,16 @@ router.get("/blooddonated", function (req, res, next) {
   result
     .then((data) => {
       const result = { ...data[0][0], ...data[1][0] };
-      const info = data[2];
-
+      var info = data[2];
+      info.map(
+        (element) =>
+          (element.ondate =
+            moment(element.ondate, "YYYY-MM-DDTHH:mm:ss").format("LLL") +
+            " ( " +
+            moment(element.ondate, "YYYY-MM-DDTHH:mm:ss").fromNow() +
+            " ) ")
+      );
+      console.log(info);
       res.render("Donar/blooddonated", {
         title: "BloodDonated Page",
         user: req.session.currentUser,
@@ -81,13 +97,6 @@ router.get("/blooddonated", function (req, res, next) {
       });
     })
     .catch((err) => console.log(err));
-  // }
-  // // res.render("Donar/blooddonated", {
-  // //   title: "BloodDonated Page",
-  // //   user: req.session.currentUser,
-  // //   active: "blooddonated",
-  // // });
-  // else res.redirect("/auth/login");
 });
 
 router.get("/search", function (req, res, next) {
@@ -126,25 +135,6 @@ router.post("/search", function (req, res, next) {
       })
       .catch((err) => console.log(err));
   } else res.redirect("/auth/login");
-
-  // console.log(req.body);
-  // const dataJson = [
-  //   { username: "chinna", bloodType: "AB+", units: 100 },
-  //   { username: "A", bloodType: "AB+", units: 50 },
-  //   { username: "B", bloodType: "AB+", units: 500 },
-  //   { username: "blood Bank OP ", bloodType: "AB+", units: 250 },
-  // ];
-
-  // const userSessionData = req.session.currentUser;
-  // if (userSessionData)
-  //   res.render("Donar/search", {
-  //     title: "Search Page",
-  //     user: userSessionData,
-  //     active: "search",
-  //     searchError: false,
-  //     searchData: dataJson,
-  //   });
-  // else res.redirect("/auth/login");
 });
 
 router.get("/addblood", function (req, res, next) {
@@ -257,4 +247,18 @@ router.get("/profile/edit", function (req, res, next) {
     //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
   } else res.redirect("/auth/login");
 });
+
+router.get("/error", function (req, res, next) {
+  const Instance = DbService.getDbInstance();
+
+  const result = Instance.parsingDate();
+
+  result
+    .then((data) => {
+      console.log(data[0]["onDateTime"]);
+      res.send(moment().format("YYYY-MM-DD HH:mm:ss"));
+    })
+    .catch((err) => console.log(err));
+});
+
 module.exports = router;

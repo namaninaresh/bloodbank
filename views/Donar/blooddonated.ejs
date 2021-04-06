@@ -36,13 +36,15 @@
               <table>
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th scope="col">Message</th>
                     <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% info.forEach(element => { %>
+                  <% info.forEach((element,index )=> { %>
                   <tr>
+                    <td><%= index+1%></td>
                     <td>
                       Donated blood to user: <%= element.touser %>, Units <%=
                       element.units %>

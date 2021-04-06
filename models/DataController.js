@@ -1,4 +1,5 @@
 var mysql = require("mysql");
+const moment = require("moment");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -29,6 +30,10 @@ class DbService {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  curDate = () => {
+    return moment().format("YYYY-MM-DD HH:mm:ss");
   };
 
   getHomeData = () => {
@@ -132,6 +137,7 @@ class DbService {
     const query = "insert ignore into requestinfo values(?,?,?,?,?,?,?,?,?)";
 
     const id = Math.floor(Math.random() * 14000);
+    const onDate = this.curDate();
     return this.queryExecuter(query, [
       id,
       userid,
@@ -139,7 +145,7 @@ class DbService {
       username,
       requser,
       bloodunits,
-      "01/01/22",
+      onDate,
       "unknown",
       bloodtype,
     ]);
@@ -186,6 +192,12 @@ class DbService {
         group,
       ]);
     }
+  };
+
+  parsingDate = () => {
+    const query = "select onDateTime from scores where personId=6";
+
+    return this.queryExecuter(query);
   };
 }
 
