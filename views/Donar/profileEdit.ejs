@@ -2,6 +2,14 @@
 <html lang="en">
   <head>
     <%- include('../header'); %>
+    <style>
+      .profileedit .row {
+        display: inline-flex;
+      }
+      .profileedit .form-input-material {
+        margin: 2rem;
+      }
+    </style>
   </head>
   <body>
     <%- include('./navbar') %>
@@ -9,9 +17,78 @@
     <section class="profileedit">
       <div class="container">
         <div class="card">
-          <div class="card-body">
-            <h3>he</h3>
-          </div>
+          <form action="/auth/register" method="POST" class="login-form">
+            <div class="row">
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="password"
+                  class="form-control-material"
+                  name="password"
+                  placeholder="Password"
+                  autocomplete="off"
+                  value=""
+                  required
+                />
+                <label for="password">Firstname</label>
+              </div>
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="password"
+                  class="form-control-material"
+                  name="password"
+                  placeholder="Password"
+                  autocomplete="off"
+                  value=""
+                  required
+                />
+                <label for="password">Lastname</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="password"
+                  class="form-control-material"
+                  name="password"
+                  placeholder="Password"
+                  autocomplete="off"
+                  value=""
+                  required
+                  disabled
+                />
+                <label for="password">Email</label>
+              </div>
+              <div class="form-input-material">
+                <input
+                  type="text"
+                  id="password"
+                  class="form-control-material"
+                  name="password"
+                  placeholder="Password"
+                  autocomplete="off"
+                  required
+                />
+                <label for="password">Password</label>
+              </div>
+            </div>
+
+            <div class="form-input-material">
+              <input
+                type="text"
+                id="password"
+                class="form-control-material"
+                name="password"
+                placeholder="Password"
+                autocomplete="off"
+                value=""
+                required
+              />
+              <label for="password">Password</label>
+            </div>
+          </form>
         </div>
       </div>
     </section>
