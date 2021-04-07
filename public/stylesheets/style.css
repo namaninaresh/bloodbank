@@ -1231,9 +1231,13 @@ tr,td,th
   display: grid;
   grid-template-columns: repeat(1,1fr);
 }
-
+.content-block .row
+{
+  justify-items: center !important;
+}
 @media screen and (min-width:760px)
 {
+ 
   .row
   {
     grid-template-columns: repeat(auto-fill,minmax(30rem, 1fr));

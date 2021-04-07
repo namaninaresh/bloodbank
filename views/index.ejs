@@ -2,79 +2,282 @@
 <html lang="en">
   <head>
     <%- include('../header'); %>
-
-    <style>
-      header {
-        display: grid;
-        grid-template-areas: "hero";
-        place-items: center;
-        height: 60vh;
-        max-height: 600px;
-        background-color: rgba(45, 56, 63, 0.5);
-        overflow: hidden;
-      }
-      header::before {
-        content: "";
-        grid-area: hero;
-        place-self: start;
-        width: 50vmin;
-        height: 50vmin;
-        border-radius: 50%;
-        transform: translate(-10%, -10%);
-        background-image: url("../public/images/donation.jpg");
-      }
-      header::after {
-        content: "";
-        grid-area: hero;
-        place-self: end;
-        width: 30vmin;
-        height: 60vmin;
-        transform: translate(20%, 40%) rotate(45deg);
-        background-image: url("../public/images/donation.jpg");
-      }
-      header > * {
-        grid-area: hero;
-      }
-      header img {
-        -o-object-fit: cover;
-        object-fit: cover;
-        height: min(60vh, 600px);
-        width: 100%;
-        z-index: -1;
-      }
-      header .hero__content {
-        z-index: 1;
-        text-align: center;
-        color: #fff;
-        min-width: 30ch;
-        padding: 1rem;
-      }
-      header .hero__content h1 {
-        font-weight: 500;
-        margin: 0 0 1rem;
-      }
-      header .hero__content p {
-        font-size: 1.75rem;
-      }
-
-      .hero__content .btn-danger {
-        background: red;
-        color: white;
-      }
-    </style>
   </head>
+
+  <style>
+    .hero-image {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("./images/donation.jpg");
+
+      background-size: cover;
+    }
+    .container-new {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .container-new h1 {
+      font-size: 72px;
+      letter-spacing: 0.2rem;
+    }
+    .container-new h1 span {
+      border: 1px solid white;
+      padding: 6px 14px;
+      display: inline-block;
+    }
+
+    .des {
+      margin: 2rem;
+      display: block;
+      font-size: 26px;
+      text-shadow: 0 0 10px rgb(129, 129, 129);
+      display: block;
+    }
+    .btn-danger {
+      color: white;
+      background: red;
+    }
+
+    .content-new {
+      background: #f2f4f8;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 50rem;
+      font-family: "Open Sans";
+    }
+
+    .education {
+      --bg-color: #ffd861;
+      --bg-color-light: #ffeeba;
+      --text-color-hover: #4c5656;
+      --box-shadow-color: rgba(255, 215, 97, 0.48);
+    }
+
+    .credentialing {
+      --bg-color: #b8f9d3;
+      --bg-color-light: #e2fced;
+      --text-color-hover: #4c5656;
+      --box-shadow-color: rgba(184, 249, 211, 0.48);
+    }
+
+    .wallet {
+      --bg-color: #ceb2fc;
+      --bg-color-light: #f0e7ff;
+      --text-color-hover: #fff;
+      --box-shadow-color: rgba(206, 178, 252, 0.48);
+    }
+
+    .human-resources {
+      --bg-color: #dce9ff;
+      --bg-color-light: #f1f7ff;
+      --text-color-hover: #4c5656;
+      --box-shadow-color: rgba(220, 233, 255, 0.48);
+    }
+
+    .card {
+      width: 220px;
+      height: 321px;
+      background: #fff;
+      border-top-right-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease-out;
+      text-decoration: none;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+        0 24px 46px var(--box-shadow-color);
+    }
+
+    .card:hover .overlay {
+      transform: scale(4) translateZ(0);
+    }
+
+    .card:hover .circle {
+      border-color: var(--bg-color-light);
+      background: var(--bg-color);
+    }
+
+    .card:hover .circle:after {
+      background: var(--bg-color-light);
+    }
+
+    .card:hover p {
+      color: var(--text-color-hover);
+    }
+
+    .card:active {
+      transform: scale(1) translateZ(0);
+      box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11),
+        0 15px 24px var(--box-shadow-color);
+    }
+
+    .card p {
+      font-size: 17px;
+      color: #4c5656;
+      margin-top: 30px;
+      z-index: 1000;
+      transition: color 0.3s ease-out;
+    }
+
+    .circle {
+      width: 131px;
+      height: 131px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease-out;
+    }
+
+    .circle:after {
+      content: "";
+      width: 118px;
+      height: 118px;
+      display: block;
+      position: absolute;
+      background: var(--bg-color);
+      border-radius: 50%;
+
+      transition: opacity 0.3s ease-out;
+    }
+
+    .circle svg {
+      z-index: 10000;
+      transform: translateZ(0);
+    }
+
+    .overlay {
+      width: 118px;
+      position: absolute;
+      height: 118px;
+      border-radius: 50%;
+      background: var(--bg-color);
+      top: 70px;
+      left: 50px;
+      z-index: 0;
+      transition: transform 0.3s ease-out;
+    }
+
+    .information {
+      background: #f5f5f5;
+      padding: 5rem 0;
+      min-height: 40rem;
+    }
+
+    .information .col-content {
+      background: #fff;
+    }
+    .bg-add {
+      min-height: 6rem;
+      background: rgba(40, 41, 44, 0.94) url(../images/add-bg.png) no-repeat
+        center;
+      border-radius: 10px;
+    }
+
+    .bg-add .text {
+      color: rgb(255, 255, 255);
+      align-self: center;
+      padding-left: 3rem;
+    }
+    .bg-add .text p {
+      text-shadow: 0px 2px 0px rgb(0 0 0 / 22%);
+      padding: 0;
+      margin: 0;
+    }
+    .bg-add .text h4 {
+      text-shadow: 0px 2px 0px rgb(0 0 0 / 22%);
+      padding: 0;
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .col-md-12 {
+      padding: 2rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    }
+
+    .col-md-5 {
+      display: inline-flex;
+      margin: 2rem 0;
+      justify-content: center;
+    }
+    .section__title {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 26px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .section__title::before {
+      content: "";
+      background: #d61a22;
+      position: absolute;
+      width: 56px;
+      height: 3px;
+      margin-top: -30px;
+      text-align: center;
+      left: 0;
+      right: 0;
+      margin: 29px auto;
+    }
+    .whyblood {
+      min-height: 30rem;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    .whyblood .container {
+      background: white;
+      padding: 5rem;
+    }
+    .whyblood__content {
+      padding-top: 2rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .content-block {
+      min-height: 30rem;
+    }
+  </style>
   <body>
     <%- include('../includes/homeNav'); %>
 
-    <header>
-      <div class="hero__content">
-        <h1>Save Life</h1>
-        <h3>Donate Blood</h3>
-        <a href="/auth/register" class="btn btn-danger">Register</a>
-        <a href="/auth/login" class="btn btn-accent">Login</a>
+    <div class="hero-image">
+      <div class="container-new">
+        <h1>
+          <span>Save lives</span>
+        </h1>
+
+        <span class="des">Donate Blood</span>
+        <a href="#" class="btn btn-danger">Register</a>
+        <a href="#" class="btn btn-accent">Login</a>
       </div>
-      <img src="./images/donation.jpg" alt="" />
-    </header>
+    </div>
 
     <section class="content">
       <div class="container">
@@ -82,7 +285,7 @@
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
             <h4 class="text-title">Why Give Blood</h4>
-            <a href="#" class="link">Read More</a>
+            <a href="#whyblood" class="link">Read More</a>
           </div>
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
@@ -97,6 +300,7 @@
         </div>
       </div>
     </section>
+
     <section class="content-block">
       <div class="container">
         <div class="row">
@@ -120,6 +324,57 @@
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Reprehenderit, assumenda.
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="whyblood">
+      <div class="container">
+        <h1 class="section__title">Why should i donate blood ?</h1>
+        <div class="whyblood__content">
+          Blood is the most precious gift that anyone can give to another person
+          — the gift of life. A decision to donate your blood can save a life,
+          or even several if your blood is separated into its components — red
+          cells, platelets and plasma — which can be used individually for
+          patients with specific conditions
+        </div>
+      </div>
+    </section>
+
+    <section class="information">
+      <div class="container">
+        <h1 class="section__title">Our Impact</h1>
+
+        <div class="bg-add">
+          <div class="col-md-12">
+            <div class="col-md-5">
+              <div class="image-icon">
+                <img src="./images/add-icon.png" alt="image" />
+              </div>
+              <div class="text">
+                <h4>26</h4>
+                <p>Blood Donars</p>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="image-icon">
+                <img src="./images/add-icon1.png" alt="image" />
+              </div>
+              <div class="text">
+                <h4>26</h4>
+                <p>Blood Donars</p>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="image-icon">
+                <img src="./images/add-icon2.png" alt="image" />
+              </div>
+              <div class="text">
+                <h4>26</h4>
+                <p>Blood Donars</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
