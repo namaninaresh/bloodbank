@@ -37,7 +37,7 @@ class DbService {
   };
 
   getHomeData = () => {
-    const query = "SELECT * FROM totalbloods";
+    const query = "SELECT * FROM totalbloods order by BloodUnits Desc";
     return this.queryExecuter(query);
   };
 
@@ -94,22 +94,25 @@ class DbService {
 
   getBloodDonatedData = ({ userid }) => {
     const query =
-      "select SUM(units) as bloodonated from donationsinfo where userid=?;select SUM(bloodunits) as totalblood from bloodinfo where userid=?;select * from donationsinfo where userid=?";
+      "select SUM(units) as bloodonated from donationsinfo where userid=?;select SUM(bloodunits) as totalblood from bloodinfo where userid=?;select * from donationsinfo where userid=? order by ondate Desc";
 
     return this.queryExecuter(query, [userid, userid, userid]);
   };
 
   getRequestData = ({ userid, role }) => {
     var query = null;
-    if (role == "donar") query = "select * from requestinfo where userid=?";
-    else query = "select * from requestinfo where requesteduserid=?";
+    if (role == "donar")
+      query = "select * from requestinfo where userid=? order by ondate Desc";
+    else
+      query =
+        "select * from requestinfo where requesteduserid=? order by ondate Desc ";
 
     return this.queryExecuter(query, [userid]);
   };
 
   putRequestData = ({
     status,
-    id,
+    reqid,
     userid,
     group,
     units,
@@ -126,7 +129,7 @@ class DbService {
         status,
 
         userid,
-        id,
+        reqid,
         userid,
         group,
         units,

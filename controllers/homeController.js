@@ -167,20 +167,10 @@ router.post("/addblood", function (req, res, next) {
 });
 
 router.get(
-  "/requestEx/status=:status&id=:id&:username&userid=:userid&:requser&:requserid&group=:group&units=:units",
+  "/requestEx/status=:status&reqid=:reqid&:username&userid=:userid&:requser&:requserid&group=:group&units=:units",
   function (req, res, next) {
     const userSessionData = req.session.currentUser;
-    const data = {
-      status: req.params.status,
-      reqid: req.params.id,
-      userid: req.params.userid,
-      group: req.params.group,
-      username: req.params.username,
-      requser: req.params.requser,
-      ondate: "1/1/1",
-      units: req.params.units,
-      requserid: req.params.requserid,
-    };
+
     if (userSessionData) {
       const Instance = DbService.getDbInstance();
 

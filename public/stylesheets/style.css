@@ -522,7 +522,7 @@ a {
 
  .title
 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
 
   text-transform: uppercase;
@@ -559,7 +559,7 @@ a {
   }
 
 }
-.blood-groud
+.blood-group
 {
   /* width:15%; */
   background: var(--color--white);
@@ -596,16 +596,12 @@ a {
 
 
 /* blood-banks-info */
-.blood-banks-info
-{
-  margin-top: 2rem;
-  margin-bottom: 5rem;
-}
+
 .blood-banks-info h6
 {
   font-size: 1.2rem;
 }
-.blood-banks-info .container
+.blood-banks-info
 {
     background: var(--color--white);
     box-sizing: var(--box--shadow);
@@ -1103,6 +1099,12 @@ hr
   background-color: #d1e7dd;
   border-color: #badbcc;
 }
+.alert-primary
+{
+  color: #2f2f2f;
+  background-color: #dce9ff;
+  border-color: #c8dbfb;
+}
 
 /* Blood Donated Page */
 
@@ -1288,7 +1290,7 @@ col img
 
 .content-block
 {
-  background: #f5f5f5;
+ 
   color: #000;
   padding: 4rem 0;
 }
