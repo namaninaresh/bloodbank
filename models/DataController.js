@@ -1,17 +1,4 @@
-var mysql = require("mysql");
-const moment = require("moment");
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "chinna",
-  database: "bloodbank",
-  multipleStatements: true,
-});
-
-connection.connect(function (err) {
-  if (err) throw err;
-});
-
+var connection = require("./db");
 let instance = null;
 class DbService {
   static getDbInstance() {
