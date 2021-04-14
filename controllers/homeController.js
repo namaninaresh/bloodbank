@@ -223,22 +223,34 @@ router.get(
   }
 );
 
-router.get("/deleteuser", function (req, res, next) {
-  res.send("user Deleting....");
+router.get("/deleteuser/:id", function (req, res, next) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.deleteUser(req.params.id);
+
+    result
+      .then((data) => {
+        req.session.destroy((err) => {
+          res.redirect("/index");
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 });
 
 router.get("/profile/edit", function (req, res, next) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
-
-    const result = Instance.getProfileData(req.session.currentUser);
+    const { userid } = req.session.currentUser;
+    const result = Instance.getUser(userid);
 
     // const result= Instance.getProfileData(req.session.currentUser);
     result
       .then((data) => {
         res.render("Donar/profileEdit", {
           title: "Profile Page",
-          user: req.session.currentUser,
+          user: data[0],
           active: "profile",
         });
       })
@@ -246,6 +258,20 @@ router.get("/profile/edit", function (req, res, next) {
 
     //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
   } else res.redirect("/auth/login");
+});
+
+router.post("/profile/edit", function (req, res) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+    console.log(req.body);
+    const result = Instance.updateUser(req.body);
+
+    result
+      .then((data) => {
+        res.redirect("/profile");
+      })
+      .catch((err) => console.log(err));
+  }
 });
 
 router.get("/error", function (req, res, next) {

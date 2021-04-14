@@ -175,7 +175,38 @@ class DbService {
     ]);
   };
 
-  deleteUser = () => {};
+  getUser = (userid) => {
+    const query = "select * from users where userid =?";
+
+    return this.queryExecuter(query, userid);
+  };
+  updateUser = ({
+    userid,
+    firstname,
+    lastname,
+    address,
+    city,
+    contactno,
+    contactprefix,
+  }) => {
+    const query =
+      "update users set firstname=?,lastname=?,address=?,city=?,contactno=?,contactprefix=? where userid=?";
+
+    return this.queryExecuter(query, [
+      firstname,
+      lastname,
+      address,
+      city,
+      contactno,
+      contactprefix,
+      userid,
+    ]);
+  };
+  deleteUser = (userid) => {
+    const query = "delete from users where userid=?";
+
+    return this.queryExecuter(query, userid);
+  };
 
   addBlood = ({ type, group, Units }, { userid, username, city }) => {
     if (type === "add") {

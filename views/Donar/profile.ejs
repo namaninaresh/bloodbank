@@ -37,7 +37,7 @@
 
                   <a
                     class="btn btn-primary center"
-                    onclick="onDelete()"
+                    onclick="onDelete('<%= userdata.userid %>')"
                     style="margin: 0 0.5rem"
                   >
                     <svg class="icon">
@@ -196,9 +196,10 @@
     </section>
 
     <script>
-      function onDelete() {
+      function onDelete(e) {
         const answer = confirm("Delete ?");
-        if (answer) window.location.replace("/deleteUser");
+
+        if (answer) window.location.replace("/deleteUser/" + e);
       }
     </script>
     <script src="./javascripts/mobileNav.js"></script>

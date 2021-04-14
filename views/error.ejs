@@ -2,108 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Error</title>
-
-    <!-- CSS (load bootstrap from a CDN) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../images/favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../images/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../images/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="../images/favicon/site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="../images/favicon/safari-pinned-tab.svg"
-      color="#5bbad5"
-    />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
-    <link
-      rel="shortcut icon"
-      href="../images/favicon/favicon.ico"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="../stylesheets/normalize.css" />
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/cards.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@200;300;400;500&display=swap"
-      rel="stylesheet"
-    />
-
-    <style>
-      .navbar {
-        background: #ed1b24;
-
-        color: white;
-        border-radius: 5px;
-        box-shadow: 0px 16px 24px 0px rgb(0 0 0 / 28%);
-        transition: all 0.5s;
-      }
-      li {
-        padding: 2rem 2rem;
-        color: white;
-        transition: all 0.5s;
-        margin: 0 ;
-      }
-
-      li:hover {
-        background: black;
-      }
-      .logo {
-        width: 100%;
-        height: 10rem;
-      }
-      body
-      {
-        background: white;
-      }
-    </style>
   </head>
   <body>
-    <nav class="nav">
-      <div class="container">
-        <a href="/index" class="logo"
-          ><svg class="icon">
-            <use xlink:href="../images/sprite.svg#droplet-fill"></use>
-          </svg>
-          Blood Bank
-        </a>
-
-        <a href="#">Username</a>
-        <div class="mobile-nav__menu">
-          <div class="bar1"></div>
-          <div class="bar2"></div>
-          <div class="bar3"></div>
-        </div>
-        
-      </div>
-    </nav>
-    <div class="container navbar">
-      <ul class="list collapse" id="nav">
-        <li class="nav__item">Home</li>
-        <li class="nav__item">About</li>
-        <li class="nav__item">Search</li>
-        <li class="nav__item">Requests</li>
-        <li class="nav__item">Profile</li>
-        <li class="nav__item">Logout</li>
-        <li class="nav__item">Help</li>
-        <li class="nav__item">Contact Us</li>
-    </div>
+    <h1><%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre><%= error.stack %></pre>
   </body>
 </html>

@@ -5,9 +5,92 @@
     <style>
       .profileedit .row {
         display: inline-flex;
+        margin: 2rem 0;
       }
       .profileedit .form-input-material {
         margin: 2rem;
+      }
+      .login-form {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      @media screen and (min-width: 760px) {
+        .login-form {
+          width: 50%;
+        }
+      }
+      .form__group {
+        position: relative;
+        padding: 15px 0 0;
+        margin-top: 10px;
+        margin: 0 2rem;
+        width: 100%;
+      }
+
+      .form__field {
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 2px solid #9b9b9b;
+        outline: 0;
+        font-size: 1.3rem;
+        color: #fff;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s;
+      }
+      .form__field::placeholder {
+        color: transparent;
+      }
+      .form__field:placeholder-shown ~ .form__label {
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+      }
+
+      .form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: #9b9b9b;
+      }
+
+      .form__field:focus {
+        padding-bottom: 6px;
+        font-weight: 700;
+        border-width: 3px;
+        border-image: linear-gradient(to right, #11998e, #38ef7d);
+        border-image-slice: 1;
+      }
+      .form__field:focus ~ .form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: #11998e;
+        font-weight: 700;
+      }
+
+      /* reset input */
+      .form__field:required,
+      .form__field:invalid {
+        box-shadow: none;
+      }
+      .btn-accents {
+        background: #2c87f0 !important;
+        border-radius: 5px;
+        color: white;
+        margin: 2rem !important;
+      }
+      .btn-danger {
+        background: red !important;
+        color: white;
+        border: 0 !important;
+        margin: 2rem !important;
       }
     </style>
   </head>
@@ -17,82 +100,190 @@
     <section class="profileedit">
       <div class="container">
         <div class="card">
-          <form action="/auth/register" method="POST" class="login-form">
-            <div class="row">
-              <div class="form-input-material">
+          <form
+            action="/profile/edit"
+            method="POST"
+            class="login-form"
+            onsubmit="return checkPassword(this) "
+          >
+            <input
+              type="number"
+              name="userid"
+              value="<%= user.userid %>"
+              hidden
+            />
+            <% if(user.role=='donar') {%>
+            <div class="row" style="width: 100%">
+              <div class="form__group field" style="padding: 1.5rem">
                 <input
-                  type="text"
-                  id="password"
-                  class="form-control-material"
-                  name="password"
-                  placeholder="Password"
+                  type="input"
+                  class="form__field"
+                  placeholder="Name"
+                  name="name"
+                  id="name"
                   autocomplete="off"
-                  value=""
-                  required
+                  value="<%= user.username %>"
                 />
-                <label for="password">Firstname</label>
+
+                <label for="bloodbank name" class="form__label"
+                  >BloodBank Name</label
+                >
               </div>
-              <div class="form-input-material">
+            </div>
+            <% } else {%>
+            <div class="row">
+              <div class="form__group field">
                 <input
-                  type="text"
-                  id="password"
-                  class="form-control-material"
-                  name="password"
-                  placeholder="Password"
+                  type="input"
+                  class="form__field"
+                  placeholder="FirstName"
+                  name="firstname"
+                  id="firstname"
+                  value="<%= user.firstname %>"
                   autocomplete="off"
-                  value=""
-                  required
                 />
-                <label for="password">Lastname</label>
+                <label for="firstname" class="form__label">First Name</label>
+              </div>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Last Name"
+                  name="lastname"
+                  id="lastname"
+                  autocomplete="off"
+                  value="<%= user.lastname %>"
+                />
+                <label for="name" class="form__label">Last Name</label>
+              </div>
+            </div>
+            <% }%>
+            <div class="row">
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Email"
+                  name="email"
+                  id="email"
+                  autocomplete="off"
+                  value="<%= user.email %>"
+                  disabled
+                />
+                <label for="name" class="form__label">Email</label>
+              </div>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="City"
+                  name="city"
+                  id="city"
+                  autocomplete="off"
+                  value="<%= user.city %>"
+                />
+                <label for="city" class="form__label">City</label>
               </div>
             </div>
             <div class="row">
-              <div class="form-input-material">
+              <div class="form__group field">
                 <input
-                  type="text"
-                  id="password"
-                  class="form-control-material"
-                  name="password"
-                  placeholder="Password"
+                  type="number"
+                  class="form__field"
+                  placeholder="ContactNO"
+                  name="contactno"
+                  id="contactno"
+                  value="<%= user.contactno %>"
                   autocomplete="off"
-                  value=""
-                  required
-                  disabled
                 />
-                <label for="password">Email</label>
+                <label for="contact" class="form__label">Contact No</label>
               </div>
-              <div class="form-input-material">
+              <div class="form__group field">
                 <input
-                  type="text"
-                  id="password"
-                  class="form-control-material"
-                  name="password"
-                  placeholder="Password"
+                  type="input"
+                  class="form__field"
+                  placeholder="Contact Prefix"
+                  name="contactprefix"
+                  id="prefix"
+                  value="<%= user.contactprefix %>"
                   autocomplete="off"
-                  required
                 />
-                <label for="password">Password</label>
+                <label for="contact prefix" class="form__label"
+                  >Contact Prefix</label
+                >
+              </div>
+            </div>
+            <div class="row" style="width: 100%">
+              <div class="form__group field" style="padding: 1.5rem">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Address"
+                  name="address"
+                  id="address"
+                  autocomplete="off"
+                  value="<%= user.address %>"
+                />
+
+                <label for="address" class="form__label">Address</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="newpassword"
+                  name="newpassword"
+                  id="newpassword"
+                  autocomplete="off"
+                  onchange="fun(this)"
+                />
+                <label for="firstname" class="form__label">New Password</label>
+              </div>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="confirmpassword"
+                  name="confirmpassword"
+                  id="confirmpassword"
+                  onchange="fun(this)"
+                  autocomplete="off"
+                />
+                <label for="name" class="form__label">Confirm Password</label>
               </div>
             </div>
 
-            <div class="form-input-material">
-              <input
-                type="text"
-                id="password"
-                class="form-control-material"
-                name="password"
-                placeholder="Password"
-                autocomplete="off"
-                value=""
-                required
-              />
-              <label for="password">Password</label>
+            <div onclick="show()">click</div>
+            <div class="row">
+              <a class="btn btn-danger" href="/profile">Cancel</a>
+
+              <button class="btn btn-accents">Save</button>
             </div>
           </form>
         </div>
       </div>
     </section>
 
+    <script>
+      function checkPassword(form) {
+        var confirmpassword = document.getElementById("confirmpassword").value;
+        var newpassword = document.getElementById("newpassword").value;
+
+        if (newpassword.length !== confirmpassword.length) {
+          alert("Passwords not Matching..");
+
+          return false;
+        }
+
+        if (newpassword !== confirmpassword) {
+          alert("Passwords not Matching..");
+
+          return false;
+        }
+      }
+    </script>
     <script src="../javascripts/mobileNav.js"></script>
   </body>
 </html>
