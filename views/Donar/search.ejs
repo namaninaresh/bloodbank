@@ -3,26 +3,16 @@
   <head>
     <%- include('../header'); %>
     <style>
-      .search .card-body
-      {
+      .search .card-body {
         padding: 2rem;
       }
     </style>
   </head>
   <body>
-    <%- include('./navbar') %>
-
-    <% if(requestMsg) { %>
-      <section class="notify">
-      <div class="container">
-        <div class="notification" style="margin-bottom: -8rem">
-          <div class="alert <%= requestMsg.status ==='success' ? "alert-success" : "alert-danger" %>" style="padding: 2rem">
-              <%= requestMsg.message %>
-          </div>
-        </div>
-      </div>
-    </section>
-    <% }%>
+    <%- include('./navbar') %> <% if(requestMsg) { %> <%-
+    include('../includes/notification',{className: requestMsg.status
+    ==='success' ? "alert-success" : "alert-danger", message:requestMsg.message
+    }) %> <% }%>
     <section class="search">
       <div class="container">
         <div class="card">
@@ -117,8 +107,8 @@
                 <hr />
                 <p class="card__text">
                   contains
-                  <strong style="font-size: 2rem"><%= _.bloodtype %></strong> with
-                  <%= requestData.Units %> units
+                  <strong style="font-size: 2rem"><%= _.bloodtype %></strong>
+                  with <%= requestData.Units %> units
                 </p>
 
                 <a

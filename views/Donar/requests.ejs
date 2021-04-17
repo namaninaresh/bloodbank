@@ -124,7 +124,22 @@
                       Request To <%= _.username %> with <%= _.bloodunits %>
                       units
                     </td>
-                    <td style="text-transform: capitalize"><%= _.status %></td>
+                    <% if (_.status=='pending') { %>
+                    <td style="text-transform: capitalize; color: #393e46">
+                      <%= _.status %>
+                    </td>
+                    <% } if(_.status=='accepted') { %>
+                    <td style="text-transform: capitalize; color: #7bc74d">
+                      <%= _.status %>
+                    </td>
+
+                    <%} if(_.status=='rejected') { %>
+                    <td style="text-transform: capitalize; color: #f06161">
+                      <%= _.status %>
+                    </td>
+
+                    <% } %>
+
                     <td><%= _.ondate %></td>
                   </tr>
                   <% }) } else {%>

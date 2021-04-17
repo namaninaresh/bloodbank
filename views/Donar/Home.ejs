@@ -151,26 +151,10 @@
   </head>
 
   <body>
-    <%- include('./navbar') %>
-    <section class="notify">
-      <div class="container">
-        <div class="notification">
-          <div
-            class="alert alert-primary"
-            style="padding: 2rem; text-align: center"
-          >
-            <svg
-              class="icon"
-              style="width: 1.5rem; height: 1.5rem; float: left"
-            >
-              <use xlink:href="images/sprite.svg#info-circle"></use>
-            </svg>
-            Welcome
-            <span style="text-transform: capitalize"><%=user.username %></span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <%- include('./navbar') %> <%-
+    include('../includes/notification',{className:"alert-primary",
+    message:"Welcome "+user.username }) %>
+
     <section class="home">
       <div class="container container-color">
         <div class="homeMain">

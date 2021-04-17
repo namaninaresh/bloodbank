@@ -4,19 +4,10 @@
     <%- include('../header'); %>
   </head>
   <body>
-    <%- include('../includes/homeNav'); %>
+    <%- include('../includes/homeNav'); %> <% if(loginError) {%> <%-
+    include('../includes/notification',{className:"alert-danger",message:
+    loginError}); %> <%} %>
 
-    <section class="error">
-      <div class="container">
-        <div class="notification">
-          <% if(loginError) {%>
-          <div class="alert alert-danger" style="padding: 2rem">
-            <%= loginError %>
-          </div>
-          <%} %>
-        </div>
-      </div>
-    </section>
     <section class="login">
       <div class="container">
         <div class="justify-center">

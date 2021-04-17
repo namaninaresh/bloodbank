@@ -1,4 +1,6 @@
 var connection = require("./db");
+const moment = require("moment");
+
 let instance = null;
 class DbService {
   static getDbInstance() {
@@ -160,7 +162,7 @@ class DbService {
       requser,
       bloodunits,
       onDate,
-      "unknown",
+      "pending",
       bloodtype,
     ]);
   };
