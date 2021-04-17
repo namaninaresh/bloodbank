@@ -200,6 +200,11 @@ class DbService {
     return this.queryExecuter(query, userid);
   };
 
+  changePassword = ({ userid, newpassword }) => {
+    const query = "update users set password=? where userid=?";
+    return this.queryExecuter(query, [newpassword, userid]);
+  };
+
   addBlood = ({ type, group, Units }, { userid, username, city }) => {
     if (type === "add") {
       const innerQUery =

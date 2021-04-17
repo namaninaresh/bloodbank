@@ -4,7 +4,7 @@
     <%- include('../header'); %>
     <style>
      
-         .btn-accents {
+        .btn-accents {
         background: #2c87f0 !important;
         border-radius: 5px;
         color: white;
@@ -19,7 +19,68 @@
       input
       {
         width: 100%;;
+        outline: none;
       }
+      .email
+      {
+        opacity: 0.5;
+      }
+      @media screen and (min-width:768px) {
+        .register .container 
+      {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .profile-form
+      {
+        width: 65%;
+      }
+      .password-col
+      {
+        
+        width:30%;
+      
+      }
+      
+      }
+      @media screen and (max-width:768px) {
+          .password-col
+          {
+            margin: 2rem 0 ;
+          }
+      }
+
+
+      
+      .password-col
+      {
+        height: 35rem;
+
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 20px 3px rgb(124 124 124 / 5%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem 4rem;
+        color: black;
+        border-radius: 8px;
+        
+      }
+
+    
+      .password-form .form-input-material
+      {
+        margin:5rem 0 ;
+        width: 100%;
+      }
+      
+      .password-form .btn
+      {
+        margin: 0 !important;
+        border-radius: 0;
+      }
+
     </style>
     </style>
   </head>
@@ -73,11 +134,11 @@
     </nav>
     <section class="register">
       <div class="container">
-        <div class="justify-center">
+        <div class="profile-form justify-center">
           <form  action="/profile/edit"
           method="POST"
           class="login-form"
-          onsubmit="return checkPassword(this) ">
+         >
           <input
               type="number"
               name="userid"
@@ -140,11 +201,11 @@
               </div>
             </div>
             <% }%>
-            <div class="form-input-material">
+            <div class="form-input-material email">
               <input
                 type="email"
                 id="email"
-                class="form-control-material"
+                class="form-control-material "
                 name="email"
                       id="email"
                       autocomplete="off"
@@ -161,7 +222,7 @@
           
               <div class="form-input-material" style="flex: 0 0 50%">
                 <input
-                  placeholder="This is an awesome comment box"
+                
                  
                   name="address"
                       id="address"
@@ -223,10 +284,68 @@
             <button class="btn btn-accents" type="submit">Update</button>
             <a href="/profile/"> Cancel</a>
           </form>
+          
+        </div>
+
+        <div class="password-col">
+          <form  action="/profile/password"
+          method="POST"
+          class="password-form"
+          onsubmit="return checkPassword(this) ">
+          <input
+          type="number"
+          name="userid"
+          value="<%= user.userid %>"
+          hidden
+        />
+          <div class="form-input-material">
+            <input
+              type="password"
+              id="newpassword"
+              class="form-control-material"
+              name="newpassword"
+              placeholder="Login"
+              autocomplete="off"
+              required
+            />
+            <label for="newpassword">New Password</label>
+          </div>
+        <div class="form-input-material">
+          <input
+            type="password"
+            id="confirmpassword"
+            class="form-control-material"
+            name="confirmpassword"
+            placeholder="Login"
+            autocomplete="off"
+            required
+          />
+          <label for="confirmpassword">Confirm Password</label>
+        </div>
+        <button class="btn btn-accents" type="submit">Change Password</button>
+          </form>
         </div>
       </div>
     </section>
     <script src="../javascripts/mobileNav.js"></script>
-   
+    <script>
+      function checkPassword(form) {
+        
+        var confirmpassword = document.getElementById("confirmpassword").value;
+        var newpassword = document.getElementById("newpassword").value;
+
+        if (newpassword.length !== confirmpassword.length) {
+          alert("Passwords not Matching..");
+
+          return false;
+        }
+
+        if (newpassword !== confirmpassword) {
+          alert("Passwords not Matching..");
+
+          return false;
+        }
+      }
+    </script>
   </body>
 </html>

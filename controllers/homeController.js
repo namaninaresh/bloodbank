@@ -253,8 +253,22 @@ router.get("/profile/edit", function (req, res, next) {
 router.post("/profile/edit", function (req, res) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
-    console.log(req.body);
+
     const result = Instance.updateUser(req.body);
+
+    result
+      .then((data) => {
+        res.redirect("/profile");
+      })
+      .catch((err) => console.log(err));
+  }
+});
+
+router.post("/profile/password", function (req, res) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.changePassword(req.body);
 
     result
       .then((data) => {
