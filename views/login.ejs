@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <%- include('../header'); %>
+    <style>
+      @media screen and (min-width: 760px) {
+        .login__image {
+          width: 40rem;
+          background-image: linear-gradient(
+              rgba(0, 0, 0, 0.5),
+              rgba(0, 0, 0, 0),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url("../images/heart.jpg");
+          background-position: center;
+          background-size: cover;
+        }
+      }
+    </style>
   </head>
   <body>
     <%- include('../includes/homeNav'); %> <% if(loginError) {%> <%-
@@ -11,6 +26,7 @@
     <section class="login">
       <div class="container">
         <div class="justify-center">
+          <div class="login__image"></div>
           <form action="/auth/login" method="POST" class="login-form">
             <h1>Login</h1>
             <div class="form-input-material">

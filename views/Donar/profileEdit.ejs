@@ -3,84 +3,8 @@
   <head>
     <%- include('../header'); %>
     <style>
-      .profileedit .row {
-        display: inline-flex;
-        margin: 2rem 0;
-      }
-      .profileedit .form-input-material {
-        margin: 2rem;
-      }
-      .login-form {
-        width: 100%;
-        margin: 0 auto;
-      }
-
-      @media screen and (min-width: 760px) {
-        .login-form {
-          width: 50%;
-        }
-      }
-      .form__group {
-        position: relative;
-        padding: 15px 0 0;
-        margin-top: 10px;
-        margin: 0 2rem;
-        width: 100%;
-      }
-
-      .form__field {
-        font-family: inherit;
-        width: 100%;
-        border: 0;
-        border-bottom: 2px solid #9b9b9b;
-        outline: 0;
-        font-size: 1.3rem;
-        color: #fff;
-        padding: 7px 0;
-        background: transparent;
-        transition: border-color 0.2s;
-      }
-      .form__field::placeholder {
-        color: transparent;
-      }
-      .form__field:placeholder-shown ~ .form__label {
-        font-size: 1.3rem;
-        cursor: text;
-        top: 20px;
-      }
-
-      .form__label {
-        position: absolute;
-        top: 0;
-        display: block;
-        transition: 0.2s;
-        font-size: 1rem;
-        color: #9b9b9b;
-      }
-
-      .form__field:focus {
-        padding-bottom: 6px;
-        font-weight: 700;
-        border-width: 3px;
-        border-image: linear-gradient(to right, #11998e, #38ef7d);
-        border-image-slice: 1;
-      }
-      .form__field:focus ~ .form__label {
-        position: absolute;
-        top: 0;
-        display: block;
-        transition: 0.2s;
-        font-size: 1rem;
-        color: #11998e;
-        font-weight: 700;
-      }
-
-      /* reset input */
-      .form__field:required,
-      .form__field:invalid {
-        box-shadow: none;
-      }
-      .btn-accents {
+     
+         .btn-accents {
         background: #2c87f0 !important;
         border-radius: 5px;
         color: white;
@@ -92,198 +16,217 @@
         border: 0 !important;
         margin: 2rem !important;
       }
+      input
+      {
+        width: 100%;;
+      }
+    </style>
     </style>
   </head>
   <body>
-    <%- include('./navbar') %>
-
-    <section class="profileedit">
+    <nav class="nav">
       <div class="container">
-        <div class="card">
-          <form
-            action="/profile/edit"
-            method="POST"
-            class="login-form"
-            onsubmit="return checkPassword(this) "
-          >
-            <input
+        <a href="/" class="logo"
+          ><svg class="icon">
+            <use xlink:href="../images/sprite.svg#droplet-fill"></use>
+          </svg>
+          Blood Bank
+        </a>
+    
+        <ul class="list collapse" id="nav">
+          <li class="nav__item">
+            <a href="/" class=<%= active=='home' ? "active" : "" %> >Home </a>
+          </li> 
+         
+          <% if(user.role !== 'donar') {%>
+          <li class="nav__item">
+            <a href="/search" class=<%= active=='search' ? "active" : "" %> >Search for Blood </a>
+          </li> 
+          <% } %>
+          <% if(user.role === 'donar') {%>
+          <li class="nav__item">
+            <a href="/addblood" class=<%= active=='addblood' ? "active" : "" %> >Add Blood </a>
+          </li> 
+    
+          
+          <li class="nav__item">
+            <a href="/blooddonated"  class=<%= active=='blooddonated' ? "active" : "" %>> Blood Donated </a>
+          </li>
+          <% } %>
+          <li class="nav__item">
+            <a href="/requests"  class=<%= active=='requests' ? "active" : "" %>> Requests </a>
+          </li>
+          <li class="nav__item">
+            <a href="/profile"  class=<%= active=='profile' ? "active" : "" %>> My Profile </a>
+          </li>
+          <li class="nav__item">
+            <a href="/auth/logout" > Logout </a>
+          </li>
+        </ul>
+    
+        <div class="mobile-nav__menu" onclick="myFunction(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+      </div>
+    </nav>
+    <section class="register">
+      <div class="container">
+        <div class="justify-center">
+          <form  action="/profile/edit"
+          method="POST"
+          class="login-form"
+          onsubmit="return checkPassword(this) ">
+          <input
               type="number"
               name="userid"
               value="<%= user.userid %>"
               hidden
             />
             <% if(user.role=='donar') {%>
-            <div class="row" style="width: 100%">
-              <div class="form__group field" style="padding: 1.5rem">
+              <div
+                class="form-input-material"
+                id="lastname-box"
+                style="flex: 0 0 45%"
+              >
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="Name"
+                  type="text"
+               
+                  class="form-control-material"
                   name="name"
                   id="name"
+                  placeholder="Last Name"
                   autocomplete="off"
                   value="<%= user.username %>"
                 />
-
-                <label for="bloodbank name" class="form__label"
-                  >BloodBank Name</label
-                >
+                <label for="lastname">BloodBank Name</label>
               </div>
-            </div>
-            <% } else {%>
-            <div class="row">
-              <div class="form__group field">
+              <% } else {%>
+            <div style="display: flex">
+              <div
+                class="form-input-material"
+                id="firstname-box"
+                style="flex: 0 0 45%"
+              >
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="FirstName"
+                  type="text"
+                  class="form-control-material"
                   name="firstname"
                   id="firstname"
                   value="<%= user.firstname %>"
+                  placeholder="Name"
                   autocomplete="off"
                 />
-                <label for="firstname" class="form__label">First Name</label>
+                <label for="firstname">First Name</label>
               </div>
-              <div class="form__group field">
+              <div
+                class="form-input-material"
+                id="lastname-box"
+                style="flex: 0 0 45%"
+              >
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="Last Name"
+                  type="text"
+                
+                  class="form-control-material"
                   name="lastname"
-                  id="lastname"
+                      id="lastname"
+                  placeholder="Last Name"
                   autocomplete="off"
+                  
                   value="<%= user.lastname %>"
                 />
-                <label for="name" class="form__label">Last Name</label>
+                <label for="lastname">Last Name</label>
               </div>
             </div>
             <% }%>
-            <div class="row">
-              <div class="form__group field">
+            <div class="form-input-material">
+              <input
+                type="email"
+                id="email"
+                class="form-control-material"
+                name="email"
+                      id="email"
+                      autocomplete="off"
+                      value="<%= user.email %>"
+                      disabled
+                placeholder="Email"
+               
+              />
+              <label for="Email">Email</label>
+            </div>
+           
+             
+       
+          
+              <div class="form-input-material" style="flex: 0 0 50%">
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="Email"
-                  name="email"
-                  id="email"
+                  placeholder="This is an awesome comment box"
+                 
+                  name="address"
+                      id="address"
+                 
+                  class="form-control-material"
                   autocomplete="off"
-                  value="<%= user.email %>"
-                  disabled
+                  role="textbox"
+                  aria-autocomplete="list"
+                  value="<%= user.address %>"
+                  aria-haspopup="true"
                 />
-                <label for="name" class="form__label">Email</label>
+               
+                </textarea>
+                <label for="address">Address</label>
               </div>
-              <div class="form__group field">
+              <div class="form-input-material">
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="City"
+                  type="text"
+                
+                  class="form-control-material"
                   name="city"
                   id="city"
+                  placeholder="City"
                   autocomplete="off"
+                  required
                   value="<%= user.city %>"
                 />
-                <label for="city" class="form__label">City</label>
+                <label for="city">City</label>
               </div>
-            </div>
-            <div class="row">
-              <div class="form__group field">
+
+          
+
+            <div style="display: flex">
+              <div class="form-input-material" style="flex: 0 0 50%">
                 <input
-                  type="number"
-                  class="form__field"
-                  placeholder="ContactNO"
-                  name="contactno"
-                  id="contactno"
-                  value="<%= user.contactno %>"
-                  autocomplete="off"
-                />
-                <label for="contact" class="form__label">Contact No</label>
-              </div>
-              <div class="form__group field">
-                <input
-                  type="input"
-                  class="form__field"
+                  type="text"
+                  class="form-control-material"
                   placeholder="Contact Prefix"
                   name="contactprefix"
                   id="prefix"
                   value="<%= user.contactprefix %>"
-                  autocomplete="off"
+                  required
                 />
-                <label for="contact prefix" class="form__label"
-                  >Contact Prefix</label
-                >
+                <label for="countrycode">Contact Prefix</label>
               </div>
-            </div>
-            <div class="row" style="width: 100%">
-              <div class="form__group field" style="padding: 1.5rem">
+              <div class="form-input-material">
                 <input
-                  type="input"
-                  class="form__field"
-                  placeholder="Address"
-                  name="address"
-                  id="address"
-                  autocomplete="off"
-                  value="<%= user.address %>"
+                  type="number"
+                  class="form-control-material"
+                  placeholder="ContactNO"
+                      name="contactno"
+                      id="contactno"
+                      value="<%= user.contactno %>"
+                      autocomplete="off"
                 />
-
-                <label for="address" class="form__label">Address</label>
+                <label for="contactno">Contact No</label>
               </div>
             </div>
-            <div class="row">
-              <div class="form__group field">
-                <input
-                  type="input"
-                  class="form__field"
-                  placeholder="newpassword"
-                  name="newpassword"
-                  id="newpassword"
-                  autocomplete="off"
-                  onchange="fun(this)"
-                />
-                <label for="firstname" class="form__label">New Password</label>
-              </div>
-              <div class="form__group field">
-                <input
-                  type="input"
-                  class="form__field"
-                  placeholder="confirmpassword"
-                  name="confirmpassword"
-                  id="confirmpassword"
-                  onchange="fun(this)"
-                  autocomplete="off"
-                />
-                <label for="name" class="form__label">Confirm Password</label>
-              </div>
-            </div>
-
-            <div onclick="show()">click</div>
-            <div class="row">
-              <a class="btn btn-danger" href="/profile">Cancel</a>
-
-              <button class="btn btn-accents">Save</button>
-            </div>
+            <button class="btn btn-accents" type="submit">Update</button>
+            <a href="/profile/"> Cancel</a>
           </form>
         </div>
       </div>
     </section>
-
-    <script>
-      function checkPassword(form) {
-        var confirmpassword = document.getElementById("confirmpassword").value;
-        var newpassword = document.getElementById("newpassword").value;
-
-        if (newpassword.length !== confirmpassword.length) {
-          alert("Passwords not Matching..");
-
-          return false;
-        }
-
-        if (newpassword !== confirmpassword) {
-          alert("Passwords not Matching..");
-
-          return false;
-        }
-      }
-    </script>
     <script src="../javascripts/mobileNav.js"></script>
+   
   </body>
 </html>
