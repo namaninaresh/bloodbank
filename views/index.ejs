@@ -216,33 +216,15 @@
     }
     .col-md-12 {
       padding: 2rem 4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+      display: flex;
+      justify-content: center;
     }
 
     .col-md-5 {
       display: inline-flex;
       margin: 2rem 0;
+      width: 30%;
       justify-content: center;
-    }
-    .section__title {
-      text-align: center;
-      font-size: 20px;
-      margin-bottom: 26px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .section__title::before {
-      content: "";
-      background: #d61a22;
-      position: absolute;
-      width: 56px;
-      height: 3px;
-      margin-top: -30px;
-      text-align: center;
-      left: 0;
-      right: 0;
-      margin: 29px auto;
     }
     .whyblood {
       min-height: 30rem;
@@ -263,6 +245,12 @@
     .content-block {
       min-height: 30rem;
     }
+    @media screen and (min-width: 768px) {
+      .content .col {
+        width: 31%;
+        margin: 2rem 1rem;
+      }
+    }
   </style>
   <body>
     <%- include('../includes/homeNav'); %>
@@ -281,7 +269,7 @@
 
     <section class="content">
       <div class="container">
-        <div class="row">
+        <div class="flex">
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
             <h4 class="text-title">Why Give Blood</h4>
@@ -303,7 +291,7 @@
 
     <section class="content-block">
       <div class="container">
-        <div class="row">
+        <div class="flex">
           <div class="col col-content white">
             <h4 class="text-title">Home Layouts</h4>
             <p>

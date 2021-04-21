@@ -81,85 +81,78 @@
           <div class="card">
             <div class="card-body">
               <% if(userdata.role!='donar') {%>
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>First Name</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.firstname %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>First Name</h6>
                 </div>
+                <div class="user-text"><%= userdata.firstname %></div>
               </div>
+
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>Last Name</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.lastname %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>Last Name</h6>
                 </div>
+                <div class="user-text"><%= userdata.lastname %></div>
               </div>
+
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>Gender</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.gender %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>Gender</h6>
                 </div>
+                <div class="user-text"><%= userdata.gender %></div>
               </div>
 
               <% } else {%>
 
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>BloodBank Name</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.username %></div>
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>BloodBank Name</h6>
                 </div>
+                <div class="user-text"><%= userdata.username %></div>
               </div>
 
               <% } %>
 
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>Email</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.email %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>Email</h6>
                 </div>
+                <div class="user-text"><%= userdata.email %></div>
               </div>
 
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>Address</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.address %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>Address</h6>
                 </div>
+                <div class="user-text"><%= userdata.address %></div>
               </div>
 
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>City</h6>
-                  </div>
-                  <div class="user-text"><%= userdata.city %></div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>City</h6>
                 </div>
+                <div class="user-text"><%= userdata.city %></div>
               </div>
 
               <hr />
-              <div class="row">
-                <div class="d-flex">
-                  <div class="user-title">
-                    <h6>Contact No</h6>
-                  </div>
-                  <div class="user-text">
-                    <%= userdata.contactprefix %> <%= userdata.contactno %>
-                  </div>
+
+              <div class="d-flex">
+                <div class="user-title">
+                  <h6>Contact No</h6>
+                </div>
+                <div class="user-text">
+                  <%= userdata.contactprefix %> <%= userdata.contactno %>
                 </div>
               </div>
 

@@ -19,6 +19,7 @@
         text-align: center;
         padding: 2rem;
         border-radius: 6px;
+
         z-index: 1;
         opacity: 0;
         transition: opacity 0.3s;
@@ -29,20 +30,44 @@
         opacity: 1;
       }
 
-      .tooltip-right {
-        top: -5px;
-        left: 125%;
-      }
+      @media screen and (max-width: 760px) {
+        .tooltip .tooltiptext {
+          left: -5rem;
+          width: 25rem;
+        }
+        .tooltip-right {
+          top: 135%;
+          left: 50%;
+          margin-left: -60px;
+        }
 
-      .tooltip-right::after {
-        content: "";
-        position: absolute;
-        top: 10%;
-        right: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent #555 transparent transparent;
+        .tooltip-right::after {
+          content: "";
+          position: absolute;
+          bottom: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent transparent #555 transparent;
+        }
+      }
+      @media screen and (min-width: 768px) {
+        .tooltip-right {
+          top: -5px;
+          left: 125%;
+        }
+
+        .tooltip-right::after {
+          content: "";
+          position: absolute;
+          top: 10%;
+          right: 100%;
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent #555 transparent transparent;
+        }
       }
 
       .tooltip-bottom {
@@ -117,7 +142,7 @@
                 </thead>
                 <tbody>
                   <% data.filter(element =>
-                  element.status=='unknown').map((_,index) => { %>
+                  element.status=='pending').map((_,index) => { %>
                   <tr>
                     <td><%= index+1%></td>
                     <td>
@@ -230,13 +255,17 @@
                     >
                       <%= _.status %>
                       <span class="tooltiptext tooltip-right">
-                        <h3>hellow <%=_.status %></h3>
+                        <h3>Request <%=_.status %> By</h3>
+
+                        <% const user= (users.filter((element)=>
+                        element.userid==_.userid))[0] %>
+                        <p>BloodBank : <%=user.username %></p>
+                        <p>Email : <%=user.email %></p>
+                        <p>Address : <%=user.address %></p>
+                        <p>City : <%=user.city %></p>
                         <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Accusantium ex officiis ut dolores id amet
-                          voluptatem doloremque ad delectus ullam optio, facere
-                          eveniet autem alias at quisquam deleniti. Reiciendis,
-                          nihil.
+                          Contact No : <%= user.contactprefix %>
+                          <%=user.contactno %>
                         </p>
                       </span>
                     </td>

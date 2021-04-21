@@ -4,8 +4,11 @@
     <%- include('../header'); %>
 
     <style>
-      body {
+      /* body {
         background: #f2f4f8;
+      } */
+      .container {
+        background: white;
       }
       .content-new {
         display: flex;
@@ -17,7 +20,8 @@
       }
 
       .row {
-        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        display: flex;
+        justify-content: center;
       }
 
       .education {
@@ -42,7 +46,8 @@
       }
 
       .human-resources {
-        --bg-color: #dce9ff;
+        --bg-color: #71deff99;
+        /* --bg-color: #dce9ff; */
         --bg-color-light: #f1f7ff;
         --text-color-hover: #4c5656;
         --box-shadow-color: rgba(220, 233, 255, 0.48);
@@ -55,6 +60,7 @@
         border-top-right-radius: 10px;
         overflow: hidden;
         display: flex;
+        margin: 2rem auto;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -147,6 +153,9 @@
         transform: scale(1.05);
         transition: all 0.4s;
       }
+      .notify {
+        margin-top: 2rem;
+      }
     </style>
   </head>
 
@@ -159,9 +168,10 @@
       <div class="container container-color">
         <div class="homeMain">
           <div class="availableBlood">
-            <h6 class="title justify-center">
+            <h1 class="section__title">
               Total Available Blood In All Blood Banks
-            </h6>
+            </h1>
+
             <div class="blood-group-grid justify-center">
               <% availableBlood.map((_)=> {%>
               <div class="blood-group">
@@ -194,102 +204,49 @@
             <h2>12,400</h2>
           </div>
         </div>
+        <hr />
       </div>
     </section>
 
     <section class="content-block" style="margin-bottom: 4rem">
-      <div class="container container-color">
-        <h2 style="text-align: center">QUICK LINKS</h2>
-        <div class="row">
-          <a href="#" class="card education">
+      <div class="container container-color" style="padding-top: 10rem">
+        <h1 class="section__title">QUICK LINKS</h1>
+        <div class="flex" style="padding-top: 5rem">
+          <% if(user.role ==='donar') { %>
+          <a href="/addblood" class="card education">
             <div class="overlay"></div>
             <div class="circle">
               <svg
+                xmlns="http://www.w3.org/2000/svg"
                 width="71px"
                 height="76px"
-                viewBox="29 14 71 76"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 112.84 178.11"
               >
-                <desc>Created with Sketch.</desc>
-                <defs></defs>
-                <g
-                  id="Group"
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                  transform="translate(30.000000, 14.000000)"
-                >
-                  <g id="Group-8" fill="#D98A19">
-                    <g id="Group-7">
-                      <g id="Group-6">
-                        <path
-                          d="M0,0 L0,75.9204805 L69.1511499,75.9204805 L0,0 Z M14.0563973,32.2825679 L42.9457663,63.9991501 L14.2315268,63.9991501 L14.0563973,32.2825679 Z"
-                          id="Fill-1"
-                        ></path>
-                      </g>
-                    </g>
-                  </g>
-                  <g
-                    id="Group-20"
-                    transform="translate(0.000000, 14.114286)"
-                    stroke="#FFFFFF"
-                    stroke-linecap="square"
-                  >
+                <defs>
+                  <style>
+                    .addblood__cls-1 {
+                      fill: #d98a19;
+                    }
+                    .addblood__cls-2 {
+                      font-size: 119.94px;
+                      fill: #fff;
+                      font-family: NAILED, NAILED;
+                    }
+                  </style>
+                </defs>
+                <title>Asset 1</title>
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
                     <path
-                      d="M0.419998734,54.9642857 L4.70316223,54.9642857"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,50.4404762 L4.70316223,50.4404762"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,45.9166667 L4.70316223,45.9166667"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,41.3928571 L2.93999114,41.3928571"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,36.8690476 L4.70316223,36.8690476"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,32.3452381 L4.70316223,32.3452381"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,27.8214286 L4.70316223,27.8214286"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,23.297619 L2.93999114,23.297619"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,18.7738095 L4.70316223,18.7738095"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,14.25 L4.70316223,14.25"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,9.72619048 L4.70316223,9.72619048"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,5.20238095 L2.93999114,5.20238095"
-                      id="Line"
-                    ></path>
-                    <path
-                      d="M0.419998734,0.678571429 L4.70316223,0.678571429"
-                      id="Line"
-                    ></path>
+                      class="addblood__cls-1"
+                      d="M112.84,106.42A56.42,56.42,0,1,1,0,106.42C0,75.26,56.42,0,56.42,0S112.84,75.26,112.84,106.42Z"
+                    />
+                    <text
+                      class="addblood__cls-2"
+                      transform="translate(22.08 158.2)"
+                    >
+                      +
+                    </text>
                   </g>
                 </g>
               </svg>
@@ -297,89 +254,56 @@
             <p>Add Blood</p>
           </a>
 
-          <a href="#" class="card credentialing">
+          <a href="/blooddonated" class="card credentialing">
             <div class="overlay"></div>
             <div class="circle">
               <svg
+                xmlns="http://www.w3.org/2000/svg"
                 width="64px"
                 height="72px"
-                viewBox="27 21 64 72"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 359.62 297.46"
               >
                 <defs>
-                  <polygon
-                    id="path-1"
-                    points="60.9784821 18.4748913 60.9784821 0.0299638385 0.538377293 0.0299638385 0.538377293 18.4748913"
-                  ></polygon>
+                  <style>
+                    .blooddonation__cls-1 {
+                      fill: #4fc391;
+                      fill-rule: evenodd;
+                    }
+                    .blooddonation__cls-2 {
+                      fill: #5bd6a2;
+                    }
+                    .blooddonation__cls-3 {
+                      font-size: 78.98px;
+                      fill: #fff;
+                      font-family: NAILED, NAILED;
+                    }
+                  </style>
                 </defs>
-                <g
-                  id="Group-12"
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                  transform="translate(27.000000, 21.000000)"
-                >
-                  <g id="Group-5">
-                    <g id="Group-3" transform="translate(2.262327, 21.615176)">
-                      <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"></use>
-                      </mask>
-                      <g id="Clip-2"></g>
-                      <path
-                        d="M7.17774177,18.4748913 L54.3387782,18.4748913 C57.9910226,18.4748913 60.9789911,15.7266455 60.9789911,12.3681986 L60.9789911,6.13665655 C60.9789911,2.77820965 57.9910226,0.0299638385 54.3387782,0.0299638385 L7.17774177,0.0299638385 C3.52634582,0.0299638385 0.538377293,2.77820965 0.538377293,6.13665655 L0.538377293,12.3681986 C0.538377293,15.7266455 3.52634582,18.4748913 7.17774177,18.4748913"
-                        id="Fill-1"
-                        fill="#59A785"
-                        mask="url(#mask-2)"
-                      ></path>
-                    </g>
-                    <polygon
-                      id="Fill-4"
-                      fill="#FFFFFF"
-                      transform="translate(31.785111, 30.877531) rotate(-2.000000) translate(-31.785111, -30.877531) "
-                      points="62.0618351 55.9613216 7.2111488 60.3692832 1.50838775 5.79374073 56.3582257 1.38577917"
-                    ></polygon>
-                    <ellipse
-                      id="Oval-3"
-                      fill="#25D48A"
-                      opacity="0.216243004"
-                      cx="30.0584472"
-                      cy="21.7657707"
-                      rx="9.95169733"
-                      ry="9.17325562"
-                    ></ellipse>
-                    <g
-                      id="Group-4"
-                      transform="translate(16.959615, 6.479082)"
-                      fill="#54C796"
+                <title>Asset 5</title>
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path
+                      class="blooddonation__cls-1"
+                      d="M359.62,179c-2.93,3.23-6.46,6-9.7,8.93-4,3.54-8,6.92-12,10.32-7.54,6.31-15.08,12.31-22.62,18.62a20.66,20.66,0,0,0-8.15-9.23c-4.92-3.38-11.08-5.08-17.23-6,3.69-4.93,10.15-6.92,15.69-9.38,6.31-2.78,11.39-7.24,16.93-11.55,5.39-4.16,11.23-8,18.32-8.46,6.46-.47,14.46,1.38,18.77,6.76Zm-98.79,16.93H261v-.16l-.15.16ZM243.6,232a1.19,1.19,0,0,1-.77-.15c-1.85-.16-3.54-.16-5.39-.31l-4.62-.31s-.61.15-.61,0c-2.47,0-4.92,0-7.39.15l-2.61.16c-2.31.15-4.46.31-6.77.61a101.39,101.39,0,0,0-29.08,9.08c-1.54.77-2.93-1.54-1.39-2.3a96.56,96.56,0,0,1,32.47-9.7,123.31,123.31,0,0,1,26,0h.46l3.84.47c8.62.92,16.93,2.62,25.55,3.38s17.7.92,26-2c6.31-2.15,15.85-5.23,13.7-13.54-2-8-10.77-9.54-18-11.69-9.54-2.62-19.55-2.77-29.55-2.62-9.84.32-19.69-1.54-29.54-1.69-9.23-.31-18.62-3.85-26.77-8.62-.15,0-.15-.15-.31-.15a.15.15,0,0,1-.15-.16h-.15c-25.85-17.84-58.48-16.77-90.79-12.92-21.85,2.77-44,2.15-62.17,14.77-8,5.69-14.93,12.47-22,19.23L32.32,215l36.93,55.39c2.31-1.69,4.62-3.07,6.93-4.46a55.88,55.88,0,0,1,28-6.76A139.06,139.06,0,0,1,134,263.29c10.92,2.46,21.69,5.53,32.62,8.3,10.77,2.93,21.54,5.69,32.47,7.55,10.77,1.69,22.16,2.77,32.78.31h.31c10-6,18.46-14.31,26.77-22.47,4-4.16,8.16-8.31,12.62-12.16a94.25,94.25,0,0,1,10.61-8.46c-10.61,0-21.23-2.15-31.85-3.54Zm84.78-70c-5.39,2.31-10.31,6.15-14.77,9.85-3.08,2.3-6,4.77-9.08,7.07-3.38,2.31-6.77,4.46-10.31,6.62-6.77,4.31-13.85,8.78-18.93,15.09-5.08,0-10.16.31-15.23.76,4.46-4.46,9.69-8.15,14.92-11.84a203.15,203.15,0,0,0,16.47-14c5.08-4.92,10.62-9.54,17.23-12.15A36.23,36.23,0,0,1,321,161.27a30.15,30.15,0,0,1,7.38.77Zm23.08,3.54c-.46,1.69-1.69,3.07-2.61,4.46a33.88,33.88,0,0,0-5.54-.62c-7.69-.47-14.62,3.22-20.62,7.69s-11.54,9.54-18.46,12.62c-6.46,2.93-13.23,5.24-17.39,11.39h0c-2-.15-4-.31-6-.31a9.07,9.07,0,0,0-2-.15c4.62-4.93,10.31-8.62,16-12.16A209.88,209.88,0,0,0,313,175.89c5.69-4.77,11.69-9.54,18.77-12.15,6.15-2.31,14.62-3.09,19.69,1.84Z"
+                    />
+                    <rect
+                      class="blooddonation__cls-2"
+                      x="25.03"
+                      y="196.16"
+                      width="34.27"
+                      height="100.26"
+                      transform="translate(-130 65.2) rotate(-33.84)"
+                    />
+                    <path
+                      class="blooddonation__cls-1"
+                      d="M263.75,104.49,209.59,0,155.73,104.49c-10.77,36.47,24.16,65.4,54,65.4s66.47-28.47,54-65.4Z"
+                    />
+                    <text
+                      class="blooddonation__cls-3"
+                      transform="translate(190.09 146.68)"
                     >
-                      <polygon
-                        id="Fill-6"
-                        points="10.7955395 21.7823628 0.11873799 11.3001058 4.25482787 7.73131106 11.0226557 14.3753897 27.414824 1.77635684e-15 31.3261391 3.77891399"
-                      ></polygon>
-                    </g>
-                    <path
-                      d="M4.82347935,67.4368303 L61.2182039,67.4368303 C62.3304205,67.4368303 63.2407243,66.5995595 63.2407243,65.5765753 L63.2407243,31.3865871 C63.2407243,30.3636029 62.3304205,29.5263321 61.2182039,29.5263321 L4.82347935,29.5263321 C3.71126278,29.5263321 2.80095891,30.3636029 2.80095891,31.3865871 L2.80095891,65.5765753 C2.80095891,66.5995595 3.71126278,67.4368303 4.82347935,67.4368303"
-                      id="Fill-8"
-                      fill="#59B08B"
-                    ></path>
-                    <path
-                      d="M33.3338063,67.4368303 L61.2181191,67.4368303 C62.3303356,67.4368303 63.2406395,66.5995595 63.2406395,65.5765753 L63.2406395,31.3865871 C63.2406395,30.3636029 62.3303356,29.5263321 61.2181191,29.5263321 L33.3338063,29.5263321 C32.2215897,29.5263321 31.3112859,30.3636029 31.3112859,31.3865871 L31.3112859,65.5765753 C31.3112859,66.5995595 32.2215897,67.4368303 33.3338063,67.4368303"
-                      id="Fill-10"
-                      fill="#4FC391"
-                    ></path>
-                    <path
-                      d="M29.4284029,33.2640869 C29.4284029,34.2202068 30.2712569,34.9954393 31.3107768,34.9954393 C32.3502968,34.9954393 33.1931508,34.2202068 33.1931508,33.2640869 C33.1931508,32.3079669 32.3502968,31.5327345 31.3107768,31.5327345 C30.2712569,31.5327345 29.4284029,32.3079669 29.4284029,33.2640869"
-                      id="Fill-15"
-                      fill="#FEFEFE"
-                    ></path>
-                    <path
-                      d="M8.45417501,71.5549073 L57.5876779,71.5549073 C60.6969637,71.5549073 63.2412334,69.2147627 63.2412334,66.3549328 L63.2412334,66.3549328 C63.2412334,63.4951029 60.6969637,61.1549584 57.5876779,61.1549584 L8.45417501,61.1549584 C5.34488919,61.1549584 2.80061956,63.4951029 2.80061956,66.3549328 L2.80061956,66.3549328 C2.80061956,69.2147627 5.34488919,71.5549073 8.45417501,71.5549073"
-                      id="Fill-12"
-                      fill="#5BD6A2"
-                    ></path>
+                      +
+                    </text>
                   </g>
                 </g>
               </svg>
@@ -387,82 +311,157 @@
             <p>Blood Donations</p>
           </a>
 
-          <a href="#" class="card wallet">
+          <% } else { %>
+          <a href="/search" class="card credentialing">
             <div class="overlay"></div>
             <div class="circle">
               <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64px"
+                height="72px"
+                viewBox="0 0 214.96 166.12"
+              >
+                <defs>
+                  <style>
+                    .search__cls-1 {
+                      fill: #909ba0;
+                    }
+                    .search__cls-2 {
+                      fill: #2e4661;
+                    }
+                    .search__cls-3 {
+                      fill: #272525;
+                      opacity: 0.12;
+                    }
+                    .search__cls-4 {
+                      fill: #59595b;
+                    }
+                    .search__cls-5 {
+                      fill: #b3d1e2;
+                    }
+                    .search__cls-6 {
+                      opacity: 0.22;
+                    }
+                    .search__cls-7,
+                    .search__cls-8 {
+                      fill: #fff;
+                    }
+                    .search__cls-8 {
+                      opacity: 0.31;
+                    }
+                    .search__cls-9 {
+                      fill: #a36652;
+                    }
+                    .search__cls-10 {
+                      fill: #6a8678;
+                    }
+                  </style>
+                </defs>
+                <title>search</title>
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <rect
+                      class="search__cls-1"
+                      x="128.32"
+                      y="61.39"
+                      width="22.19"
+                      height="104.36"
+                      transform="translate(-30.75 171.69) rotate(-58.02)"
+                    />
+                    <path
+                      class="search__cls-2"
+                      d="M212.53,159.06l-.14.22c-3.71,5.94-10.32,8.5-14.78,5.72l-51.19-31.42,13.45-22.63,51.3,32.33C215.63,146.05,216.23,153.12,212.53,159.06Z"
+                    />
+                    <polygon
+                      class="search__cls-3"
+                      points="115.77 111.41 119 113.76 148.22 106.17 123.88 90.63 115.77 111.41"
+                    />
+                    <circle
+                      class="search__cls-4"
+                      cx="66.81"
+                      cy="66.81"
+                      r="66.81"
+                      transform="matrix(0.53, -0.85, 0.85, 0.53, -25.24, 88.11)"
+                    />
+                    <circle
+                      class="search__cls-5"
+                      cx="66.81"
+                      cy="66.81"
+                      r="57.47"
+                      transform="matrix(0.53, -0.85, 0.85, 0.53, -25.24, 88.11)"
+                    />
+                    <g class="search__cls-6">
+                      <path
+                        class="cls-7"
+                        d="M25.4,64.5A40.47,40.47,0,0,1,100.83,43c2.61,4.46,9.73.73,7.11-3.73A49.11,49.11,0,0,0,55.44,16C35.1,20.38,20.08,37.87,17.64,58.3a44.39,44.39,0,0,0-.26,6c.08,5.16,8.11,5.43,8,.23Z"
+                      />
+                    </g>
+                    <circle
+                      class="search__cls-8"
+                      cx="110.03"
+                      cy="55.38"
+                      r="5.29"
+                      transform="translate(4.78 119.39) rotate(-58.02)"
+                    />
+                    <path
+                      class="search__cls-9"
+                      d="M147.1,132.82l12.8-21.53a1.68,1.68,0,0,0-.44-2.2l-.22-.17a1.68,1.68,0,0,0-2.45.5l-12.6,21.68a1.68,1.68,0,0,0,.64,2.31l0,0A1.68,1.68,0,0,0,147.1,132.82Z"
+                    />
+                    <path
+                      class="search__cls-10"
+                      d="M122.88,67.23a56.86,56.86,0,0,1-88.75,47.11,56.89,56.89,0,0,1,9.93-99.6,56.88,56.88,0,0,1,71.19,24,56.92,56.92,0,0,1,7.63,28.47,1.53,1.53,0,0,0,3.06,0A60,60,0,0,0,78.59,8.62,60,60,0,0,0,8.41,83.82,59.94,59.94,0,0,0,106.94,111a60.27,60.27,0,0,0,19-43.77A1.53,1.53,0,0,0,122.88,67.23Z"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <p>Search for Blood</p>
+          </a>
+
+          <% } %>
+
+          <a href="/requests" class="card wallet">
+            <div class="overlay"></div>
+            <div class="circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
                 width="78px"
                 height="60px"
-                viewBox="23 29 78 60"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 54.72 56.06"
               >
-                <defs></defs>
-                <g
-                  id="icon"
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                  transform="translate(23.000000, 29.500000)"
-                >
-                  <rect
-                    id="Rectangle-3"
-                    fill="#AC8BE9"
-                    x="67.8357511"
-                    y="26.0333433"
-                    width="9.40495664"
-                    height="21.8788565"
-                    rx="4.70247832"
-                  ></rect>
-                  <rect
-                    id="Rectangle-3"
-                    fill="#6A5297"
-                    x="67.8357511"
-                    y="38.776399"
-                    width="9.40495664"
-                    height="10.962961"
-                    rx="4.70247832"
-                  ></rect>
-                  <polygon
-                    id="Rectangle-2"
-                    fill="#6A5297"
-                    points="57.3086772 0 67.1649301 26.3776902 14.4413177 45.0699507 4.58506484 18.6922605"
-                  ></polygon>
-                  <path
-                    d="M0,19.6104296 C0,16.2921718 2.68622235,13.6021923 5.99495032,13.6021923 L67.6438591,13.6021923 C70.9547788,13.6021923 73.6388095,16.2865506 73.6388095,19.6104296 L73.6388095,52.6639057 C73.6388095,55.9821635 70.9525871,58.672143 67.6438591,58.672143 L5.99495032,58.672143 C2.68403068,58.672143 0,55.9877847 0,52.6639057 L0,19.6104296 Z"
-                    id="Rectangle"
-                    fill="#8B6FC0"
-                  ></path>
-                  <path
-                    d="M47.5173769,27.0835169 C45.0052827,24.5377699 40.9347162,24.5377699 38.422622,27.0835169 L36.9065677,28.6198808 L35.3905134,27.0835169 C32.8799903,24.5377699 28.8078527,24.5377699 26.2957585,27.0835169 C23.7852354,29.6292639 23.7852354,33.7559532 26.2957585,36.3001081 L36.9065677,47.0530632 L47.5173769,36.3001081 C50.029471,33.7559532 50.029471,29.6292639 47.5173769,27.0835169"
-                    id="Fill-12"
-                    fill="#F6F1FF"
-                  ></path>
-                  <rect
-                    id="Rectangle-4"
-                    fill="#AC8BE9"
-                    x="58.0305835"
-                    y="26.1162588"
-                    width="15.6082259"
-                    height="12.863158"
-                  ></rect>
-                  <ellipse
-                    id="Oval"
-                    fill="#FFFFFF"
-                    cx="65.8346965"
-                    cy="33.0919007"
-                    rx="2.20116007"
-                    ry="2.23319575"
-                  ></ellipse>
+                <defs>
+                  <style>
+                    .request__cls-1 {
+                      fill: #8b6fc0;
+                    }
+                    .request__cls-2 {
+                      fill: #ff5652;
+                    }
+                  </style>
+                </defs>
+                <title>request</title>
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path
+                      class="request__cls-1"
+                      d="M48.64,44.24H0a9.75,9.75,0,0,1,2.87-6.92l1-1A8.37,8.37,0,0,0,6.3,30.4V19.09A18,18,0,0,1,25,1.08a17.84,17.84,0,0,1,4.35.71A13.11,13.11,0,0,0,41.61,19.52l.73,0V30.4a8.41,8.41,0,0,0,2.46,5.94l1,1a9.69,9.69,0,0,1,2.87,6.92Z"
+                    />
+                    <path
+                      class="request__cls-1"
+                      d="M33.93,46.87a9.63,9.63,0,0,1-10,9.19,9.75,9.75,0,0,1-9.25-9.19Z"
+                    />
+                    <path
+                      class="request__cls-2"
+                      d="M51,.64A5,5,0,0,0,49.43.31a8.26,8.26,0,0,0-6,2.53A20.09,20.09,0,0,0,40.55.64,6,6,0,0,0,32.65,3a7.43,7.43,0,0,0,1.14,8,15.72,15.72,0,0,0,5.71,4,9.78,9.78,0,0,0,3.16,1,9.28,9.28,0,0,0,4-.7A13.77,13.77,0,0,0,53,11a7.63,7.63,0,0,0,1.2-7.4A5.66,5.66,0,0,0,51,.64Z"
+                    />
+                  </g>
                 </g>
               </svg>
             </div>
             <p>Requests</p>
           </a>
 
-          <a href="#" class="card human-resources">
+          <a href="/profile" class="card human-resources">
             <div class="overlay"></div>
             <div class="circle">
               <svg
@@ -510,48 +509,8 @@
         </div>
       </div>
     </section>
-
-    <!-- <section class="content-block">
-      <div class="container">
-        <div class="row">
-          <div class="col col-content white">
-            <h4 class="text-title">
-              <svg
-                class="icon"
-                style="margin: 0 0.3rem; width: 4rem; height: 4rem"
-              >
-                <use xlink:href="images/sprite.svg#search"></use>
-              </svg>
-            </h4>
-
-            <p>Search For Blood Bank with Specific Blood Group.</p>
-          </div>
-          <div class="col col-content white">
-            <h4 class="text-title">
-              <svg
-                class="icon"
-                style="margin: 0 0.3rem; width: 4rem; height: 4rem"
-              >
-                <use xlink:href="images/sprite.svg#person-fill"></use>
-              </svg>
-            </h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit, assumenda.
-            </p>
-          </div>
-          <div class="col col-content white">
-            <h4 class="text-title">Home Layouts</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit, assumenda.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
     <%- include('../includes/footer'); %>
+
     <script src="./javascripts/mobileNav.js"></script>
   </body>
 </html>

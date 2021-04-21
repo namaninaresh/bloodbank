@@ -28,19 +28,21 @@ router.get("/requests", function (req, res, next) {
     const result = Instance.getRequestData(req.session.currentUser);
 
     result
-      .then((data) => {
-        data.map(
+      .then((data = result[0]) => {
+        data[0].map(
           (element) =>
             (element.ondate = moment(
               element.ondate,
               "YYYY-MM-DDTHH:mm:ss"
             ).fromNow())
         );
+
         res.render("Donar/requests", {
           title: "Requests Page",
           user: req.session.currentUser,
           active: "requests",
-          data,
+          data: data[0],
+          users: data[1],
         });
       })
       .catch((err) => console.log(err));
@@ -72,6 +74,10 @@ router.get("/profile", function (req, res, next) {
 
 router.get("/blooddonated", function (req, res, next) {
   // if (req.session.currentUser) {
+
+  if (req.session.currentUser.role !== "donar") {
+    res.redirect("/");
+  }
   const Instance = DbService.getDbInstance();
   const result = Instance.getBloodDonatedData(req.session.currentUser);
 
@@ -138,6 +144,9 @@ router.post("/search", function (req, res, next) {
 });
 
 router.get("/addblood", function (req, res, next) {
+  if (req.session.currentUser.role !== "donar") {
+    res.redirect("/");
+  }
   const userSessionData = req.session.currentUser;
   if (userSessionData)
     res.render("Donar/addBlood", {

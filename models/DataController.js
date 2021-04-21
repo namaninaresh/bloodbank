@@ -91,10 +91,11 @@ class DbService {
   getRequestData = ({ userid, role }) => {
     var query = null;
     if (role == "donar")
-      query = "select * from requestinfo where userid=? order by ondate Desc";
+      query =
+        "select * from requestinfo where userid=? order by ondate Desc;select * from users;";
     else
       query =
-        "select * from requestinfo where requesteduserid=? order by ondate Desc ";
+        "select * from requestinfo where requesteduserid=? order by ondate Desc;select * from users;";
 
     return this.queryExecuter(query, [userid]);
   };
