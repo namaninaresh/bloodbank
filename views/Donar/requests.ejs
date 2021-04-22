@@ -286,14 +286,21 @@
                   <% } %>
                 </tbody>
               </table>
-              <%} %>
+              <%} else {%>
+              <div class="notification" style="width: 100%; padding: 0">
+                <div class="alert alert-success" style="padding: 2rem">
+                  No New Requests
+                </div>
+              </div>
+
+              <% } %>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <%} %>
+    <%} %> <%- include('../includes/subFooter'); %>
 
     <script src="./javascripts/mobileNav.js"></script>
     <script>

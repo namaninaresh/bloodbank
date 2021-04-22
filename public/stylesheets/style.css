@@ -152,7 +152,23 @@ a {
   margin: 0 0.4rem;
 }
 
+.bi
+{
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 1rem ;
+  transition: 0.2s;
+}
 
+.bi-facebook:hover
+{
+  color: #4267B2;
+}
+
+.bi-twitter:hover
+{
+  color:#1DA1F2;
+}
 
 /* navigation */
 
@@ -1372,6 +1388,32 @@ background:#e2e8f0c9;
   font-size: 2rem;
 }
 
+.subfooter .col-1, .subfooter .col-2
+{
+  padding: 0;
+  flex: 0 0 100%;
+}
+
+.subfooter .quick-links
+{
+  align-self:center;
+  transition: all 0.5s;
+}
+
+@media  screen and (min-width:768px)
+{
+
+
+  .subfooter .col-1
+{
+  flex: 0 0 80%;
+}
+
+.subfooter .col-2
+{
+  flex: 0 0 20%;
+}
+}
 
 .quick-links ul
 {

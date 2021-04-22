@@ -5,6 +5,10 @@
   </head>
 
   <style>
+    .index-icon {
+      width: 20rem;
+      height: 20rem;
+    }
     .hero-image {
       position: relative;
       height: 500px;
@@ -214,12 +218,19 @@
       margin: 0;
       font-size: 2.5rem;
     }
+
     .col-md-12 {
       padding: 2rem 4rem;
-      display: flex;
-      justify-content: center;
+      display: grid;
+      justify-items: center;
     }
-
+    @media screen and (min-width: 768px) {
+      .col-md-12 {
+        padding: 2rem 4rem;
+        display: flex;
+        justify-content: center;
+      }
+    }
     .col-md-5 {
       display: inline-flex;
       margin: 2rem 0;
@@ -273,17 +284,27 @@
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
             <h4 class="text-title">Why Give Blood</h4>
-            <a href="#whyblood" class="link">Read More</a>
+            <a
+              href="https://www.healthline.com/health/benefits-of-donating-blood#benefits"
+              class="link"
+              target="_blank"
+              >Read More</a
+            >
           </div>
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
             <h4 class="text-title">Blood Donate</h4>
-            <a href="#" class="link">Read More</a>
+            <a href="/auth/register" class="link">Read More</a>
           </div>
           <div class="col text-white">
             <img src="../images/blooddrop.png" alt="blooddrop" />
             <h4 class="text-title">Tips for donation</h4>
-            <a href="#" class="link">Read More</a>
+            <a
+              href="https://www.who.int/health-topics/blood-transfusion-safety/#tab=tab_1"
+              class="link"
+              target="_blank"
+              >Read More</a
+            >
           </div>
         </div>
       </div>
@@ -293,24 +314,37 @@
       <div class="container">
         <div class="flex">
           <div class="col col-content white">
-            <h4 class="text-title">Home Layouts</h4>
+            <img
+              src="../images/svg/wholeblood.svg"
+              alt="image"
+              class="index-icon"
+            />
+            <h4 class="text-title">Whole Blood</h4>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit, assumenda.
+              Whole Blood consists of Red Blood Cells , White Blood, and Plasma
+              , it can save only 1 person at a time.
             </p>
           </div>
           <div class="col col-content white">
-            <h4 class="text-title">Home Layouts</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit, assumenda.
-            </p>
+            <img
+              src="../images/svg/redblood.svg"
+              alt="redbloodcelldonation-image"
+              class="index-icon"
+            />
+            <h4 class="text-title">Red Blood Cell Donation</h4>
+            <p>With Red Blood Cell Donation you can help more people.</p>
           </div>
           <div class="col col-content white">
-            <h4 class="text-title">Home Layouts</h4>
+            <img
+              src="../images/svg/plasma.svg"
+              alt="plasmadonation-image"
+              class="index-icon"
+            />
+
+            <h4 class="text-title">Plasma Donation</h4>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit, assumenda.
+              Plasma is liquid portion of blood.Plasma is separated from the
+              cells.The Donar's red Blood cells and platelets are returned back.
             </p>
           </div>
         </div>
