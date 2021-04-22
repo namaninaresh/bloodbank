@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../header'); %>
+    <%- include('../includes/header'); %>
     <style>
       .search .card-body {
         padding: 2rem;
@@ -9,7 +9,7 @@
     </style>
   </head>
   <body>
-    <%- include('./navbar') %> <% if(requestMsg) { %> <%-
+    <%- include('../includes/navbar') %> <% if(requestMsg) { %> <%-
     include('../includes/notification',{className: requestMsg.status
     ==='success' ? "alert-success" : "alert-danger", message:requestMsg.message
     }) %> <% }%>

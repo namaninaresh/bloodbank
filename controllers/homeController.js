@@ -11,8 +11,8 @@ router.get("/", function (req, res, next) {
     const result = Instance.getHomeData();
 
     result.then((data) => {
-      res.render("Donar/Home", {
-        title: "Donar Home",
+      res.render("App/Home", {
+        title: "Home Page",
         active: "home",
         user: userSessionData,
         availableBlood: data,
@@ -37,7 +37,7 @@ router.get("/requests", function (req, res, next) {
             ).fromNow())
         );
 
-        res.render("Donar/requests", {
+        res.render("App/requests", {
           title: "Requests Page",
           user: req.session.currentUser,
           active: "requests",
@@ -57,7 +57,7 @@ router.get("/profile", function (req, res, next) {
     // const result= Instance.getProfileData(req.session.currentUser);
     result
       .then((data) => {
-        res.render("Donar/profile", {
+        res.render("App/profile", {
           title: "Profile Page",
           user: req.session.currentUser,
           active: "profile",
@@ -94,7 +94,7 @@ router.get("/blooddonated", function (req, res, next) {
             " ) ")
       );
       console.log(info);
-      res.render("Donar/blooddonated", {
+      res.render("App/blooddonated", {
         title: "BloodDonated Page",
         user: req.session.currentUser,
         active: "blooddonated",
@@ -108,7 +108,7 @@ router.get("/blooddonated", function (req, res, next) {
 router.get("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData)
-    res.render("Donar/search", {
+    res.render("App/search", {
       title: "Search Page",
       user: userSessionData,
       active: "search",
@@ -129,7 +129,7 @@ router.post("/search", function (req, res, next) {
 
     result
       .then((data) => {
-        res.render("Donar/search", {
+        res.render("App/search", {
           title: "Search Page",
           user: userSessionData,
           requestData: req.body,
@@ -149,7 +149,7 @@ router.get("/addblood", function (req, res, next) {
   }
   const userSessionData = req.session.currentUser;
   if (userSessionData)
-    res.render("Donar/addBlood", {
+    res.render("App/addBlood", {
       title: "Add Blood Page",
       user: userSessionData,
       active: "addblood",
@@ -165,7 +165,7 @@ router.post("/addblood", function (req, res, next) {
     const result = Instance.addBlood(req.body, req.session.currentUser);
 
     result.then((data) => {
-      res.render("Donar/addBlood", {
+      res.render("App/addBlood", {
         title: "Add Blood Page",
         user: userSessionData,
         active: "addblood",
@@ -195,7 +195,7 @@ router.get(
 function contSearch(req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData)
-    res.render("Donar/search", {
+    res.render("App/search", {
       title: "Search Page",
       user: userSessionData,
       active: "search",
@@ -247,7 +247,7 @@ router.get("/profile/edit", function (req, res, next) {
     // const result= Instance.getProfileData(req.session.currentUser);
     result
       .then((data) => {
-        res.render("Donar/profileEdit", {
+        res.render("App/profileEdit", {
           title: "Profile Page",
           user: data[0],
           active: "profile",

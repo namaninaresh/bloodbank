@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../header'); %>
+   
+    <%- include('../includes/header'); %>
     <style>
      
         .btn-accents {
@@ -132,7 +133,7 @@
         </div>
       </div>
     </nav>
-    <section class="register">
+    <section class="register" style="margin: 5rem 0 ;">
       <div class="container">
         <div class="profile-form justify-center">
           <form  action="/profile/edit"
@@ -327,6 +328,7 @@
         </div>
       </div>
     </section>
+    <%- include('../includes/subFooter'); %>
     <script src="../javascripts/mobileNav.js"></script>
     <script>
       function checkPassword(form) {

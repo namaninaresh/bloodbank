@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../header'); %>
+    <%- include('../includes/header'); %>
 
     <style>
       /* body {
@@ -160,7 +160,7 @@
   </head>
 
   <body>
-    <%- include('./navbar') %> <%-
+    <%- include('../includes/navbar') %><%-
     include('../includes/notification',{className:"alert-primary",
     message:"Welcome "+user.username }) %>
 
