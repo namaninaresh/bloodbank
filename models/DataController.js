@@ -246,12 +246,6 @@ class DbService {
       ]);
     }
   };
-
-  parsingDate = () => {
-    const query = "select onDateTime from scores where personId=6";
-
-    return this.queryExecuter(query);
-  };
 }
 
 module.exports = DbService;

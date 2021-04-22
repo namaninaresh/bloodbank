@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const url = require("url");
+
 const DbService = require("../models/DataController");
 const moment = require("moment");
 
