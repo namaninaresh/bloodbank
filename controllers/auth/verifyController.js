@@ -1,5 +1,4 @@
 var express = require("express");
-var router = express.Router();
 
 const nodemailer = require("nodemailer");
 
@@ -15,7 +14,7 @@ function genOTP(emailTo) {
   });
 
   var mailOptions = {
-    from: "",
+    from: "BloodBank <namaninaresh1996@gmail.com>",
     to: emailTo,
     subject: "OTP for Blood Bank",
     text: `Generated Otp is ${token__code} ,this otp will expire with  in 1 hour.`,

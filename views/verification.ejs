@@ -67,12 +67,6 @@
           action="/auth/register/verify"
         >
           <input
-            type="text"
-            name="data"
-            value="<%-JSON.stringify(data)%>;"
-            hidden
-          />
-          <input
             type="number"
             id="otp"
             class="form-control-material"
@@ -85,7 +79,7 @@
         </form>
         <p id="log"></p>
         <p class="verify__message">
-          Wrong OTP , Attempts left <span class="count" id="count"></span>
+          <span class="count" id="count"></span>
         </p>
       </div>
     </section>
@@ -128,12 +122,13 @@
         // Finally, send our data.
         XHR.send( urlEncodedData );
       }
-                 const form = document.getElementById("form");
+
+      const form = document.getElementById("form");
                  const log = document.getElementById("log");
                  form.addEventListener("submit", logSubmit);
 
                  var count = 3;
-                 displayCount();
+
                  function logSubmit(event) {
 
                    const token = <%=otp__token%>;
@@ -159,16 +154,18 @@
                      window.location.href = "/auth/register";
                    }
                    var countDom = document.getElementById("count");
-                   countDom.innerText = count;
+                   countDom.innerText = "Wrong Otp, Attempts left "+count;
                  }
 
 
                  function showMessage()
                  {
+
+
                    var main = document.getElementById("main");
                    main.style = "display:none";
                    var section = document.createElement('section');
-                   section.style="margin:2rem 0;transition:all 0.5s"
+                   section.style="margin:2rem 0"
                    var div = document.createElement('div');
                    div.classList.add('container');
 
