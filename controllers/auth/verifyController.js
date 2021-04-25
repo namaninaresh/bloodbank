@@ -9,7 +9,7 @@ function genOTP(emailTo) {
     service: "gmail",
     auth: {
       user: "namaninaresh1996@gmai.com",
-      pass: "chinna.8686",
+      pass: "",
     },
   });
 
