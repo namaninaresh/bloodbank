@@ -50,6 +50,10 @@ router.post("/", function (req, res, next) {
   );
 });
 
+router.get("/verify", function (req, res, next) {
+  return { username: "username", password: "password" };
+});
+
 router.post("/verify", function (req, res, next) {
   const instance = DbService.getDbInstance();
 

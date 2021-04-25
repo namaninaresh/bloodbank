@@ -2,13 +2,98 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Error</title>
+    <title>Error Page</title>
+
+    <!-- CSS (load bootstrap from a CDN) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../images/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="../images/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="shortcut icon"
+      href="../images/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../stylesheets/normalize.css" />
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .error .container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .title_404 {
+        font-size: 8rem;
+        margin: 0;
+      }
+      .error .btn {
+        width: 13rem;
+
+        border-radius: 3rem;
+        padding: 1rem 2.5rem;
+        border: 1px solid rgb(0, 122, 221);
+        background: transparent;
+        transition: all 0.5s;
+      }
+      .error .btn:hover {
+        background: rgb(0, 122, 221);
+        color: white;
+      }
+      .notfound {
+        font-size: 2rem;
+        margin: 0;
+      }
+      .error .link {
+        color: rgb(2, 152, 197);
+      }
+    </style>
   </head>
   <body>
-    <h1><%= message %></h1>
-    <h2><%= error.status %></h2>
-    <pre><%= error.stack %></pre>
+    <section class="error">
+      <div class="container">
+        <div class="">
+          <h1 class="title_404">404</h1>
+          <h3 class="notfound">Sorry, Page Not Found</h3>
+          <p>
+            Uh oh , we can't seem to find the page you're looking for. Try going
+            to the previous page or
+            <a href="/index" class="link">Back To Home</a>
+          </p>
+          <p>Get in touch with the us.</p>
+          <a class="btn">Contact Us</a>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

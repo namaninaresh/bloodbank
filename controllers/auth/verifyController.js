@@ -8,8 +8,8 @@ function genOTP(emailTo) {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "",
-      pass: "",
+      user: "namaninaresh1996@gmai.com",
+      pass: "chinna.8686",
     },
   });
 
