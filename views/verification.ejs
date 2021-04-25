@@ -85,8 +85,8 @@
     </section>
 
     <script>
-                function sendData( data ) {
-
+             function sendData( data ) {
+        console.log( 'Sending data' );
 
         const XHR = new XMLHttpRequest();
 
@@ -114,7 +114,7 @@
         } );
 
         // Set up our request
-        XHR.open( 'POST', 'http://18.191.142.129:3000/auth/register/verify' );
+        XHR.open( 'POST', 'http://localhost:3000/auth/register/verify' );
 
         // Add the required HTTP header for form data POST requests
         XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
@@ -123,103 +123,103 @@
         XHR.send( urlEncodedData );
       }
 
-      const form = document.getElementById("form");
-                 const log = document.getElementById("log");
-                 form.addEventListener("submit", logSubmit);
+            const form = document.getElementById("form");
+                       const log = document.getElementById("log");
+                       form.addEventListener("submit", logSubmit);
 
-                 var count = 3;
+                       var count = 3;
 
-                 function logSubmit(event) {
+                       function logSubmit(event) {
 
-                   const token = <%=otp__token%>;
-                   const otp__input = document.getElementById('otp');
-                   if(otp__input.value == token)
-                   {
-
-
-                     sendData(<%-JSON.stringify(data) %>)
-
-                   }
-                   else {
-                     otp__input.value ="";
-                     count--;
-                     displayCount();
-                   }
-                   event.preventDefault();
-                 }
-
-                 function displayCount()
-                 {
-                      if (count === 0) {
-                     window.location.href = "/auth/register";
-                   }
-                   var countDom = document.getElementById("count");
-                   countDom.innerText = "Wrong Otp, Attempts left "+count;
-                 }
+                         const token = <%=otp__token%>;
+                         const otp__input = document.getElementById('otp');
+                         if(otp__input.value == token)
+                         {
 
 
-                 function showMessage()
-                 {
+                           sendData(<%-JSON.stringify(data) %>)
+
+                         }
+                         else {
+                           otp__input.value ="";
+                           count--;
+                           displayCount();
+                         }
+                         event.preventDefault();
+                       }
+
+                       function displayCount()
+                       {
+                            if (count === 0) {
+                           window.location.href = "/auth/register";
+                         }
+                         var countDom = document.getElementById("count");
+                         countDom.innerText = "Wrong Otp, Attempts left "+count;
+                       }
 
 
-                   var main = document.getElementById("main");
-                   main.style = "display:none";
-                   var section = document.createElement('section');
-                   section.style="margin:2rem 0"
-                   var div = document.createElement('div');
-                   div.classList.add('container');
-
-                   div.classList.add('bg-white');
-                   div.classList.add('verify__inner');
+                       function showMessage()
+                       {
 
 
+                         var main = document.getElementById("main");
+                         main.style = "display:none";
+                         var section = document.createElement('section');
+                         section.style="margin:2rem 0"
+                         var div = document.createElement('div');
+                         div.classList.add('container');
 
-                   const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-             const iconPath = document.createElementNS(
-               'http://www.w3.org/2000/svg',
-               'path'
-             );
-
-             iconSvg.setAttribute('fill', 'currentColor');
-             iconSvg.setAttribute('viewBox', '0 0 16 16');
-             iconSvg.setAttribute('width', '16');
-             iconSvg.setAttribute('height', '16');
-            // iconSvg.setAttribute('class', 'bi bi-check-circle-fill');
-             iconSvg.classList.add('bi');
-             iconSvg.classList.add('bi-check-circle-fill');
-
-             iconPath.setAttribute(
-               'd',
-               'M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'
-             );
-
-             iconSvg.appendChild(iconPath);
+                         div.classList.add('bg-white');
+                         div.classList.add('verify__inner');
 
 
+
+                         const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                   const iconPath = document.createElementNS(
+                     'http://www.w3.org/2000/svg',
+                     'path'
+                   );
+
+                   iconSvg.setAttribute('fill', 'currentColor');
+                   iconSvg.setAttribute('viewBox', '0 0 16 16');
+                   iconSvg.setAttribute('width', '16');
+                   iconSvg.setAttribute('height', '16');
+                  // iconSvg.setAttribute('class', 'bi bi-check-circle-fill');
+                   iconSvg.classList.add('bi');
+                   iconSvg.classList.add('bi-check-circle-fill');
+
+                   iconPath.setAttribute(
+                     'd',
+                     'M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'
+                   );
+
+                   iconSvg.appendChild(iconPath);
 
 
 
 
 
-                   let h5  = document.createElement('h5');
-                   h5.style="font-size:2rem"
-                   h5.innerText="Successfully Registered";
-                   let a_link = document.createElement('a');
-                   a_link.innerText="Please Login";
-                   a_link.style = "text-transform:capitalize";
-                   a_link.setAttribute('href',"/auth/login");
-
-                   div.appendChild(iconSvg)
-                   div.appendChild(h5);
-                   div.appendChild(a_link);
-                   section.appendChild(div);
 
 
+                         let h5  = document.createElement('h5');
+                         h5.style="font-size:2rem"
+                         h5.innerText="Successfully Registered";
+                         let a_link = document.createElement('a');
+                         a_link.innerText="Please Login";
+                         a_link.style = "text-transform:capitalize";
+                         a_link.setAttribute('href',"/auth/login");
+
+                         div.appendChild(iconSvg)
+                         div.appendChild(h5);
+                         div.appendChild(a_link);
+                         section.appendChild(div);
 
 
-                   document.body.appendChild(section);
 
-                 }
+
+                         document.body.appendChild(section);
+
+                       }
     </script>
     <script src="../javascripts/mobileNav.js"></script>
   </body>

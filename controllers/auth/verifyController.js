@@ -7,9 +7,11 @@ function genOTP(emailTo) {
 
   var transporter = nodemailer.createTransport({
     service: "gmail",
+    host: "smtp.gmail.com",
+
     auth: {
-      user: "namaninaresh1996@gmai.com",
-      pass: "",
+      user: "namaninaresh1996@gmail.com",
+      pass: "chinna.8686",
     },
   });
 
@@ -30,15 +32,5 @@ function genOTP(emailTo) {
 
   return token__code;
 }
-
-// router.get("/", function (req, res, next) {
-//   // const otp__token = genOTP();
-//   const otp__token = 5566;
-//   res.render("verification", {
-//     title: "Registration Page",
-//     active: "register",
-//     otp__token,
-//   });
-// });
 
 module.exports = genOTP;
