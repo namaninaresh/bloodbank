@@ -3,6 +3,7 @@ const router = require("express").Router();
 const DbService = require("../models/DataController");
 const moment = require("moment");
 
+//Home Route
 router.get("/", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData) {
@@ -21,6 +22,7 @@ router.get("/", function (req, res, next) {
   } else res.redirect("/auth/login");
 });
 
+//Request Page Route
 router.get("/requests", function (req, res, next) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
@@ -48,30 +50,8 @@ router.get("/requests", function (req, res, next) {
       .catch((err) => console.log(err));
   } else res.redirect("/auth/login");
 });
-router.get("/profile", function (req, res, next) {
-  if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
 
-    const result = Instance.getProfileData(req.session.currentUser);
-
-    // const result= Instance.getProfileData(req.session.currentUser);
-    result
-      .then((data) => {
-        res.render("App/profile", {
-          title: "Profile Page",
-          user: req.session.currentUser,
-          active: "profile",
-          userdata: data[0][0],
-          donated: data[1][0],
-          available: data[2],
-        });
-      })
-      .catch((err) => console.log(err));
-
-    //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
-  } else res.redirect("/auth/login");
-});
-
+//Blood Donated Page Route
 router.get("/blooddonated", function (req, res, next) {
   // if (req.session.currentUser) {
 
@@ -105,6 +85,7 @@ router.get("/blooddonated", function (req, res, next) {
     .catch((err) => console.log(err));
 });
 
+//Search Page Route
 router.get("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData)
@@ -119,6 +100,7 @@ router.get("/search", function (req, res, next) {
   else res.redirect("/auth/login");
 });
 
+//Search Page Route with POst REquest (when user searched)
 router.post("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
 
@@ -143,6 +125,7 @@ router.post("/search", function (req, res, next) {
   } else res.redirect("/auth/login");
 });
 
+//Add Blood Page Route
 router.get("/addblood", function (req, res, next) {
   if (req.session.currentUser.role !== "donar") {
     res.redirect("/");
@@ -158,6 +141,7 @@ router.get("/addblood", function (req, res, next) {
   else res.redirect("/auth/login");
 });
 
+//Add Blood Page Route with Post Request (when user added BLood)
 router.post("/addblood", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData) {
@@ -175,6 +159,7 @@ router.post("/addblood", function (req, res, next) {
   } else res.redirect("/auth/login");
 });
 
+//Changing Request Data
 router.get(
   "/requestEx/status=:status&reqid=:reqid&:username&userid=:userid&:requser&:requserid&group=:group&units=:units",
   function (req, res, next) {
@@ -192,19 +177,7 @@ router.get(
   }
 );
 
-function contSearch(req, res, next) {
-  const userSessionData = req.session.currentUser;
-  if (userSessionData)
-    res.render("App/search", {
-      title: "Search Page",
-      user: userSessionData,
-      active: "search",
-      searchError: false,
-      searchData: false,
-      requestMsg: { message: "Requested Successfull", status: "success" },
-    });
-  else res.redirect("/auth/login");
-}
+//Requesting BLood with Get Resquest
 router.get(
   "/requestBlood/:userid&:username&:bloodtype&:bloodunits&:requserid&:requser",
   function (req, res, next) {
@@ -221,23 +194,47 @@ router.get(
     }
   }
 );
+//when Requesting Blood Done , contSearch Renders
+function contSearch(req, res, next) {
+  const userSessionData = req.session.currentUser;
+  if (userSessionData)
+    res.render("App/search", {
+      title: "Search Page",
+      user: userSessionData,
+      active: "search",
+      searchError: false,
+      searchData: false,
+      requestMsg: { message: "Requested Successfull", status: "success" },
+    });
+  else res.redirect("/auth/login");
+}
 
-router.get("/deleteuser/:id", function (req, res, next) {
+//Profile Page Route
+router.get("/profile", function (req, res, next) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
 
-    const result = Instance.deleteUser(req.params.id);
+    const result = Instance.getProfileData(req.session.currentUser);
 
+    // const result= Instance.getProfileData(req.session.currentUser);
     result
       .then((data) => {
-        req.session.destroy((err) => {
-          res.redirect("/index");
+        res.render("App/profile", {
+          title: "Profile Page",
+          user: req.session.currentUser,
+          active: "profile",
+          userdata: data[0][0],
+          donated: data[1][0],
+          available: data[2],
         });
       })
       .catch((err) => console.log(err));
-  }
+
+    //res.render('Donar/profile',{title:"Profile Page",user: req.session.currentUser, active:"profile"});
+  } else res.redirect("/auth/login");
 });
 
+//Profile Edit Page
 router.get("/profile/edit", function (req, res, next) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
@@ -259,6 +256,7 @@ router.get("/profile/edit", function (req, res, next) {
   } else res.redirect("/auth/login");
 });
 
+//Profile Update with user Details
 router.post("/profile/edit", function (req, res) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
@@ -273,6 +271,7 @@ router.post("/profile/edit", function (req, res) {
   }
 });
 
+//Profile Updating with Password Change
 router.post("/profile/password", function (req, res) {
   if (req.session.currentUser) {
     const Instance = DbService.getDbInstance();
@@ -287,6 +286,24 @@ router.post("/profile/password", function (req, res) {
   }
 });
 
+// Deleting User
+router.get("/deleteuser/:id", function (req, res, next) {
+  if (req.session.currentUser) {
+    const Instance = DbService.getDbInstance();
+
+    const result = Instance.deleteUser(req.params.id);
+
+    result
+      .then((data) => {
+        req.session.destroy((err) => {
+          res.redirect("/index");
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+});
+
+//Error Page
 router.get("/error", function (req, res, next) {
   const Instance = DbService.getDbInstance();
 

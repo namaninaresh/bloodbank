@@ -8,6 +8,7 @@ const session = require("express-session");
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 var homeRouter = require("./routes/home");
+var otpRouter = require("./routes/otp");
 var app = express();
 
 // view engine setup
@@ -33,6 +34,7 @@ app.use(
 app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/index", indexRouter);
+app.use("/otp", otpRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
