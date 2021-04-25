@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
     service: "gmail",
     auth: {
       user: "namaninaresh1996@gmail.com",
-      pass: "chinna.8686",
+      pass: "",
     },
   });
 

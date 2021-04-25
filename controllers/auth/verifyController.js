@@ -11,7 +11,7 @@ function genOTP(emailTo) {
 
     auth: {
       user: "namaninaresh1996@gmail.com",
-      pass: "chinna.8686",
+      pass: "",
     },
   });
 
