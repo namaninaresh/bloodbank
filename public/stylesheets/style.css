@@ -1337,6 +1337,7 @@ background:#e2e8f0c9;
 }
 .col-content
 {
+  width:33.33%;
   margin: 2rem 1rem;
 }
 .content-block .white
@@ -1377,6 +1378,18 @@ background:#e2e8f0c9;
   font-size: 2rem;
 }
 
+
+@media screen and (max-width:768px) {
+  .subfooter {
+   
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+  
+}
 .subfooter .col-1, .subfooter .col-2
 {
   padding: 0;

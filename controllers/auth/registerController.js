@@ -51,7 +51,7 @@ router.post("/", function (req, res, next) {
 });
 
 router.get("/verify", function (req, res, next) {
-  return { username: "username", password: "password" };
+  res.sendStatus(404);
 });
 
 router.post("/verify", function (req, res, next) {

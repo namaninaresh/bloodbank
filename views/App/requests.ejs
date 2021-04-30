@@ -218,7 +218,7 @@
 
     <% } else {%>
 
-    <section class="requests">
+    <section class="requests" id="requests_box">
       <div class="container">
         <div class="receptor-req">
           <div class="card">
@@ -302,6 +302,11 @@
 
     <%} %> <%- include('../includes/subFooter'); %>
 
+    <script>
+      var request_section = document.getElementById("requests_box");
+
+      request_section.style.minHeight = (screen.height - 350) / 10 + "rem";
+    </script>
     <script src="./javascripts/mobileNav.js"></script>
     <script>
       const tooltip = document.querySelectorAll("#tooltip");

@@ -3,13 +3,15 @@ const router = require("express").Router();
 const DbService = require("../models/DataController");
 const moment = require("moment");
 
+var InstanceOfDb = undefined;
+
 //Home Route
 router.get("/", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData) {
-    const Instance = DbService.getDbInstance();
+    InstanceOfDb == undefined && (InstanceOfDb = DbService.getDbInstance());
 
-    const result = Instance.getHomeData();
+    const result = InstanceOfDb.getHomeData();
 
     result.then((data) => {
       res.render("App/Home", {
@@ -19,15 +21,15 @@ router.get("/", function (req, res, next) {
         availableBlood: data,
       });
     });
-  } else res.redirect("/auth/login");
+  } else res.redirect("/index");
 });
 
 //Request Page Route
 router.get("/requests", function (req, res, next) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    // const Instance = DbService.getDbInstance();
 
-    const result = Instance.getRequestData(req.session.currentUser);
+    const result = InstanceOfDb.getRequestData(req.session.currentUser);
 
     result
       .then((data = result[0]) => {
@@ -58,8 +60,8 @@ router.get("/blooddonated", function (req, res, next) {
   if (req.session.currentUser.role !== "donar") {
     res.redirect("/");
   }
-  const Instance = DbService.getDbInstance();
-  const result = Instance.getBloodDonatedData(req.session.currentUser);
+  //const Instance = DbService.getDbInstance();
+  const result = InstanceOfDb.getBloodDonatedData(req.session.currentUser);
 
   result
     .then((data) => {
@@ -105,9 +107,9 @@ router.post("/search", function (req, res, next) {
   const userSessionData = req.session.currentUser;
 
   if (userSessionData) {
-    const Instance = DbService.getDbInstance();
+    //const Instance = DbService.getDbInstance();
 
-    const result = Instance.getSearchData(req.body);
+    const result = InstanceOfDb.getSearchData(req.body);
 
     result
       .then((data) => {
@@ -145,8 +147,8 @@ router.get("/addblood", function (req, res, next) {
 router.post("/addblood", function (req, res, next) {
   const userSessionData = req.session.currentUser;
   if (userSessionData) {
-    const Instance = DbService.getDbInstance();
-    const result = Instance.addBlood(req.body, req.session.currentUser);
+    //const Instance = DbService.getDbInstance();
+    const result = InstanceOfDb.addBlood(req.body, req.session.currentUser);
 
     result.then((data) => {
       res.render("App/addBlood", {
@@ -166,9 +168,9 @@ router.get(
     const userSessionData = req.session.currentUser;
 
     if (userSessionData) {
-      const Instance = DbService.getDbInstance();
+      // const Instance = DbService.getDbInstance();
 
-      const result = Instance.putRequestData(req.params);
+      const result = InstanceOfDb.putRequestData(req.params);
 
       result.then((data) => {
         res.redirect("/requests");
@@ -183,9 +185,9 @@ router.get(
   function (req, res, next) {
     const userSessionData = req.session.currentUser;
     if (userSessionData) {
-      const Instance = DbService.getDbInstance();
+      // const Instance = DbService.getDbInstance();
 
-      const result = Instance.makeRequest(req.params);
+      const result = InstanceOfDb.makeRequest(req.params);
       result
         .then((data) => {
           return contSearch(req, res, next);
@@ -212,9 +214,9 @@ function contSearch(req, res, next) {
 //Profile Page Route
 router.get("/profile", function (req, res, next) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    //const Instance = DbService.getDbInstance();
 
-    const result = Instance.getProfileData(req.session.currentUser);
+    const result = InstanceOfDb.getProfileData(req.session.currentUser);
 
     // const result= Instance.getProfileData(req.session.currentUser);
     result
@@ -237,9 +239,9 @@ router.get("/profile", function (req, res, next) {
 //Profile Edit Page
 router.get("/profile/edit", function (req, res, next) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    //const Instance = DbService.getDbInstance();
     const { userid } = req.session.currentUser;
-    const result = Instance.getUser(userid);
+    const result = InstanceOfDb.getUser(userid);
 
     // const result= Instance.getProfileData(req.session.currentUser);
     result
@@ -259,9 +261,9 @@ router.get("/profile/edit", function (req, res, next) {
 //Profile Update with user Details
 router.post("/profile/edit", function (req, res) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    // const Instance = DbService.getDbInstance();
 
-    const result = Instance.updateUser(req.body);
+    const result = InstanceOfDb.updateUser(req.body);
 
     result
       .then((data) => {
@@ -274,9 +276,9 @@ router.post("/profile/edit", function (req, res) {
 //Profile Updating with Password Change
 router.post("/profile/password", function (req, res) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    //const Instance = DbService.getDbInstance();
 
-    const result = Instance.changePassword(req.body);
+    const result = InstanceOfDb.changePassword(req.body);
 
     result
       .then((data) => {
@@ -289,9 +291,9 @@ router.post("/profile/password", function (req, res) {
 // Deleting User
 router.get("/deleteuser/:id", function (req, res, next) {
   if (req.session.currentUser) {
-    const Instance = DbService.getDbInstance();
+    //const Instance = DbService.getDbInstance();
 
-    const result = Instance.deleteUser(req.params.id);
+    const result = InstanceOfDb.deleteUser(req.params.id);
 
     result
       .then((data) => {
@@ -301,20 +303,6 @@ router.get("/deleteuser/:id", function (req, res, next) {
       })
       .catch((err) => console.log(err));
   }
-});
-
-//Error Page
-router.get("/error", function (req, res, next) {
-  const Instance = DbService.getDbInstance();
-
-  const result = Instance.parsingDate();
-
-  result
-    .then((data) => {
-      console.log(data[0]["onDateTime"]);
-      res.send(moment().format("YYYY-MM-DD HH:mm:ss"));
-    })
-    .catch((err) => console.log(err));
 });
 
 module.exports = router;

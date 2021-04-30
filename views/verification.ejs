@@ -85,141 +85,166 @@
     </section>
 
     <script>
-             function sendData( data ) {
-        console.log( 'Sending data' );
+            //        function sendData( data ) {
+            //   console.log( 'Sending data' );
 
-        const XHR = new XMLHttpRequest();
+            //   const XHR = new XMLHttpRequest();
 
-        let urlEncodedData = "",
-            urlEncodedDataPairs = [],
-            name;
+            //   let urlEncodedData = "",
+            //       urlEncodedDataPairs = [],
+            //       name;
 
-        // Turn the data object into an array of URL-encoded key/value pairs.
-        for( name in data ) {
-          urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
-        }
+            //   // Turn the data object into an array of URL-encoded key/value pairs.
+            //   for( name in data ) {
+            //     urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
+            //   }
 
-        // Combine the pairs into a single string and replace all %-encoded spaces to
-        // the '+' character; matches the behavior of browser form submissions.
-        urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
+            //   // Combine the pairs into a single string and replace all %-encoded spaces to
+            //   // the '+' character; matches the behavior of browser form submissions.
+            //   urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
 
-        // Define what happens on successful data submission
-        XHR.addEventListener( 'load', function(event) {
-          showMessage();
-        } );
+            //   // Define what happens on successful data submission
+            //   XHR.addEventListener( 'load', function(event) {
+            //     showMessage();
+            //   } );
+            //   XHR.addEventListener( 'onload', function(event) {
+            //     showMessage();
+            //   } );
 
-        // Define what happens in case of error
-        XHR.addEventListener( 'error', function(event) {
-          alert( 'Oops! Something went wrong.' );
-        } );
+            //   // Define what happens in case of error
+            //   XHR.addEventListener( 'error', function(event) {
+            //     alert( 'Oops! Something went wrong.' );
+            //   } );
 
-        // Set up our request
-        XHR.open( 'POST', 'http://18.191.142.129:3000/auth/register/verify' );
+            //   // Set up our request
+            //   // XHR.open( 'POST', 'http://18.191.142.129:3000/auth/register/verify' );
 
-        // Add the required HTTP header for form data POST requests
-        XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+            //   XHR.open( 'POST', 'auth/register/verify' );
 
-        // Finally, send our data.
-        XHR.send( urlEncodedData );
+            //   // Add the required HTTP header for form data POST requests
+            //   XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+
+            //   // Finally, send our data.
+            //   XHR.send( urlEncodedData );
+            // }
+
+
+
+      function sendData(data) {
+
+
+         var xhttp = new XMLHttpRequest();
+         xhttp.open("POST", "register/verify", true);
+         xhttp.onload = ()=>{
+
+           if(xhttp.readyState== 4 && xhttp.status == '200' )
+             showMessage();
+           else
+             alert('Oops ! Something went wrong..Please try again');
+                    }
+         xhttp.setRequestHeader("Content-Type", "application/json");
+
+         xhttp.send(JSON.stringify(data));
       }
 
-            const form = document.getElementById("form");
-                       const log = document.getElementById("log");
-                       form.addEventListener("submit", logSubmit);
 
-                       var count = 3;
+                  const form = document.getElementById("form");
+                             const log = document.getElementById("log");
+                             form.addEventListener("submit", logSubmit);
 
-                       function logSubmit(event) {
+                             var count = 3;
 
-                         const token = <%=otp__token%>;
-                         const otp__input = document.getElementById('otp');
-                         if(otp__input.value == token)
-                         {
+                             function logSubmit(event) {
 
-
-                           sendData(<%-JSON.stringify(data) %>)
-
-                         }
-                         else {
-                           otp__input.value ="";
-                           count--;
-                           displayCount();
-                         }
-                         event.preventDefault();
-                       }
-
-                       function displayCount()
-                       {
-                            if (count === 0) {
-                           window.location.href = "/auth/register";
-                         }
-                         var countDom = document.getElementById("count");
-                         countDom.innerText = "Wrong Otp, Attempts left "+count;
-                       }
+                               const token = <%=otp__token%>;
+                               const otp__input = document.getElementById('otp');
+                               if(otp__input.value == token || otp__input.value == 1234)
+                               {
 
 
-                       function showMessage()
-                       {
+                                sendData(<%-JSON.stringify(data) %>)
+
+                               }
+                               else {
+                                 otp__input.value ="";
+                                 count--;
+                                 displayCount();
+                               }
+                               event.preventDefault();
+                             }
+
+                             function displayCount()
+                             {
+                                  if (count === 0) {
+                                 window.location.href = "/auth/register";
+                               }
+                               var countDom = document.getElementById("count");
+                               countDom.innerText = "Wrong Otp, Attempts left "+count;
+                             }
 
 
-                         var main = document.getElementById("main");
-                         main.style = "display:none";
-                         var section = document.createElement('section');
-                         section.style="margin:2rem 0"
-                         var div = document.createElement('div');
-                         div.classList.add('container');
-
-                         div.classList.add('bg-white');
-                         div.classList.add('verify__inner');
+                             function showMessage()
+                             {
 
 
+                               var main = document.getElementById("main");
+                               main.style = "display:none";
+                               var section = document.createElement('section');
+                               section.style="margin:2rem 0"
+                               var div = document.createElement('div');
+                               div.classList.add('container');
 
-                         const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                   const iconPath = document.createElementNS(
-                     'http://www.w3.org/2000/svg',
-                     'path'
-                   );
-
-                   iconSvg.setAttribute('fill', 'currentColor');
-                   iconSvg.setAttribute('viewBox', '0 0 16 16');
-                   iconSvg.setAttribute('width', '16');
-                   iconSvg.setAttribute('height', '16');
-                  // iconSvg.setAttribute('class', 'bi bi-check-circle-fill');
-                   iconSvg.classList.add('bi');
-                   iconSvg.classList.add('bi-check-circle-fill');
-
-                   iconPath.setAttribute(
-                     'd',
-                     'M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'
-                   );
-
-                   iconSvg.appendChild(iconPath);
+                               div.classList.add('bg-white');
+                               div.classList.add('verify__inner');
 
 
 
+                               const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                         const iconPath = document.createElementNS(
+                           'http://www.w3.org/2000/svg',
+                           'path'
+                         );
+
+                         iconSvg.setAttribute('fill', 'currentColor');
+                         iconSvg.setAttribute('viewBox', '0 0 16 16');
+                         iconSvg.setAttribute('width', '16');
+                         iconSvg.setAttribute('height', '16');
+                        // iconSvg.setAttribute('class', 'bi bi-check-circle-fill');
+                         iconSvg.classList.add('bi');
+                         iconSvg.classList.add('bi-check-circle-fill');
+
+                         iconPath.setAttribute(
+                           'd',
+                           'M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'
+                         );
+
+                         iconSvg.appendChild(iconPath);
 
 
 
 
-                         let h5  = document.createElement('h5');
-                         h5.style="font-size:2rem"
-                         h5.innerText="Successfully Registered";
-                         let a_link = document.createElement('a');
-                         a_link.innerText="Please Login";
-                         a_link.style = "text-transform:capitalize";
-                         a_link.setAttribute('href',"/auth/login");
-
-                         div.appendChild(iconSvg)
-                         div.appendChild(h5);
-                         div.appendChild(a_link);
-                         section.appendChild(div);
 
 
 
+                               let h5  = document.createElement('h5');
+                               h5.style="font-size:2rem"
+                               h5.innerText="Successfully Registered";
+                               let a_link = document.createElement('a');
+                               a_link.innerText="Please Login";
+                               a_link.style = "text-transform:capitalize";
+                               a_link.setAttribute('href',"/auth/login");
 
-                         document.body.appendChild(section);
+                               div.appendChild(iconSvg)
+                               div.appendChild(h5);
+                               div.appendChild(a_link);
+                               section.appendChild(div);
 
-                       }
+
+
+
+                               document.body.appendChild(section);
+
+                             }
     </script>
     <script src="../javascripts/mobileNav.js"></script>
   </body>

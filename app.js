@@ -5,11 +5,11 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
 
+//Importing Routers from routes folder
 var indexRouter = require("./routes/index");
 var contactRouter = require("./routes/contact");
 var authRouter = require("./routes/auth");
 var homeRouter = require("./routes/home");
-var otpRouter = require("./routes/otp");
 var app = express();
 
 // view engine setup
@@ -24,6 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+//creating default session
 app.use(
   session({
     secret: "secret",
@@ -32,12 +34,11 @@ app.use(
   })
 );
 
+//Processing Routes(urls) with routers
 app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/index", indexRouter);
 app.use("/contact", contactRouter);
-
-app.use("/otp", otpRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
