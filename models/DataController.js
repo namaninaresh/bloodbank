@@ -152,6 +152,7 @@ class DbService {
 
     requserid,
   }) => {
+    const onDate = this.curDate();
     if (status == "accepted") {
       const query =
         "update requestinfo set status=? where userid=? AND reqid=?;update bloodinfo set bloodunits=(select bloodunits where userid=? and bloodtype=?)-? where userid=? and bloodtype=?;update totalbloods set BloodUnits=(select BloodUnits where BloodType=?)-? where BloodType=?;insert into donationsinfo values(?,?,?,?,?,?);";
@@ -172,7 +173,7 @@ class DbService {
         userid,
         username,
         requser,
-        "1/1/1",
+        onDate,
         units,
         requserid,
       ]);

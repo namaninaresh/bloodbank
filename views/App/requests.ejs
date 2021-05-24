@@ -125,7 +125,7 @@
   <body>
     <%- include('../includes/navbar') %> <% if(user.role=='donar') { %>
 
-    <section class="requests">
+    <section class="requests" style="min-height: 80vh">
       <div class="container">
         <div class="new-requests">
           <div class="card">
@@ -196,7 +196,7 @@
                 </thead>
                 <tbody>
                   <% if(data.length>0) { %> <% data.filter(element =>
-                  element.status!=='unknown').map(_ => { %>
+                  element.status!=='pending').map(_ => { %>
                   <tr>
                     <td>
                       Request from <%= _.requesteduser %> with <%= _.bloodunits
@@ -218,7 +218,7 @@
 
     <% } else {%>
 
-    <section class="requests" id="requests_box">
+    <section class="requests" id="requests_box" style="min-height: 80vh">
       <div class="container">
         <div class="receptor-req">
           <div class="card">

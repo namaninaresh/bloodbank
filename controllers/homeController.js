@@ -69,11 +69,10 @@ router.get("/blooddonated", function (req, res, next) {
       var info = data[2];
       info.map(
         (element) =>
-          (element.ondate =
-            moment(element.ondate, "YYYY-MM-DDTHH:mm:ss").format("LLL") +
-            " ( " +
-            moment(element.ondate, "YYYY-MM-DDTHH:mm:ss").fromNow() +
-            " ) ")
+          (element.ondate = moment(
+            element.ondate,
+            "YYYY-MM-DDTHH:mm:ss"
+          ).fromNow())
       );
       console.log(info);
       res.render("App/blooddonated", {
