@@ -36,15 +36,37 @@ router.post("/", function (req, res, next) {
           registerSuccess: null,
         });
       } else {
-        let otp__token = verifyController(req.body.email);
-        req.body.email = emailHidder(req.body.email);
 
-        res.render("verification", {
-          title: "Registration Page",
-          active: "register",
-          data: req.body,
-          otp__token,
-        });
+        const instance = DbService.getDbInstance();
+
+  const result = instance.registerUser(req.body);
+
+  result
+    .then(() =>
+      res.render("register", {
+        title: "Registration Page",
+        active: "register",
+        registerError: null,
+        registerSuccess: "Registration Success . Please Login",
+      })
+    )
+    .catch((err) =>
+      res.render("register", {
+        title: "Registration Page",
+        active: "register",
+        registerError: "Unknown Error Please Try again",
+        registerSuccess: null,
+      })
+    );
+        // let otp__token = verifyController(req.body.email);
+        // req.body.email = emailHidder(req.body.email);
+
+        // res.render("verification", {
+        //   title: "Registration Page",
+        //   active: "register",
+        //   data: req.body,
+        //   otp__token,
+        // });
       }
     }
   );
